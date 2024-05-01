@@ -1,7 +1,9 @@
 {
     "cSpell.words": [
+        "googleusercontent",
         "ombur",
-        "vercel"
+        "vercel",
+        "webp"
     ],
     "typescript.tsdk": "node_modules/typescript/lib"
 }
