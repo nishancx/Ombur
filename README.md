@@ -1,2 +1,1 @@
-# Ombur
- Ombur App
+Ombur
