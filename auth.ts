@@ -18,6 +18,7 @@ const createUser = async ({ user }: { user: User }) => {
   await connectDB();
 
   const preExistingUser = await Users.findOne({ email: user.email });
+  console.log("preExistingUser", preExistingUser);
 
   if (!preExistingUser) {
     const createUserPayload = {
