@@ -5,6 +5,16 @@ import { auth, signIn, signOut } from "@/../auth";
 const Nav: React.FC = async () => {
   const session = await auth();
 
+  const handleAuth = async () => {
+    "use server";
+
+    if (session) {
+      await signOut();
+    } else {
+      await signIn("google");
+    }
+  };
+
   return (
     <nav className={styles.nav}>
       <div className={styles.left}>
@@ -12,13 +22,7 @@ const Nav: React.FC = async () => {
         <div className={styles.title}>Ombur</div>
       </div>
 
-      <form
-        action={async () => {
-          "use server";
-          session ? await signOut() : await signIn("google");
-        }}
-        className={styles.right}
-      >
+      <form action={handleAuth} className={styles.right}>
         {session ? (
           <>
             <Image
