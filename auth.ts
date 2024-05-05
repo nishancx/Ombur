@@ -7,6 +7,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Google],
   callbacks: {
     async signIn(args) {
+      console.info('callback')
       createUser({ user: args.user });
       return true;
     },
@@ -18,7 +19,7 @@ const createUser = async ({ user }: { user: User }) => {
   await connectDB();
 
   const preExistingUser = await Users.findOne({ email: user.email });
-  console.log("preExistingUser", preExistingUser);
+  console.info("preExistingUser", preExistingUser);
 
   if (!preExistingUser) {
     const createUserPayload = {

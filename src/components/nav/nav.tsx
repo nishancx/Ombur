@@ -11,6 +11,7 @@ const Nav: React.FC = async () => {
     if (session) {
       await signOut();
     } else {
+      console.info('siging in')
       await signIn("google");
     }
   };
