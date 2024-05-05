@@ -8,7 +8,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async signIn(args) {
       console.info('callback')
-      createUser({ user: args.user });
+      await createUser({ user: args.user });
       return true;
     },
   },
