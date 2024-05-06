@@ -74,7 +74,9 @@ const Nav: React.FC<NavProps> = ({ session }) => {
           }
         />
       ) : (
-        <Button onClick={async () => await signIn("google")}>Sign in</Button>
+        <Button onClick={async () => await signIn("google")}>
+          <div className={styles.signInButtonText}>Sign in</div>
+        </Button>
       )}
     </nav>
   );
