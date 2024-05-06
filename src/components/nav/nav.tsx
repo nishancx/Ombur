@@ -1,18 +1,27 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./nav.module.css";
-import { auth, signIn, signOut } from "@/../auth";
+import { Button, Dropdown } from "@/components";
+import { Session } from "next-auth";
+import { signIn, signOut } from "next-auth/react";
+import { Link, LogOut } from "lucide-react";
+import { modalStore } from "@/libs/client/stores/modalStore";
+import { config } from "@/libs/config";
 
-const Nav: React.FC = async () => {
-  const session = await auth();
+type NavProps = {
+  session: Session | null;
+};
 
-  const handleAuth = async () => {
-    "use server";
+const Nav: React.FC<NavProps> = ({ session }) => {
+  const handleGetIssueLink = async () => {
+    const encodedEmail = Buffer.from("your string here").toString("base64");
+    const issueLink = `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/create-issue/${encodedEmail}`;
 
-    if (session) {
-      await signOut();
-    } else {
-      await signIn("google");
-    }
+    modalStore.issueLinkModal.setIssueLink({
+      issueLink,
+    });
+    modalStore.issueLinkModal.open();
   };
 
   return (
@@ -22,23 +31,53 @@ const Nav: React.FC = async () => {
         <div className={styles.title}>Ombur</div>
       </div>
 
-      <form action={handleAuth} className={styles.right}>
-        {session ? (
-          <>
+      {session?.user ? (
+        <Dropdown
+          handle={
             <Image
-              src={session?.user?.image || "/person.webp"}
+              src={session.user.image || "/person.webp"}
               alt="Ombur"
               width={32}
               height={32}
               className={styles.clientImage}
             />
+          }
+          content={
+            <div className={styles.content}>
+              <div className={styles.contentUserInfo}>
+                <div>{session.user.name}</div>
+                <div>{session.user.email}</div>
+              </div>
 
-            <button>Sign out</button>
-          </>
-        ) : (
-          <button>Sign in</button>
-        )}
-      </form>
+              <Button
+                hasBackground={false}
+                hasBorderRadius={false}
+                onClick={handleGetIssueLink}
+              >
+                <div className={styles.contentButton}>
+                  <Link size={16} />
+                  <div className={styles.buttonText}>Get issue link</div>
+                </div>
+              </Button>
+
+              <Button
+                onClick={async () => await signOut()}
+                hasBackground={false}
+                hasBorderRadius={false}
+              >
+                <div className={styles.contentButton}>
+                  <LogOut size={16} />
+                  <div className={styles.buttonText}>Sign out</div>
+                </div>
+              </Button>
+            </div>
+          }
+        />
+      ) : (
+        <Button onClick={async () => await signIn("google")}>
+          <div className={styles.signInButtonText}>Sign in</div>
+        </Button>
+      )}
     </nav>
   );
 };

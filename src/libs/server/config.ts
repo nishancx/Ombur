@@ -7,6 +7,9 @@ function loadFromEnv(key: string) {
 
 const config = {
   mongodbUri: loadFromEnv("MONGODB_URI"),
+  public: {
+    nextAuthUrl: loadFromEnv("NEXTAUTH_URL"),
+  },
 };
 
 export { config as serverConfig };
