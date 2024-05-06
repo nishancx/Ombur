@@ -1,5 +1,5 @@
 .title {
-  height: calc(100vh-64px);
+  height: calc(100vh - 64px);
   display: flex;
   align-items: center;
   justify-content: center;
