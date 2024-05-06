@@ -1,7 +1,14 @@
+function loadFromEnv(key: string) {
+  if (typeof process.env[key] !== "undefined") {
+    return process.env[key] as string;
+  }
+  throw new Error(`process.env doesn't have the key ${key}`);
+}
+
 const config = {
-  mongodbUri: process.env.MONGODB_URI,
+  mongodbUri: loadFromEnv("MONGODB_URI"),
   public: {
-    nextAuthUrl: process.env.NEXTAUTH_URL,
+    nextAuthUrl: loadFromEnv("NEXTAUTH_URL"),
   },
 };
 
