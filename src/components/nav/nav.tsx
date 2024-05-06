@@ -1,20 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./nav.module.css";
-import { auth, signIn, signOut } from "@/../auth";
+import { Button, Dropdown } from "@/components";
+import { Session } from "next-auth";
+import { signIn, signOut } from "next-auth/react";
 
-const Nav: React.FC = async () => {
-  const session = await auth();
+type NavProps = {
+  session: Session | null;
+};
 
-  const handleAuth = async () => {
-    "use server";
-
-    if (session) {
-      await signOut();
-    } else {
-      await signIn("google");
-    }
-  };
-
+const Nav: React.FC<NavProps> = ({ session }) => {
   return (
     <nav className={styles.nav}>
       <div className={styles.left}>
@@ -22,9 +18,9 @@ const Nav: React.FC = async () => {
         <div className={styles.title}>Ombur</div>
       </div>
 
-      <form action={handleAuth} className={styles.right}>
-        {session ? (
-          <>
+      {session ? (
+        <Dropdown
+          handle={
             <Image
               src={session?.user?.image || "/person.webp"}
               alt="Ombur"
@@ -32,13 +28,16 @@ const Nav: React.FC = async () => {
               height={32}
               className={styles.clientImage}
             />
-
-            <button>Sign out</button>
-          </>
-        ) : (
-          <button>Sign in</button>
-        )}
-      </form>
+          }
+          content={
+            <Button onClick={async () => await signOut()} showBorder={false}>
+              Sign out
+            </Button>
+          }
+        />
+      ) : (
+        <Button onClick={async () => await signIn("google")}>Sign in</Button>
+      )}
     </nav>
   );
 };
