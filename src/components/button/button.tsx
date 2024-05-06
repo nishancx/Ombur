@@ -1,8 +1,10 @@
+import clsx from "clsx";
 import styles from "./button.module.css";
 
 type ButtonProps = {
   onClick?: () => void;
-  showBorder?: boolean;
+  hasBackground?: boolean;
+  hasBorderRadius?: boolean;
 } & (
   | { text: string; children?: never }
   | { children: React.ReactNode; text?: never }
@@ -11,18 +13,18 @@ type ButtonProps = {
 const Button: React.FC<ButtonProps> = ({
   children,
   text,
-  showBorder = true,
+  hasBackground = true,
+  hasBorderRadius = true,
   onClick,
 }) => {
   return (
     <button
       onClick={onClick}
-      className={styles.button}
-      style={
-        showBorder
-          ? { border: "1px solid #05608d", borderRadius: "5px" }
-          : { border: "1px solid transparent" }
-      }
+      className={clsx(
+        styles.button,
+        hasBackground && styles.buttonWithBackground,
+        hasBorderRadius && styles.buttonWithBorderRadius
+      )}
     >
       {children || text}
     </button>

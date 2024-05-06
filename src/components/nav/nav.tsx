@@ -30,7 +30,11 @@ const Nav: React.FC<NavProps> = ({ session }) => {
             />
           }
           content={
-            <Button onClick={async () => await signOut()} showBorder={false}>
+            <Button
+              onClick={async () => await signOut()}
+              hasBackground={false}
+              hasBorderRadius={false}
+            >
               Sign out
             </Button>
           }

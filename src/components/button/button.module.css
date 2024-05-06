@@ -3,9 +3,24 @@
   font-size: 16px;
   cursor: pointer;
   padding: 0 10px;
+  border: none;
   background-color: white;
 }
 
+.buttonWithBackground {
+  background: linear-gradient(45deg, #05608d 0%, #05608d 100%);
+  color: white;
+}
+
+.buttonWithBorderRadius {
+  border-radius: 5px;
+}
+
 .button:hover {
-  background-color: #dfe4e8;
+  background: linear-gradient(45deg, #03507d 0%, #0984c6 100%);
+  color: white;
+}
+
+.button:active {
+  background: linear-gradient(45deg, #05608d 0%, #05608d 100%);
 }
