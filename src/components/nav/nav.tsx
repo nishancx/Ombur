@@ -26,11 +26,11 @@ const Nav: React.FC = async () => {
         {session ? (
           <>
             <Image
-              src={session?.user?.image || "/user.webp"}
+              src={session?.user?.image || "/person.webp"}
               alt="Ombur"
               width={32}
               height={32}
-              className={styles.userImage}
+              className={styles.clientImage}
             />
 
             <button>Sign out</button>
