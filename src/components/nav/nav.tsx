@@ -5,7 +5,7 @@ import styles from "./nav.module.css";
 import { Button, Dropdown } from "@/components";
 import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
-import { LogOut } from "lucide-react";
+import { Link, LogOut } from "lucide-react";
 
 type NavProps = {
   session: Session | null;
@@ -31,19 +31,27 @@ const Nav: React.FC<NavProps> = ({ session }) => {
             />
           }
           content={
-            <div className={styles.contentContainer}>
-              <div className={styles.userInfoContainer}>
+            <div className={styles.content}>
+              <div className={styles.contentUserInfo}>
                 <div>{session.user.name}</div>
                 <div>{session.user.email}</div>
               </div>
+
+              <Button hasBackground={false} hasBorderRadius={false}>
+                <div className={styles.contentButton}>
+                  <Link size={16} />
+                  <div className={styles.buttonText}>Get issue link</div>
+                </div>
+              </Button>
+
               <Button
                 onClick={async () => await signOut()}
                 hasBackground={false}
                 hasBorderRadius={false}
               >
-                <div className={styles.signOutButton}>
-                  Sign out
+                <div className={styles.contentButton}>
                   <LogOut size={16} />
+                  <div className={styles.buttonText}>Sign out</div>
                 </div>
               </Button>
             </div>
