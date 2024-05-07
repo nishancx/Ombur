@@ -3,6 +3,7 @@
         "antd",
         "clsx",
         "googleusercontent",
+        "hookform",
         "lucide",
         "NEXTAUTH",
         "ombur",

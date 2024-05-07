@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 type Client = {
   name: string;

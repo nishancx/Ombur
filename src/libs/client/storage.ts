@@ -1,4 +1,4 @@
-import { jsonParse } from "@/../utils";
+import { jsonParse } from "@/utils";
 
 const getItemFromLocalStorage = <T>({
   key,
