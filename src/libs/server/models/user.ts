@@ -2,11 +2,13 @@ import mongoose, { Schema } from "mongoose";
 
 type User = {
   name: string;
+  clientId: Schema.Types.ObjectId;
   isDeleted?: boolean;
 };
 
 const userSchema = new Schema<User>({
   name: { type: String, required: true },
+  clientId: { type: Schema.Types.ObjectId, ref: "Clients", required: true },
   isDeleted: { type: Boolean, default: false },
 });
 

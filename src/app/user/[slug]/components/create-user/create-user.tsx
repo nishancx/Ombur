@@ -10,12 +10,19 @@ import styles from "./create-user.module.css";
 
 type CreateUserProps = {
   setSavedUserId: (userId: string) => void;
+  clientEmail: string;
 };
 
-const CreateUser: React.FC<CreateUserProps> = ({ setSavedUserId }) => {
+const CreateUser: React.FC<CreateUserProps> = ({
+  setSavedUserId,
+  clientEmail,
+}) => {
   const { control, handleSubmit } = useForm<UserDTO>({
     mode: "onSubmit",
     resolver: zodResolver(userValidationSchema),
+    defaultValues: {
+      clientEmail: clientEmail,
+    },
   });
 
   const createUser = async (data: UserDTO) => {

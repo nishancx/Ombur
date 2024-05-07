@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import styles from "./nav.module.css";
+import styles from "./client-nav.module.css";
 import { Button, Dropdown } from "@/components";
 import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
@@ -12,12 +12,12 @@ type NavProps = {
   session: Session | null;
 };
 
-const Nav: React.FC<NavProps> = ({ session }) => {
+const ClientNav: React.FC<NavProps> = ({ session }) => {
   const handleGetIssueLink = async () => {
     if (!session?.user?.email) return;
 
     const encodedEmail = btoa(encodeURIComponent(session.user.email));
-    const issueLink = `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/issues/${encodedEmail}`;
+    const issueLink = `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/user/${encodedEmail}`;
 
     modalStore.issueLinkModal.setIssueLink({
       issueLink,
@@ -83,4 +83,4 @@ const Nav: React.FC<NavProps> = ({ session }) => {
   );
 };
 
-export { Nav };
+export { ClientNav };

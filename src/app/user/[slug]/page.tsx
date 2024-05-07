@@ -27,7 +27,9 @@ export default function CreateIssue({ params }: { params: { slug: string } }) {
   }
 
   if (!savedUserId) {
-    return <CreateUser setSavedUserId={setSavedUserId} />;
+    return (
+      <CreateUser clientEmail={clientEmail} setSavedUserId={setSavedUserId} />
+    );
   }
 
   return <div className={styles.title}>{clientEmail}</div>;
