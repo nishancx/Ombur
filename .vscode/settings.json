@@ -10,5 +10,11 @@
         "vercel",
         "webp"
     ],
-    "typescript.tsdk": "node_modules/typescript/lib"
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "javascript.preferGoToSourceDefinition": true,
+    "typescript.preferGoToSourceDefinition": true,
+    "editor.gotoLocation.alternativeDeclarationCommand": "editor.action.goToReferences",
+    "editor.gotoLocation.alternativeDefinitionCommand": "editor.action.goToReferences",
+    "editor.gotoLocation.multipleDeclarations": "peek",
+    "editor.gotoLocation.multipleDefinitions": "goto"
 }

@@ -1,4 +1,5 @@
 type CreateUserProps = { setSavedUserId: (userId: string) => void };
+
 const CreateUser: React.FC<CreateUserProps> = () => {
   return (
     <div>
