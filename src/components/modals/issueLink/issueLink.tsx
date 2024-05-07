@@ -1,4 +1,4 @@
-import { modalStore } from "@/libs/client/stores/modalStore";
+import { modalStore } from "@/libs/client";
 import { Modal } from "antd";
 import { useSnapshot } from "valtio";
 import styles from "./issueLink.module.css";

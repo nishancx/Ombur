@@ -6,8 +6,7 @@ import { Button, Dropdown } from "@/components";
 import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
 import { Link, LogOut } from "lucide-react";
-import { modalStore } from "@/libs/client/stores/modalStore";
-import { config } from "@/libs/config";
+import { modalStore } from "@/libs/client";
 
 type NavProps = {
   session: Session | null;
@@ -15,7 +14,9 @@ type NavProps = {
 
 const Nav: React.FC<NavProps> = ({ session }) => {
   const handleGetIssueLink = async () => {
-    const encodedEmail = Buffer.from("your string here").toString("base64");
+    if (!session?.user?.email) return;
+
+    const encodedEmail = btoa(encodeURIComponent(session.user.email));
     const issueLink = `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/create-issue/${encodedEmail}`;
 
     modalStore.issueLinkModal.setIssueLink({

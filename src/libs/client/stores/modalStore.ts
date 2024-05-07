@@ -1,4 +1,4 @@
-import { Modals } from "@/interfaces";
+import { Modals } from "@/types";
 import { proxy } from "valtio";
 
 const modalStore: Modals = proxy<Modals>({
