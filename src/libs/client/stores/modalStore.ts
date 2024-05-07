@@ -1,7 +1,7 @@
-import { Modals } from "@/types";
+import { Valtio_Modals } from "@/types";
 import { proxy } from "valtio";
 
-const modalStore: Modals = proxy<Modals>({
+const modalStore: Valtio_Modals = proxy<Valtio_Modals>({
   issueLinkModal: {
     isOpen: false,
     open: () => (modalStore.issueLinkModal.isOpen = true),

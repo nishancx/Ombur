@@ -9,6 +9,6 @@ type IssueLinkModal = ModalProps & {
   setIssueLink: ({ issueLink }: { issueLink: string }) => void;
 };
 
-export type Modals = {
+export type Valtio_Modals = {
   issueLinkModal: IssueLinkModal;
 };
