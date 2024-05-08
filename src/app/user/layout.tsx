@@ -1,8 +1,8 @@
 "use client";
 
-import { UserNav } from "@/components";
 import { LOCAL_STORAGE } from "@/constants";
 import { getItemFromLocalStorage, userIdStore } from "@/libs/client";
+import { UserNav } from "./components";
 
 export default function RootLayout({
   children,

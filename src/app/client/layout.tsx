@@ -1,5 +1,5 @@
 import { auth } from "@/../auth";
-import { ClientNav } from "@/components";
+import { ClientNav } from "./components";
 
 export default async function RootLayout({
   children,
