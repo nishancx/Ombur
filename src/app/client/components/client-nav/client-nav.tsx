@@ -7,6 +7,8 @@ import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
 import { Link, LogOut } from "lucide-react";
 import { modalStore } from "@/libs/client";
+import { getSessionClient } from "./serverActions";
+import { ClientDataSearchParam } from "@/types";
 
 type NavProps = {
   session: Session | null;
@@ -16,8 +18,16 @@ const ClientNav: React.FC<NavProps> = ({ session }) => {
   const handleGetIssueLink = async () => {
     if (!session?.user?.email) return;
 
-    const encodedEmail = btoa(encodeURIComponent(session.user.email));
-    const issueLink = `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/user/issues?clientData=${encodedEmail}`;
+    const sessionClient = await getSessionClient();
+
+    if (!sessionClient) return;
+
+    const clientData: ClientDataSearchParam = { id: sessionClient._id };
+
+    const encodedClientData = btoa(
+      encodeURIComponent(JSON.stringify(clientData))
+    );
+    const issueLink = `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/user/issues?clientData=${encodedClientData}`;
 
     modalStore.issueLinkModal.setIssueLink({
       issueLink,

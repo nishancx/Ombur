@@ -19,6 +19,7 @@ export default function RootLayout({
   return (
     <>
       <UserNav />
+
       {/* added suspense to wrap useSearchParams */}
       {/* to do, suspend issues page properly instead of whole user layout */}
       <Suspense>{children}</Suspense>

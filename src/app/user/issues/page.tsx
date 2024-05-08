@@ -6,17 +6,21 @@ import { CreateUser } from "./components/create-user/create-user";
 import { useSnapshot } from "valtio";
 import { useIsFirstRender } from "@/hooks";
 import { useSearchParams } from "next/navigation";
+import { getClientDataFromSearchParam } from "./utils";
 
 export default function CreateIssue() {
   const searchParams = useSearchParams();
-  const clientData = searchParams.get("clientData");
+  const clientDataParam = searchParams.get("clientData");
 
-  const clientEmail = decodeURIComponent(atob(clientData || ""));
+  const clientData = getClientDataFromSearchParam({
+    clientDataParam: clientDataParam,
+  });
+
   const { userId } = useSnapshot(userIdStore);
   const isFirstRender = useIsFirstRender();
 
   // Redirect to home page if clientData is not available
-  if (!clientData) {
+  if (!clientDataParam || !clientData) {
     return (window.location.href = "/");
   }
 
@@ -31,5 +35,5 @@ export default function CreateIssue() {
   }
 
   // If userId is available, show user's issues for the client
-  return <div className={styles.title}>{clientEmail}</div>;
+  return <div className={styles.title}>{clientData.id}</div>;
 }
