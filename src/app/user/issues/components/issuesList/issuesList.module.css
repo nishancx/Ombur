@@ -1,12 +1,22 @@
 .container {
   height: 100%;
-  background-color: pink;
 }
 
-.userInfo {
+.clientInfo {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  gap: 10px;
   align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+  padding: 20px 10px 10px 10px;
+}
+
+.clientAvatar {
+  border-radius: 100%;
+}
+
+.clientName {
+  line-height: 20px;
+  height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
