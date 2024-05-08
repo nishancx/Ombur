@@ -1,8 +1,7 @@
 "use client";
 
-import styles from "./page.module.css";
 import { userIdStore } from "@/libs/client";
-import { CreateUser } from "./components/create-user/create-user";
+import { CreateUser, Issues } from "./components";
 import { useSnapshot } from "valtio";
 import { useIsFirstRender } from "@/hooks";
 import { useSearchParams } from "next/navigation";
@@ -35,5 +34,5 @@ export default function CreateIssue() {
   }
 
   // If userId is available, show user's issues for the client
-  return <div className={styles.title}>{clientData.id}</div>;
+  return <Issues clientId={clientData.id} />;
 }

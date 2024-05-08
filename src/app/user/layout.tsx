@@ -1,21 +1,17 @@
-"use client";
-
-import { LOCAL_STORAGE } from "@/constants";
-import { getItemFromLocalStorage, userIdStore } from "@/libs/client";
+import { Metadata } from "next";
 import { UserNav } from "./components";
 import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "Ombur - User",
+  description: "Ombur App - User Portal",
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const savedUserId = getItemFromLocalStorage<string>({
-    key: LOCAL_STORAGE.OMBUR_USER_ID,
-  });
-
-  userIdStore.setUserId({ userId: savedUserId });
-
   return (
     <>
       <UserNav />
