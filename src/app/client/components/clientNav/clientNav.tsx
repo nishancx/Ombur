@@ -29,10 +29,9 @@ const ClientNav: React.FC<NavProps> = ({ session }) => {
     );
     const issueLink = `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/user/issues?clientData=${encodedClientData}`;
 
-    modalStore.issueLinkModal.setIssueLink({
+    modalStore.issueLinkModal.open({
       issueLink,
     });
-    modalStore.issueLinkModal.open();
   };
 
   return (

@@ -10,8 +10,8 @@ const IssueLinkModal: React.FC = () => {
     <Modal
       title="Issue Link"
       open={isOpen}
-      onOk={() => modalStore.issueLinkModal.handleClose()}
-      onCancel={modalStore.issueLinkModal.handleClose}
+      onOk={() => modalStore.issueLinkModal.close()}
+      onCancel={modalStore.issueLinkModal.close}
       cancelButtonProps={{ style: { display: "none" } }}
     >
       <input type="text" value={issueLink} readOnly className={styles.input} />
