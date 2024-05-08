@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import styles from "./client-nav.module.css";
+import styles from "./clientNav.module.css";
 import { Button, Dropdown } from "@/components";
 import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
@@ -16,7 +16,7 @@ type NavProps = {
 
 const ClientNav: React.FC<NavProps> = ({ session }) => {
   const handleGetIssueLink = async () => {
-    if (!session?.user?.email) return;
+    if (!session!.user!.email) return;
 
     const sessionClient = await getSessionClient();
 

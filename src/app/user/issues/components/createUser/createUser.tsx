@@ -1,4 +1,4 @@
-import styles from "./create-user.module.css";
+import styles from "./createUser.module.css";
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "antd";
 import { Button } from "@/components";

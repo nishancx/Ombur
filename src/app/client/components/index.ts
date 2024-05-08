@@ -1,1 +1,1 @@
-export * from "./client-nav/client-nav";
+export * from "./clientNav/clientNav";

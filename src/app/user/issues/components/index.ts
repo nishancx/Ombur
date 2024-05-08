@@ -1,2 +1,2 @@
-export * from "./create-user/create-user";
+export * from "./createUser/createUser";
 export * from "./issues/issues";

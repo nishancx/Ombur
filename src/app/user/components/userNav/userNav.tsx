@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import styles from "./user-nav.module.css";
+import styles from "./userNav.module.css";
 import { getItemFromLocalStorage, userIdStore } from "@/libs/client";
 import { LOCAL_STORAGE } from "@/constants";
 
