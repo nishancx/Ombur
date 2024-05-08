@@ -1,3 +1,4 @@
+import styles from "./create-user.module.css";
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "antd";
 import { Button } from "@/components";
@@ -6,19 +7,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createUserAction } from "./serverActions";
 import { saveItemToLocalStorage, userIdStore } from "@/libs/client";
 import { LOCAL_STORAGE } from "@/constants";
-import styles from "./create-user.module.css";
 
-type CreateUserProps = {
-  clientEmail: string;
-};
-
-const CreateUser: React.FC<CreateUserProps> = ({ clientEmail }) => {
+const CreateUser: React.FC = () => {
   const { control, handleSubmit } = useForm<UserDTO>({
     mode: "onSubmit",
     resolver: zodResolver(userValidationSchema),
-    defaultValues: {
-      clientEmail: clientEmail,
-    },
   });
 
   const createUser = async (data: UserDTO) => {

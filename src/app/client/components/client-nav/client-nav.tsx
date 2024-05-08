@@ -17,7 +17,7 @@ const ClientNav: React.FC<NavProps> = ({ session }) => {
     if (!session?.user?.email) return;
 
     const encodedEmail = btoa(encodeURIComponent(session.user.email));
-    const issueLink = `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/user/${encodedEmail}`;
+    const issueLink = `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/user/issues?clientData=${encodedEmail}`;
 
     modalStore.issueLinkModal.setIssueLink({
       issueLink,

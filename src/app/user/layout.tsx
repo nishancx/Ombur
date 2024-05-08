@@ -3,6 +3,7 @@
 import { LOCAL_STORAGE } from "@/constants";
 import { getItemFromLocalStorage, userIdStore } from "@/libs/client";
 import { UserNav } from "./components";
+import { Suspense } from "react";
 
 export default function RootLayout({
   children,
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <>
       <UserNav />
-      {children}
+      {/* added suspense to wrap useSearchParams */}
+      {/* to do, suspend issues page properly instead of whole user layout */}
+      <Suspense>{children}</Suspense>
     </>
   );
 }
