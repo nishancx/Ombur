@@ -8,7 +8,7 @@ type IssuesListProps = {
 const IssuesList: React.FC<IssuesListProps> = ({ setIssueId, clientId }) => {
   return (
     <div className={styles.container}>
-      <div className={styles.container}></div>
+      <div className={styles.userInfo}></div>
     </div>
   );
 };

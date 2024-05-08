@@ -1,4 +1,12 @@
 .container {
-    height: 100%;
-    background-color: pink;
+  height: 100%;
+  background-color: pink;
+}
+
+.userInfo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
 }
