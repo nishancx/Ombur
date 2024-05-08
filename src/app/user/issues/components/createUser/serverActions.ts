@@ -1,10 +1,16 @@
 "use server";
 
 import { Users, connectDB } from "@/libs/server";
-import { UserDTO } from "@/validations";
+import { UserDTO, userValidationSchema } from "@/validations";
 
 const createUserAction = async ({ name }: UserDTO) => {
   await connectDB();
+
+  const isPayloadValid = userValidationSchema.safeParse({ name });
+
+  if (!isPayloadValid.success) {
+    throw new Error("Invalid form data.");
+  }
 
   const user = await Users.create({ name });
 
