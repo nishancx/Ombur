@@ -4,6 +4,7 @@ import { getClientProfileInfo } from "./serverActions";
 import Image from "next/image";
 import { Button } from "@/components";
 import { PlusIcon } from "lucide-react";
+import { modalStore } from "@/libs/client";
 
 type IssuesListProps = {
   setIssueId: (issueId: string) => void;
@@ -37,7 +38,10 @@ const IssuesList: React.FC<IssuesListProps> = ({ setIssueId, clientId }) => {
         </div>
 
         <div className={styles.createIssueContainer}>
-          <Button onClick={() => {}} className={styles.createIssueButton}>
+          <Button
+            onClick={() => modalStore.createIssueModal.open({ clientId })}
+            className={styles.createIssueButton}
+          >
             <div className={styles.createIssueButtonContent}>
               <PlusIcon size={24} />
               <div>Create Issue</div>

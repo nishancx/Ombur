@@ -8,6 +8,12 @@ type IssueLinkModal = ModalProps & {
   open: ({ issueLink }: { issueLink: string }) => void;
 };
 
+type CreateIssueModal = ModalProps & {
+  clientId: string;
+  open: ({ clientId }: { clientId: string }) => void;
+};
+
 export type Valtio_Modals = {
   issueLinkModal: IssueLinkModal;
+  createIssueModal: CreateIssueModal;
 };
