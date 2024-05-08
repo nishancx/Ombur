@@ -14,7 +14,7 @@ const IssueLinkModal: React.FC = () => {
       onCancel={modalStore.issueLinkModal.close}
       cancelButtonProps={{ style: { display: "none" } }}
     >
-      <input type="text" value={issueLink} readOnly className={styles.input} />
+      <div className={styles.input}>{issueLink}</div>
     </Modal>
   );
 };
