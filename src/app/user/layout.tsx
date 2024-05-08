@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { UserNav } from "./components";
+import { ReactQueryClientProvider, UserNav } from "./components";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
@@ -13,12 +13,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <ReactQueryClientProvider>
       <UserNav />
 
       {/* added suspense to wrap useSearchParams */}
       {/* to do, suspend issues page properly instead of whole user layout */}
       <Suspense>{children}</Suspense>
-    </>
+    </ReactQueryClientProvider>
   );
 }
