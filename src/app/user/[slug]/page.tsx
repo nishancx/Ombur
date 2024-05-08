@@ -4,20 +4,14 @@ import { userIdStore } from "@/libs/client";
 import styles from "./page.module.css";
 import { CreateUser } from "./components/create-user/create-user";
 import { useSnapshot } from "valtio";
-import { useEffect, useState } from "react";
+import { useIsFirstRender } from "@/hooks";
 
 export default function CreateIssue({ params }: { params: { slug: string } }) {
   const clientEmail = decodeURIComponent(atob(params.slug));
-  const { userId: userIdSnapshot } = useSnapshot(userIdStore);
+  const { userId } = useSnapshot(userIdStore);
+  const isFirstRender = useIsFirstRender();
 
-  // directly using the snapshot value will cause hydration mismatch
-  const [userId, setUserId] = useState<string | undefined | null>(null);
-
-  useEffect(() => {
-    setUserId(userIdSnapshot);
-  }, [userIdSnapshot]);
-
-  if (userId === null) {
+  if (isFirstRender || userId === null) {
     return null;
   }
 
