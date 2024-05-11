@@ -2,25 +2,21 @@
 
 import Image from "next/image";
 import styles from "./userNav.module.css";
-import { getItemFromLocalStorage, userStore } from "@/libs/client";
 import { LOCAL_STORAGE } from "@/constants";
-import { useQuery } from "@tanstack/react-query";
-import { getUserServerAction } from "./serverActions";
 import { useIsFirstRender } from "@/hooks";
+import { useUser } from "@/queries";
+import { useQueryClient } from "@tanstack/react-query";
 
 const UserNav: React.FC = () => {
-  const savedUserId = getItemFromLocalStorage<string>({
-    key: LOCAL_STORAGE.OMBUR_USER_ID,
-  });
   const isFirstRender = useIsFirstRender();
+  const queryClient = useQueryClient();
 
-  const { data: user, isFetched } = useQuery({
-    queryKey: ["getUser"],
-    queryFn: async () => await getUserServerAction({ userId: savedUserId! }),
-    enabled: !!savedUserId,
-  });
+  const { data: user, isFetched } = useUser();
 
-  userStore.setUser({ user: savedUserId ? user : null });
+  const signOut = () => {
+    localStorage.removeItem(LOCAL_STORAGE.OMBUR_USER_ID);
+    queryClient.setQueryData(["getUser"], null);
+  };
 
   // Return null if it's the first render to avoid hydration error
   if (isFirstRender) {
@@ -28,9 +24,8 @@ const UserNav: React.FC = () => {
   }
 
   if (isFetched && !user) {
+    signOut();
   }
-
-  console.log("isFetched", isFetched);
 
   return (
     <nav className={styles.nav}>
@@ -39,9 +34,7 @@ const UserNav: React.FC = () => {
         <div className={styles.title}>Ombur</div>
       </div>
 
-      {savedUserId && user ? (
-        <div className={styles.right}>{user.name}</div>
-      ) : null}
+      {user ? <div className={styles.right}>{user.name} </div> : null}
     </nav>
   );
 };
