@@ -4,16 +4,18 @@ import { useQuery } from "@tanstack/react-query";
 import styles from "./issuesList.module.css";
 import { getIssuesServerAction } from "../leftPane/serverActions";
 import { Loader } from "lucide-react";
+import { User } from "@/types";
 
 type IssuesListProps = {
   clientId: string;
-  userId: string;
+  user: User;
 };
 
-const IssuesList: React.FC<IssuesListProps> = ({ clientId, userId }) => {
+const IssuesList: React.FC<IssuesListProps> = ({ clientId, user }) => {
   const { data, isLoading } = useQuery({
-    queryKey: ["getIssues", clientId, userId],
-    queryFn: () => getIssuesServerAction({ clientId, userId }),
+    queryKey: ["getIssues", clientId, user._id],
+    queryFn: async () =>
+      await getIssuesServerAction({ clientId, userId: user._id }),
   });
 
   if (isLoading) {

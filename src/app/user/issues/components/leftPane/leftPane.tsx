@@ -6,14 +6,15 @@ import { PlusIcon } from "lucide-react";
 import { modalStore } from "@/libs/client";
 import { ClientProfile } from "../clientProfile/clientProfile";
 import { IssuesList } from "../issuesList/issuesList";
+import { User } from "@/types";
 
 type LeftPaneProps = {
   setIssueId: (issueId: string) => void;
   clientId: string;
-  userId: string;
+  user: User;
 };
 
-const LeftPane: React.FC<LeftPaneProps> = ({ clientId, userId }) => {
+const LeftPane: React.FC<LeftPaneProps> = ({ clientId, user }) => {
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -31,7 +32,7 @@ const LeftPane: React.FC<LeftPaneProps> = ({ clientId, userId }) => {
           </Button>
         </div>
 
-        <IssuesList clientId={clientId} userId={userId} />
+        <IssuesList clientId={clientId} user={user} />
       </div>
     </div>
   );

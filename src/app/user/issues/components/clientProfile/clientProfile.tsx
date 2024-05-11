@@ -14,7 +14,7 @@ type ClientProfileProps = {
 const ClientProfile: React.FC<ClientProfileProps> = ({ clientId }) => {
   const { data: clientProfileInfo, isLoading } = useQuery({
     queryKey: ["getClientProfileInfo", clientId],
-    queryFn: () => getClientProfileInfoServerAction({ clientId }),
+    queryFn: async () => await getClientProfileInfoServerAction({ clientId }),
   });
 
   if (isLoading) {

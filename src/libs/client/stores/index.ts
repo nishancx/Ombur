@@ -1,2 +1,2 @@
 export * from "./modalStore";
-export * from "./userIdStore";
+export * from "./userStore";

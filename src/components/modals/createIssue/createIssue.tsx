@@ -1,4 +1,4 @@
-import { modalStore, userIdStore } from "@/libs/client";
+import { modalStore, userStore } from "@/libs/client";
 import { Input, Modal, Select } from "antd";
 import { useSnapshot } from "valtio";
 import styles from "./createIssue.module.css";
@@ -11,7 +11,7 @@ import { createIssueServerAction } from "./serverActions";
 
 const CreateIssueModal: React.FC = () => {
   const { isOpen, clientId } = useSnapshot(modalStore.createIssueModal);
-  const { userId } = useSnapshot(userIdStore);
+  const { user } = useSnapshot(userStore);
   const { control, handleSubmit, setValue } = useForm<IssueDTO>({
     mode: "onSubmit",
     resolver: zodResolver(issueValidationSchema),
@@ -24,14 +24,14 @@ const CreateIssueModal: React.FC = () => {
   };
 
   useEffect(() => {
-    if (userId) {
-      setValue("userId", userId);
+    if (user) {
+      setValue("userId", user._id);
     }
 
     if (clientId) {
       setValue("clientId", clientId);
     }
-  }, [setValue, userId, clientId]);
+  }, [setValue, user, clientId]);
 
   return (
     <Modal

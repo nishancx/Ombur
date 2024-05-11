@@ -1,6 +1,6 @@
 "use client";
 
-import { userIdStore } from "@/libs/client";
+import { userStore } from "@/libs/client";
 import { CreateUser, Issues } from "./components";
 import { useSnapshot } from "valtio";
 import { useIsFirstRender } from "@/hooks";
@@ -15,7 +15,7 @@ export default function CreateIssue() {
     clientDataParam: clientDataParam,
   });
 
-  const { userId } = useSnapshot(userIdStore);
+  const { user } = useSnapshot(userStore);
   const isFirstRender = useIsFirstRender();
 
   // Redirect to home page if clientData is not available
@@ -23,16 +23,17 @@ export default function CreateIssue() {
     return (window.location.href = "/");
   }
 
-  // Return null if it's the first render or userId is null (loading userId from local storage)
-  if (isFirstRender || userId === null) {
+  // Return null if it's the first render or userId is undefined (loading userId from local storage)
+  // to avoid hydration error
+  if (isFirstRender || user === undefined) {
     return null;
   }
 
   // If userId is not available, show create user form
-  if (!userId) {
+  if (user === null) {
     return <CreateUser />;
   }
 
   // If userId is available, show user's issues for the client
-  return <Issues clientId={clientData.id} userId={userId} />;
+  return <Issues clientId={clientData.id} user={user} />;
 }

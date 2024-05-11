@@ -2,19 +2,20 @@ import { useState } from "react";
 import styles from "./issues.module.css";
 import clsx from "clsx";
 import { LeftPane } from "../leftPane/leftPane";
+import { User } from "@/types";
 
 type IssuesProps = {
   clientId: string;
-  userId: string;
+  user: User;
 };
 
-const Issues: React.FC<IssuesProps> = ({ clientId, userId }) => {
+const Issues: React.FC<IssuesProps> = ({ clientId, user }) => {
   const [issueId, setIssueId] = useState<string | null>();
 
   return (
     <div className={styles.container}>
       <div className={clsx(styles.left, issueId && styles.inactive)}>
-        <LeftPane setIssueId={setIssueId} clientId={clientId} userId={userId} />
+        <LeftPane setIssueId={setIssueId} clientId={clientId} user={user} />
       </div>
       <div className={clsx(styles.right, !issueId && styles.inactive)}></div>
     </div>

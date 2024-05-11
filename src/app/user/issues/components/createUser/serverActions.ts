@@ -1,9 +1,11 @@
 "use server";
 
 import { Users, connectDB } from "@/libs/server";
+import { User } from "@/types";
+import { serializeObject } from "@/utils";
 import { UserDTO, userValidationSchema } from "@/validations";
 
-const createUserServerAction = async ({ name }: UserDTO) => {
+const createUserServerAction = async ({ name }: UserDTO): Promise<User> => {
   await connectDB();
 
   const isPayloadValid = userValidationSchema.safeParse({ name });
@@ -14,7 +16,7 @@ const createUserServerAction = async ({ name }: UserDTO) => {
 
   const user = await Users.create({ name });
 
-  return user._id.toString();
+  return serializeObject(user);
 };
 
 export { createUserServerAction };

@@ -5,7 +5,7 @@ import { Button } from "@/components";
 import { UserDTO, userValidationSchema } from "@/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createUserServerAction } from "./serverActions";
-import { saveItemToLocalStorage, userIdStore } from "@/libs/client";
+import { saveItemToLocalStorage, userStore } from "@/libs/client";
 import { LOCAL_STORAGE } from "@/constants";
 
 const CreateUser: React.FC = () => {
@@ -15,10 +15,14 @@ const CreateUser: React.FC = () => {
   });
 
   const createUser = async (data: UserDTO) => {
-    const userId = await createUserServerAction(data);
+    const user = await createUserServerAction(data);
 
-    saveItemToLocalStorage({ key: LOCAL_STORAGE.OMBUR_USER_ID, value: userId });
-    userIdStore.setUserId({ userId });
+    saveItemToLocalStorage({
+      key: LOCAL_STORAGE.OMBUR_USER_ID,
+      value: user._id,
+    });
+
+    userStore.setUser({ user });
   };
 
   return (
