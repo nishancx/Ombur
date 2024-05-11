@@ -6,6 +6,8 @@ type Issue = {
   userId: string;
   resolved: boolean;
   type: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type { Issue };

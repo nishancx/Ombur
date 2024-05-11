@@ -4,6 +4,8 @@ type Client = {
   email: string;
   avatar?: string;
   isDeleted?: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type { Client };
