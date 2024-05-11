@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createUserServerAction } from "./serverActions";
 import { saveItemToLocalStorage, userStore } from "@/libs/client";
 import { LOCAL_STORAGE } from "@/constants";
+import { invokeOnEnterPress } from "@/utils";
 
 const CreateUser: React.FC = () => {
   const { control, handleSubmit } = useForm<UserDTO>({
@@ -38,6 +39,9 @@ const CreateUser: React.FC = () => {
               {...field}
               status={!!error ? "error" : ""}
               className={styles.nameInput}
+              onKeyDown={(event) =>
+                invokeOnEnterPress({ event, action: handleSubmit(createUser) })
+              }
             />
           )}
         />
