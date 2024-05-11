@@ -7,8 +7,9 @@ import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
 import { Link, LogOut } from "lucide-react";
 import { modalStore } from "@/libs/client";
-import { getSessionClient } from "./serverActions";
+import { getSessionClientServerAction } from "./serverActions";
 import { ClientDataSearchParam } from "@/types";
+import { FILE_PATHS } from "@/constants";
 
 type NavProps = {
   session: Session | null;
@@ -18,7 +19,8 @@ const ClientNav: React.FC<NavProps> = ({ session }) => {
   const handleGetIssueLink = async () => {
     if (!session!.user!.email) return;
 
-    const sessionClient = await getSessionClient();
+    // to fix, store the client data in valtio
+    const sessionClient = await getSessionClientServerAction();
 
     if (!sessionClient) return;
 
@@ -45,7 +47,7 @@ const ClientNav: React.FC<NavProps> = ({ session }) => {
         <Dropdown
           handle={
             <Image
-              src={session.user.image || "/person.webp"}
+              src={session.user.image || FILE_PATHS.DEFAULT_USER_IMAGE}
               alt="Ombur"
               width={32}
               height={32}

@@ -34,5 +34,5 @@ export default function CreateIssue() {
   }
 
   // If userId is available, show user's issues for the client
-  return <Issues clientId={clientData.id} />;
+  return <Issues clientId={clientData.id} userId={userId} />;
 }

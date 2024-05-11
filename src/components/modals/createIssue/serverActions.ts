@@ -1,16 +1,16 @@
 "use server";
 
-import { Issues, connectDB } from "@/libs/server";
+import { Issue, Issues, connectDB } from "@/libs/server";
 import { serializeObject } from "@/utils";
 import { IssueDTO, issueValidationSchema } from "@/validations";
 
-const createIssueAction = async ({
+const createIssueServerAction = async ({
   title,
   description,
   type,
   clientId,
   userId,
-}: IssueDTO) => {
+}: IssueDTO): Promise<Issue> => {
   await connectDB();
 
   const isPayloadValid = issueValidationSchema.safeParse({
@@ -36,4 +36,4 @@ const createIssueAction = async ({
   return serializeObject(issue);
 };
 
-export { createIssueAction };
+export { createIssueServerAction };

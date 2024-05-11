@@ -1,0 +1,30 @@
+.container {
+  height: 100%;
+}
+
+@media (min-width: 500px) and (max-width: 768px) {
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+.createIssueContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.createIssueButton {
+  flex: 1;
+}
+
+.createIssueButtonContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}

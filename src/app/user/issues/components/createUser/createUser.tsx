@@ -4,7 +4,7 @@ import { Input } from "antd";
 import { Button } from "@/components";
 import { UserDTO, userValidationSchema } from "@/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createUserAction } from "./serverActions";
+import { createUserServerAction } from "./serverActions";
 import { saveItemToLocalStorage, userIdStore } from "@/libs/client";
 import { LOCAL_STORAGE } from "@/constants";
 
@@ -15,7 +15,7 @@ const CreateUser: React.FC = () => {
   });
 
   const createUser = async (data: UserDTO) => {
-    const userId = await createUserAction(data);
+    const userId = await createUserServerAction(data);
 
     saveItemToLocalStorage({ key: LOCAL_STORAGE.OMBUR_USER_ID, value: userId });
     userIdStore.setUserId({ userId });

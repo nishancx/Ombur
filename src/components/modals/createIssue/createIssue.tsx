@@ -6,8 +6,8 @@ import { Controller, useForm } from "react-hook-form";
 import { IssueDTO, issueValidationSchema } from "@/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
-import { ISSUE } from "@/constants/issue";
-import { createIssueAction } from "./serverActions";
+import { ISSUE } from "@/constants";
+import { createIssueServerAction } from "./serverActions";
 
 const CreateIssueModal: React.FC = () => {
   const { isOpen, clientId } = useSnapshot(modalStore.createIssueModal);
@@ -19,8 +19,7 @@ const CreateIssueModal: React.FC = () => {
   });
 
   const onSubmit = async (data: IssueDTO) => {
-    const issue = await createIssueAction(data);
-    console.log("issue", issue);
+    const issue = await createIssueServerAction(data);
     modalStore.createIssueModal.close();
   };
 
@@ -79,7 +78,6 @@ const CreateIssueModal: React.FC = () => {
         render={({ field }) => (
           <>
             <div className={styles.label}>Type</div>
-            {/* <Input.TextArea {...field} className={styles.input} /> */}
             <Select
               {...field}
               value={ISSUE.TYPES_LIST[0]}

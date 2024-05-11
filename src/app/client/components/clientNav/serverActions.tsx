@@ -4,7 +4,7 @@ import { Clients, connectDB } from "@/libs/server";
 import { auth } from "@/../auth";
 import { serializeObject } from "@/utils";
 
-const getSessionClient = async () => {
+const getSessionClientServerAction = async () => {
   await connectDB();
 
   const session = await auth();
@@ -22,4 +22,4 @@ const getSessionClient = async () => {
   return serializeObject(client);
 };
 
-export { getSessionClient };
+export { getSessionClientServerAction };

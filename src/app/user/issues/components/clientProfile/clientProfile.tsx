@@ -3,8 +3,9 @@
 import styles from "./clientProfile.module.css";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
-import { getClientProfileInfo } from "../issuesList/serverActions";
+import { getClientProfileInfoServerAction } from "../leftPane/serverActions";
 import { Loader } from "lucide-react";
+import { FILE_PATHS } from "@/constants";
 
 type ClientProfileProps = {
   clientId: string;
@@ -12,8 +13,8 @@ type ClientProfileProps = {
 
 const ClientProfile: React.FC<ClientProfileProps> = ({ clientId }) => {
   const { data: clientProfileInfo, isLoading } = useQuery({
-    queryKey: ["clientProfileInfo", { clientId }],
-    queryFn: () => getClientProfileInfo({ clientId }),
+    queryKey: ["getClientProfileInfo", clientId],
+    queryFn: () => getClientProfileInfoServerAction({ clientId }),
   });
 
   if (isLoading) {
@@ -31,7 +32,7 @@ const ClientProfile: React.FC<ClientProfileProps> = ({ clientId }) => {
   return (
     <div className={styles.container}>
       <Image
-        src={clientProfileInfo.avatar || "/person.png"}
+        src={clientProfileInfo.avatar || FILE_PATHS.DEFAULT_USER_IMAGE}
         alt="avatar"
         width={50}
         height={50}

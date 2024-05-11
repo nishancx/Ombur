@@ -3,7 +3,7 @@
 import { Users, connectDB } from "@/libs/server";
 import { UserDTO, userValidationSchema } from "@/validations";
 
-const createUserAction = async ({ name }: UserDTO) => {
+const createUserServerAction = async ({ name }: UserDTO) => {
   await connectDB();
 
   const isPayloadValid = userValidationSchema.safeParse({ name });
@@ -17,4 +17,4 @@ const createUserAction = async ({ name }: UserDTO) => {
   return user._id.toString();
 };
 
-export { createUserAction };
+export { createUserServerAction };

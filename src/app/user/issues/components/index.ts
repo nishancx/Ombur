@@ -1,3 +1,3 @@
 export * from "./createUser/createUser";
 export * from "./issues/issues";
-export * from "./issuesList/issuesList";
+export * from "./leftPane/leftPane";
