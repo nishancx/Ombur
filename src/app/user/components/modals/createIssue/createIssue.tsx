@@ -1,17 +1,19 @@
-import { modalStore, userStore } from "@/libs/client";
+import styles from "./createIssue.module.css";
+import { modalStore } from "@/libs/client";
 import { Input, Modal, Select } from "antd";
 import { useSnapshot } from "valtio";
-import styles from "./createIssue.module.css";
 import { Controller, useForm } from "react-hook-form";
 import { IssueDTO, issueValidationSchema } from "@/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { ISSUE } from "@/constants";
 import { createIssueServerAction } from "./serverActions";
+import { useUser } from "@/queries";
 
 const CreateIssueModal: React.FC = () => {
   const { isOpen, clientId } = useSnapshot(modalStore.createIssueModal);
-  const { user } = useSnapshot(userStore);
+  const { data: user } = useUser();
+
   const { control, handleSubmit, setValue } = useForm<IssueDTO>({
     mode: "onSubmit",
     resolver: zodResolver(issueValidationSchema),
@@ -19,7 +21,7 @@ const CreateIssueModal: React.FC = () => {
   });
 
   const onSubmit = async (data: IssueDTO) => {
-    const issue = await createIssueServerAction(data);
+    await createIssueServerAction(data);
     modalStore.createIssueModal.close();
   };
 

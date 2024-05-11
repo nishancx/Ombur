@@ -1,5 +1,5 @@
 import { auth } from "@/../auth";
-import { ClientNav } from "./components";
+import { ClientNav, Modals } from "./components";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -16,6 +16,7 @@ export default async function RootLayout({
 
   return (
     <>
+      <Modals />
       <ClientNav session={session} />
       {children}
     </>

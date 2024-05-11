@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { ReactQueryClientProvider, UserNav } from "./components";
+import { ReactQueryClientProvider, UserNav, Modals } from "./components";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
@@ -14,6 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <ReactQueryClientProvider>
+      <Modals />
       <UserNav />
 
       {/* added suspense to wrap useSearchParams */}

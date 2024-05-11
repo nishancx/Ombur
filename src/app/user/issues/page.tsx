@@ -1,11 +1,10 @@
 "use client";
 
-import { userStore } from "@/libs/client";
 import { CreateUser, Issues } from "./components";
-import { useSnapshot } from "valtio";
 import { useIsFirstRender } from "@/hooks";
 import { useSearchParams } from "next/navigation";
 import { getClientDataFromSearchParam } from "./utils";
+import { useUser } from "@/queries";
 
 export default function CreateIssue() {
   const searchParams = useSearchParams();
@@ -15,7 +14,7 @@ export default function CreateIssue() {
     clientDataParam: clientDataParam,
   });
 
-  const { user } = useSnapshot(userStore);
+  const { data: user } = useUser();
   const isFirstRender = useIsFirstRender();
 
   // Redirect to home page if clientData is not available

@@ -1,7 +1,7 @@
+import styles from "./issueLink.module.css";
 import { modalStore } from "@/libs/client";
 import { Modal } from "antd";
 import { useSnapshot } from "valtio";
-import styles from "./issueLink.module.css";
 
 const IssueLinkModal: React.FC = () => {
   const { isOpen, issueLink } = useSnapshot(modalStore.issueLinkModal);

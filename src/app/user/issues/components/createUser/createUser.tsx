@@ -5,11 +5,13 @@ import { Button } from "@/components";
 import { UserDTO, userValidationSchema } from "@/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createUserServerAction } from "./serverActions";
-import { saveItemToLocalStorage, userStore } from "@/libs/client";
+import { saveItemToLocalStorage } from "@/libs/client";
 import { LOCAL_STORAGE } from "@/constants";
 import { invokeOnEnterPress } from "@/utils";
+import { useQueryClient } from "@tanstack/react-query";
 
 const CreateUser: React.FC = () => {
+  const queryClient = useQueryClient();
   const { control, handleSubmit } = useForm<UserDTO>({
     mode: "onSubmit",
     resolver: zodResolver(userValidationSchema),
@@ -23,7 +25,7 @@ const CreateUser: React.FC = () => {
       value: user._id,
     });
 
-    userStore.setUser({ user });
+    queryClient.setQueryData(["getUser"], user);
   };
 
   return (
