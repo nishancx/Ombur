@@ -1,6 +1,7 @@
 "use server";
 
-import { Issue, Issues, connectDB } from "@/libs/server";
+import { Issues, connectDB } from "@/libs/server";
+import { Issue } from "@/types";
 import { serializeObject } from "@/utils";
 import { IssueDTO, issueValidationSchema } from "@/validations";
 

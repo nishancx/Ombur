@@ -1,9 +1,5 @@
+import { User } from "@/types";
 import mongoose, { Schema } from "mongoose";
-
-type User = {
-  name: string;
-  isDeleted?: boolean;
-};
 
 const userSchema = new Schema<User>({
   name: { type: String, required: true },
@@ -14,4 +10,3 @@ const Users =
   mongoose.models.Users || mongoose.model<User>("Users", userSchema);
 
 export { Users };
-export type { User };
