@@ -1,41 +1,21 @@
+"use client";
+
 import styles from "./issuesList.module.css";
-import { useQuery } from "@tanstack/react-query";
-import { getClientProfileInfo } from "./serverActions";
-import Image from "next/image";
 import { Button } from "@/components";
 import { PlusIcon } from "lucide-react";
 import { modalStore } from "@/libs/client";
+import { ClientProfile } from "../clientProfile/clientProfile";
 
 type IssuesListProps = {
   setIssueId: (issueId: string) => void;
   clientId: string;
 };
 
-const IssuesList: React.FC<IssuesListProps> = ({ setIssueId, clientId }) => {
-  const { data, isLoading } = useQuery({
-    queryKey: ["clientProfileInfo", { clientId }],
-    queryFn: () => getClientProfileInfo({ clientId }),
-  });
-
+const IssuesList: React.FC<IssuesListProps> = ({ clientId }) => {
   return (
     <div className={styles.container}>
       <div className={styles.top}>
-        <div className={styles.clientInfo}>
-          {isLoading ? (
-            <></>
-          ) : (
-            <>
-              <Image
-                src={data.avatar}
-                alt="avatar"
-                width={50}
-                height={50}
-                className={styles.clientAvatar}
-              />
-              <div className={styles.clientName}>{data.name}</div>
-            </>
-          )}
-        </div>
+        <ClientProfile clientId={clientId} />
 
         <div className={styles.createIssueContainer}>
           <Button
