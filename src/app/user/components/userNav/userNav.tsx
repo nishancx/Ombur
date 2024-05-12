@@ -6,6 +6,8 @@ import { LOCAL_STORAGE } from "@/constants";
 import { useIsFirstRender } from "@/hooks";
 import { useUser } from "@/queries";
 import { useQueryClient } from "@tanstack/react-query";
+import { Button, Dropdown } from "@/components";
+import { LogOut } from "lucide-react";
 
 const UserNav: React.FC = () => {
   const isFirstRender = useIsFirstRender();
@@ -34,7 +36,25 @@ const UserNav: React.FC = () => {
         <div className={styles.title}>Ombur</div>
       </div>
 
-      {user ? <div className={styles.right}>{user.name} </div> : null}
+      {user ? (
+        <Dropdown
+          handle={<div className={styles.right}>{user.name} </div>}
+          content={
+            <div className={styles.content}>
+              <Button
+                onClick={async () => signOut()}
+                hasBackground={false}
+                hasBorderRadius={false}
+              >
+                <div className={styles.contentButton}>
+                  <LogOut size={16} />
+                  <div className={styles.buttonText}>Sign out</div>
+                </div>
+              </Button>
+            </div>
+          }
+        />
+      ) : null}
     </nav>
   );
 };

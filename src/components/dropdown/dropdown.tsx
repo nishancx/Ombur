@@ -1,7 +1,7 @@
 "use client";
 
 import { useOutsideClickHandler } from "@/hooks";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { useRef, useState } from "react";
 import styles from "./dropdown.module.css";
 
@@ -24,7 +24,7 @@ const Dropdown: React.FC<DropdownProps> = ({ handle, content }) => {
       }
     >
       {handle}
-      <ChevronDown size={18} />
+      {dropdownEnabled ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
 
       {dropdownEnabled ? <div className={styles.content}>{content}</div> : null}
     </div>

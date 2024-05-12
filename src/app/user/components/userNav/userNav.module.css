@@ -37,8 +37,9 @@
 .content {
   display: flex;
   flex-direction: column;
-  border-radius: 0 0 10px 10px;
+  border-radius: 10px;
   overflow: hidden;
+  padding: 20px 0;
 }
 
 .contentUserInfo {
