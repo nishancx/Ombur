@@ -8,7 +8,7 @@ type ChatTitleBar = {
 
 const ChatTitleBar: React.FC<ChatTitleBar> = ({ title }) => {
   const goBack = () => {
-    issueStore.valtioUsersCurrentIssue.setCurrentIssue({
+    issueStore.usersCurrentIssue.setCurrentIssue({
       currentIssue: null,
     });
   };

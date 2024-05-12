@@ -6,5 +6,5 @@ type Valtio_Users_Current_Issue = {
 };
 
 export type Valtio_Issue = {
-  valtioUsersCurrentIssue: Valtio_Users_Current_Issue;
+  usersCurrentIssue: Valtio_Users_Current_Issue;
 };

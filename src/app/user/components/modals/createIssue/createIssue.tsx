@@ -1,5 +1,5 @@
 import styles from "./createIssue.module.css";
-import { modalStore } from "@/libs/client";
+import { issueStore, modalStore } from "@/libs/client";
 import { Input, Modal, Select } from "antd";
 import { useSnapshot } from "valtio";
 import { Controller, useForm } from "react-hook-form";
@@ -16,20 +16,27 @@ const CreateIssueModal: React.FC = () => {
   const { data: user } = useUser();
   const queryClient = useQueryClient();
 
-  const { control, handleSubmit, setValue } = useForm<IssueDTO>({
+  const { control, reset, handleSubmit, setValue } = useForm<IssueDTO>({
     mode: "onSubmit",
     resolver: zodResolver(issueValidationSchema),
     defaultValues: { clientId, type: ISSUE.TYPES_LIST[0] },
   });
 
+  const closeModal = () => {
+    reset();
+    modalStore.createIssueModal.close();
+  };
+
   const onSubmit = async (data: IssueDTO) => {
-    await createIssueServerAction(data);
+    const issue = await createIssueServerAction(data);
 
     // to fix, use optimistic updates
     queryClient.invalidateQueries({
       queryKey: ["getIssues", clientId, user!._id],
     });
-    modalStore.createIssueModal.close();
+
+    issueStore.usersCurrentIssue.setCurrentIssue({ currentIssue: issue });
+    closeModal();
   };
 
   useEffect(() => {
@@ -48,7 +55,7 @@ const CreateIssueModal: React.FC = () => {
       open={isOpen}
       onOk={handleSubmit(onSubmit)}
       okText="Create Issue"
-      onCancel={modalStore.createIssueModal.close}
+      onCancel={closeModal}
       cancelButtonProps={{ style: { display: "none" } }}
     >
       <Controller

@@ -11,7 +11,7 @@ type IssuesProps = {
 };
 
 const Issues: React.FC<IssuesProps> = ({ clientId, user }) => {
-  const { currentIssue } = useSnapshot(issueStore.valtioUsersCurrentIssue);
+  const { currentIssue } = useSnapshot(issueStore.usersCurrentIssue);
 
   return (
     <div className={styles.container}>

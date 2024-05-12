@@ -12,7 +12,7 @@ type RightPaneProps = {
 };
 
 const RightPane: React.FC<RightPaneProps> = ({ user }) => {
-  const { currentIssue } = useSnapshot(issueStore.valtioUsersCurrentIssue);
+  const { currentIssue } = useSnapshot(issueStore.usersCurrentIssue);
 
   if (currentIssue === undefined) return null;
 

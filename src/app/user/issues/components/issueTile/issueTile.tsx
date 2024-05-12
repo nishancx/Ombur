@@ -9,7 +9,7 @@ type IssueTileProps = {
 
 const IssueTile: React.FC<IssueTileProps> = ({ issue }) => {
   const handleClick = () => {
-    issueStore.valtioUsersCurrentIssue.setCurrentIssue({ currentIssue: issue });
+    issueStore.usersCurrentIssue.setCurrentIssue({ currentIssue: issue });
   };
 
   return (
