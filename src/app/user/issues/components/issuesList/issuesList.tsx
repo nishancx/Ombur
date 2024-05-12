@@ -7,6 +7,7 @@ import { Loader } from "lucide-react";
 import { User } from "@/types";
 import { Empty } from "antd";
 import { IssueTile } from "../issueTile/issueTile";
+import { isEmpty } from "lodash";
 
 type IssuesListProps = {
   clientId: string;
@@ -21,10 +22,14 @@ const IssuesList: React.FC<IssuesListProps> = ({ clientId, user }) => {
   });
 
   if (isLoading) {
-    return <Loader />;
+    return (
+      <div className={styles.container}>
+        <Loader className={styles.loader} />
+      </div>
+    );
   }
 
-  if (!data) {
+  if (!data || isEmpty(data)) {
     return (
       <div className={styles.container}>
         <Empty description="No issues" className={styles.empty} />
