@@ -31,9 +31,9 @@ const LeftPane: React.FC<LeftPaneProps> = ({ clientId, user }) => {
             </div>
           </Button>
         </div>
-
-        <IssuesList clientId={clientId} user={user} />
       </div>
+
+      <IssuesList clientId={clientId} user={user} />
     </div>
   );
 };
