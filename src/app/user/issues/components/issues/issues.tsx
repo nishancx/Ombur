@@ -1,7 +1,6 @@
 import styles from "./issues.module.css";
 import clsx from "clsx";
-import { useState } from "react";
-import { LeftPane } from "..";
+import { LeftPane, RightPane } from "..";
 import { User } from "@/types";
 import { useSnapshot } from "valtio";
 import { issueStore } from "@/libs/client";
@@ -23,7 +22,9 @@ const Issues: React.FC<IssuesProps> = ({ clientId, user }) => {
       </div>
       <div
         className={clsx(styles.right, !currentIssue?._id && styles.inactive)}
-      ></div>
+      >
+        <RightPane user={user} />
+      </div>
     </div>
   );
 };

@@ -26,10 +26,6 @@
   text-decoration: underline;
 }
 
-.clientImage {
-  border-radius: 100%;
-}
-
 .signInButtonText {
   padding: 0 10px;
 }
@@ -40,25 +36,4 @@
   border-radius: 10px;
   overflow: hidden;
   padding: 20px 0;
-}
-
-.contentUserInfo {
-  padding: 10px 0;
-  background-color: #333;
-  color: white;
-  font-size: 12px;
-  border-radius: 10px 10px 0 0;
-  text-align: center;
-}
-
-.buttonText {
-  width: 100%;
-  text-align: left;
-}
-
-.contentButton {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  justify-content: center;
 }

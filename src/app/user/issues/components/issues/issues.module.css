@@ -4,26 +4,35 @@
 }
 
 .left {
-  flex-basis: 300px;
-  max-width: 300px;
+  flex-grow: 1;
 }
 
 .right {
-  background-color: blue;
   flex: 1;
 }
 
-@media (max-width: 768px) {
+.left.inactive {
+  display: none;
+}
+
+.right.inactive {
+  display: none;
+}
+
+@media (min-width: 768px) {
   .left {
-    flex: 1;
-    max-width: unset;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 300px;
   }
 
   .left.inactive {
-    display: none;
+    width: 300px;
+
+    display: block;
   }
 
   .right.inactive {
-    display: none;
+    display: block;
   }
 }
