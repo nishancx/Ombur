@@ -22,6 +22,7 @@ const CreateIssueModal: React.FC = () => {
 
   const onSubmit = async (data: IssueDTO) => {
     await createIssueServerAction(data);
+
     modalStore.createIssueModal.close();
   };
 
@@ -80,11 +81,7 @@ const CreateIssueModal: React.FC = () => {
         render={({ field }) => (
           <>
             <div className={styles.label}>Type</div>
-            <Select
-              {...field}
-              value={ISSUE.TYPES_LIST[0]}
-              className={styles.select}
-            >
+            <Select {...field} className={styles.select}>
               {ISSUE.TYPES_LIST.map((type) => (
                 <Select.Option key={type} value={type}>
                   {type}

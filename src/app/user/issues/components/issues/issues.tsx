@@ -1,7 +1,7 @@
-import { useState } from "react";
 import styles from "./issues.module.css";
 import clsx from "clsx";
-import { LeftPane } from "../leftPane/leftPane";
+import { useState } from "react";
+import { LeftPane } from "..";
 import { User } from "@/types";
 
 type IssuesProps = {

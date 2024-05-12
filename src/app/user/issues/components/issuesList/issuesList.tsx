@@ -1,10 +1,12 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import styles from "./issuesList.module.css";
+import { useQuery } from "@tanstack/react-query";
 import { getIssuesServerAction } from "../leftPane/serverActions";
 import { Loader } from "lucide-react";
 import { User } from "@/types";
+import { Empty } from "antd";
+import { IssueTile } from "../issueTile/issueTile";
 
 type IssuesListProps = {
   clientId: string;
@@ -21,7 +23,22 @@ const IssuesList: React.FC<IssuesListProps> = ({ clientId, user }) => {
   if (isLoading) {
     return <Loader />;
   }
-  return <div className={styles.container}>{JSON.stringify(data)}</div>;
+
+  if (!data) {
+    return (
+      <div className={styles.container}>
+        <Empty description="No issues" className={styles.empty} />
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.container}>
+      {data.map((issue) => (
+        <IssueTile key={issue._id} issue={issue} />
+      ))}
+    </div>
+  );
 };
 
 export { IssuesList };

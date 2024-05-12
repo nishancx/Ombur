@@ -1,6 +1,13 @@
 .container {
-  padding: 10px;
   margin-top: 10px;
   flex: 1;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container > *:not(:last-child) {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.empty {
+  margin-top: 20px;
 }

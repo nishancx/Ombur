@@ -2,10 +2,9 @@
 
 import styles from "./leftPane.module.css";
 import { Button } from "@/components";
+import { ClientProfile, IssuesList } from "..";
 import { PlusIcon } from "lucide-react";
 import { modalStore } from "@/libs/client";
-import { ClientProfile } from "../clientProfile/clientProfile";
-import { IssuesList } from "../issuesList/issuesList";
 import { User } from "@/types";
 
 type LeftPaneProps = {
@@ -27,6 +26,7 @@ const LeftPane: React.FC<LeftPaneProps> = ({ clientId, user }) => {
           >
             <div className={styles.createIssueButtonContent}>
               <PlusIcon size={24} />
+
               <div>Create Issue</div>
             </div>
           </Button>

@@ -1,0 +1,25 @@
+.container {
+  padding: 10px;
+}
+
+.title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bottom {
+  display: flex;
+  height: 30px;
+  margin-top: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.type {
+  background-color: #d3e7f1;
+  padding: 3px 6px;
+  border-radius: 5px;
+  font-size: 12px;
+  color: #2f2f2f;
+}
