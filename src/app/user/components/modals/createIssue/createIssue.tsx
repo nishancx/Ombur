@@ -74,6 +74,7 @@ const CreateIssueModal: React.FC = () => {
             <div className={styles.label}>Description</div>
             <Input.TextArea
               {...field}
+              autoSize={{ minRows: 3 }}
               className={styles.input}
               status={!!error ? "error" : ""}
             />
