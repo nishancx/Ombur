@@ -9,10 +9,12 @@ import { useEffect } from "react";
 import { ISSUE } from "@/constants";
 import { createIssueServerAction } from "./serverActions";
 import { useUser } from "@/queries";
+import { useQueryClient } from "@tanstack/react-query";
 
 const CreateIssueModal: React.FC = () => {
   const { isOpen, clientId } = useSnapshot(modalStore.createIssueModal);
   const { data: user } = useUser();
+  const queryClient = useQueryClient();
 
   const { control, handleSubmit, setValue } = useForm<IssueDTO>({
     mode: "onSubmit",
@@ -23,6 +25,10 @@ const CreateIssueModal: React.FC = () => {
   const onSubmit = async (data: IssueDTO) => {
     await createIssueServerAction(data);
 
+    // to fix, use optimistic updates
+    queryClient.invalidateQueries({
+      queryKey: ["getIssues", clientId, user!._id],
+    });
     modalStore.createIssueModal.close();
   };
 

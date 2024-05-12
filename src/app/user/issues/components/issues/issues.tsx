@@ -3,6 +3,8 @@ import clsx from "clsx";
 import { useState } from "react";
 import { LeftPane } from "..";
 import { User } from "@/types";
+import { useSnapshot } from "valtio";
+import { issueStore } from "@/libs/client";
 
 type IssuesProps = {
   clientId: string;
@@ -10,14 +12,18 @@ type IssuesProps = {
 };
 
 const Issues: React.FC<IssuesProps> = ({ clientId, user }) => {
-  const [issueId, setIssueId] = useState<string | null>();
+  const { currentIssue } = useSnapshot(issueStore.valtioUsersCurrentIssue);
 
   return (
     <div className={styles.container}>
-      <div className={clsx(styles.left, issueId && styles.inactive)}>
-        <LeftPane setIssueId={setIssueId} clientId={clientId} user={user} />
+      <div
+        className={clsx(styles.left, !!currentIssue?._id && styles.inactive)}
+      >
+        <LeftPane clientId={clientId} user={user} />
       </div>
-      <div className={clsx(styles.right, !issueId && styles.inactive)}></div>
+      <div
+        className={clsx(styles.right, !currentIssue?._id && styles.inactive)}
+      ></div>
     </div>
   );
 };

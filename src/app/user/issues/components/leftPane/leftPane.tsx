@@ -8,7 +8,6 @@ import { modalStore } from "@/libs/client";
 import { User } from "@/types";
 
 type LeftPaneProps = {
-  setIssueId: (issueId: string) => void;
   clientId: string;
   user: User;
 };
