@@ -5,6 +5,7 @@ import { issueStore } from "@/libs/client";
 import { User } from "@/types";
 import { Empty } from "antd";
 import { useSnapshot } from "valtio";
+import { Chat, ChatTitleBar } from "..";
 
 type RightPaneProps = {
   user: User;
@@ -23,7 +24,12 @@ const RightPane: React.FC<RightPaneProps> = ({ user }) => {
       />
     );
 
-  return <div>{JSON.stringify(currentIssue)}</div>;
+  return (
+    <>
+      <ChatTitleBar title={currentIssue.title} />
+      <Chat />
+    </>
+  );
 };
 
 export { RightPane };

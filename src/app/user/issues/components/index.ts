@@ -5,3 +5,5 @@ export * from "./issuesList/issuesList";
 export * from "./issueTile/issueTile";
 export * from "./leftPane/leftPane";
 export * from "./rightPane/rightPane";
+export * from "./chatTitleBar/chatTitleBar";
+export * from "./chat/chat";

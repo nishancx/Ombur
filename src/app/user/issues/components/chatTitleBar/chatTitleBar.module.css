@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  height: 50px;
+  align-items: center;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  cursor: pointer;
+}
+
+.rightFiller {
+  width: 50px;
+}
+
+.title {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 10px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .container {
+    display: none;
+  }
+}
