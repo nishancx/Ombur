@@ -26,7 +26,7 @@ const RightPane: React.FC<RightPaneProps> = ({ user }) => {
 
   return (
     <>
-      <ChatTitleBar title={currentIssue.title} />
+      <ChatTitleBar />
       <Chat />
     </>
   );

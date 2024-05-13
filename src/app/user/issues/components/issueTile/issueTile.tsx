@@ -2,12 +2,14 @@ import styles from "./issueTile.module.css";
 import { Info } from "lucide-react";
 import { Issue } from "@/types";
 import { issueStore } from "@/libs/client";
+import { useSnapshot } from "valtio";
 
 type IssueTileProps = {
   issue: Issue;
 };
 
 const IssueTile: React.FC<IssueTileProps> = ({ issue }) => {
+  const { currentIssue } = useSnapshot(issueStore.usersCurrentIssue);
   const handleClick = () => {
     issueStore.usersCurrentIssue.setCurrentIssue({ currentIssue: issue });
   };
@@ -19,7 +21,9 @@ const IssueTile: React.FC<IssueTileProps> = ({ issue }) => {
       <div className={styles.bottom}>
         <div className={styles.type}>{issue.type}</div>
 
-        <Info size={18} color="#05608d" />
+        {currentIssue?._id === issue?._id ? (
+          <Info size={18} color="#05608d" className={styles.infoButton} />
+        ) : null}
       </div>
     </div>
   );

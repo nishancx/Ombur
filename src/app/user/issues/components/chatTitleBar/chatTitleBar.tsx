@@ -1,25 +1,27 @@
-import { issueStore } from "@/libs/client";
 import styles from "./chatTitleBar.module.css";
-import { ArrowLeft } from "lucide-react";
+import { issueStore } from "@/libs/client";
+import { ArrowLeft, Info } from "lucide-react";
+import { useSnapshot } from "valtio";
 
-type ChatTitleBar = {
-  title: string;
-};
-
-const ChatTitleBar: React.FC<ChatTitleBar> = ({ title }) => {
+const ChatTitleBar: React.FC = () => {
+  const { currentIssue } = useSnapshot(issueStore.usersCurrentIssue);
   const goBack = () => {
     issueStore.usersCurrentIssue.setCurrentIssue({
       currentIssue: null,
     });
   };
 
+  if (!currentIssue) return null;
+
   return (
     <div className={styles.container}>
       <div className={styles.backButton} onClick={goBack}>
-        <ArrowLeft size={24} />
+        <ArrowLeft size={25} />
       </div>
-      <div className={styles.title}>{title}</div>
-      <div className={styles.rightFiller}></div>
+      <div className={styles.title}>{currentIssue.title}</div>
+      <div className={styles.info}>
+        <Info size={18} color="#05608d" />
+      </div>
     </div>
   );
 };
