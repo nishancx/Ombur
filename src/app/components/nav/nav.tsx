@@ -1,7 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import styles from "./nav.module.css";
+
+import Image from "next/image";
 
 const Nav: React.FC = () => {
   return (
