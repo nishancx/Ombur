@@ -7,7 +7,7 @@ import { Button } from "@/components/button/button";
 import { UserDTO, userValidationSchema } from "@/validations/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createUserServerAction } from "./serverActions";
-import { saveItemToLocalStorage } from "@/libs/client/storage";
+import { saveItemToLocalStorage } from "@/libs/client/localStorage";
 import { LOCAL_STORAGE } from "@/constants/localStorage";
 import { invokeOnEnterPress } from "@/utils/dom";
 import { useQueryClient } from "@tanstack/react-query";

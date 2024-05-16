@@ -1,6 +1,6 @@
 import { getUserServerAction } from "@/app/user/components/userNav/serverActions";
 import { LOCAL_STORAGE } from "@/constants/localStorage";
-import { getItemFromLocalStorage } from "@/libs/client/storage";
+import { getItemFromLocalStorage } from "@/libs/client/localStorage";
 
 import { useQuery } from "@tanstack/react-query";
 
