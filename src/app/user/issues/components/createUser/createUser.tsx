@@ -4,7 +4,7 @@ import styles from "./createUser.module.css";
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "antd";
 import { Button } from "@/components/button/button";
-import { UserDTO, userValidationSchema } from "@/validations";
+import { UserDTO, userValidationSchema } from "@/validations/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createUserServerAction } from "./serverActions";
 import { saveItemToLocalStorage } from "@/libs/client/storage";

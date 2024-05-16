@@ -4,7 +4,7 @@ import { Issues } from "@/libs/server/models/issue";
 import { connectDB } from "@/libs/server/mongo";
 import { Issue } from "@/types/models/issue";
 import { serializeObject } from "@/utils/object";
-import { IssueDTO, issueValidationSchema } from "@/validations";
+import { IssueDTO, issueValidationSchema } from "@/validations/issue";
 
 const createIssueServerAction = async ({
   title,

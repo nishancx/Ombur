@@ -6,7 +6,7 @@ import { modalStore } from "@/libs/client/stores/modalStore";
 import { Input, Modal, Select } from "antd";
 import { useSnapshot } from "valtio";
 import { Controller, useForm } from "react-hook-form";
-import { IssueDTO, issueValidationSchema } from "@/validations";
+import { IssueDTO, issueValidationSchema } from "@/validations/issue";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { ISSUE } from "@/constants/issue";
