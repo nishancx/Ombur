@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./chat.module.css";
-import { issueStore } from "@/libs/client/stores/issueStore";
+import { issueStore } from "@/libs/client/stores/issue";
 import { useSnapshot } from "valtio";
 
 const Chat: React.FC = () => {

@@ -4,7 +4,7 @@ import styles from "./rightPane.module.css";
 import { Chat } from "../chat/chat";
 import { ChatTitleBar } from "../chatTitleBar/chatTitleBar";
 
-import { issueStore } from "@/libs/client/stores/issueStore";
+import { issueStore } from "@/libs/client/stores/issue";
 import { User } from "@/types/models/user";
 
 import { Empty } from "antd";

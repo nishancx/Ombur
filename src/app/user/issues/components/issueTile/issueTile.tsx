@@ -3,7 +3,7 @@
 import styles from "./issueTile.module.css";
 
 import { Issue } from "@/types/models/issue";
-import { issueStore } from "@/libs/client/stores/issueStore";
+import { issueStore } from "@/libs/client/stores/issue";
 
 import { Info } from "lucide-react";
 import { useSnapshot } from "valtio";

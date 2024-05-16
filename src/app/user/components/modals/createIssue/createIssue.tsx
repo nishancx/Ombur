@@ -1,8 +1,8 @@
 "use client";
 
 import styles from "./createIssue.module.css";
-import { issueStore } from "@/libs/client/stores/issueStore";
-import { modalStore } from "@/libs/client/stores/modalStore";
+import { issueStore } from "@/libs/client/stores/issue";
+import { modalStore } from "@/libs/client/stores/modal";
 import { Input, Modal, Select } from "antd";
 import { useSnapshot } from "valtio";
 import { Controller, useForm } from "react-hook-form";

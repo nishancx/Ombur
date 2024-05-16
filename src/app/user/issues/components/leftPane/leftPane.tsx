@@ -8,7 +8,7 @@ import { Button } from "@/components/button/button";
 import { User } from "@/types/models/user";
 
 import { PlusIcon } from "lucide-react";
-import { modalStore } from "@/libs/client/stores/modalStore";
+import { modalStore } from "@/libs/client/stores/modal";
 
 type LeftPaneProps = {
   clientId: string;

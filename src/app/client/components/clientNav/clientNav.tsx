@@ -7,7 +7,7 @@ import { Dropdown } from "@/components/dropdown/dropdown";
 import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
 import { Link, LogOut } from "lucide-react";
-import { modalStore } from "@/libs/client/stores/modalStore";
+import { modalStore } from "@/libs/client/stores/modal";
 import { getSessionClientServerAction } from "./serverActions";
 import { ClientDataSearchParam } from "@/types/searchParams";
 import { FILE_PATHS } from "@/constants/filePaths";

@@ -5,7 +5,7 @@ import { LeftPane } from "../leftPane/leftPane";
 import { RightPane } from "../rightPane/rightPane";
 
 import { User } from "@/types/models/user";
-import { issueStore } from "@/libs/client/stores/issueStore";
+import { issueStore } from "@/libs/client/stores/issue";
 
 import { useSnapshot } from "valtio";
 import clsx from "clsx";
