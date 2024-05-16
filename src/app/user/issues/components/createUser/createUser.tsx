@@ -1,13 +1,17 @@
+"use client";
+
 import styles from "./createUser.module.css";
+import { createUserServerAction } from "./serverActions";
+
+import { Button } from "@/components/button/button";
+import { UserDTO, userValidationSchema } from "@/validations/user";
+import { saveItemToLocalStorage } from "@/libs/client/localStorage";
+import { LOCAL_STORAGE } from "@/constants/localStorage";
+import { invokeOnEnterPress } from "@/utils/dom";
+
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "antd";
-import { Button } from "@/components";
-import { UserDTO, userValidationSchema } from "@/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createUserServerAction } from "./serverActions";
-import { saveItemToLocalStorage } from "@/libs/client";
-import { LOCAL_STORAGE } from "@/constants";
-import { invokeOnEnterPress } from "@/utils";
 import { useQueryClient } from "@tanstack/react-query";
 
 const CreateUser: React.FC = () => {

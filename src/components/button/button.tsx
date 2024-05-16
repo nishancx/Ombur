@@ -1,5 +1,6 @@
-import clsx from "clsx";
 import styles from "./button.module.css";
+
+import clsx from "clsx";
 
 type ButtonProps = {
   onClick?: () => void;

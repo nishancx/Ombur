@@ -1,11 +1,14 @@
 "use client";
 
 import styles from "./rightPane.module.css";
-import { issueStore } from "@/libs/client";
-import { User } from "@/types";
+import { Chat } from "../chat/chat";
+import { ChatTitleBar } from "../chatTitleBar/chatTitleBar";
+
+import { issueStore } from "@/libs/client/stores/issue";
+import { User } from "@/types/models/user";
+
 import { Empty } from "antd";
 import { useSnapshot } from "valtio";
-import { Chat, ChatTitleBar } from "..";
 
 type RightPaneProps = {
   user: User;

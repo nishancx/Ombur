@@ -1,9 +1,11 @@
 "use client";
 
-import { useOutsideClickHandler } from "@/hooks";
+import styles from "./dropdown.module.css";
+
+import { useOutsideClickHandler } from "@/hooks/outsideClickHandler";
+
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useRef, useState } from "react";
-import styles from "./dropdown.module.css";
 
 type DropdownProps = {
   handle: React.ReactNode;

@@ -1,12 +1,15 @@
 "use client";
 
-import Image from "next/image";
 import styles from "./userNav.module.css";
-import { LOCAL_STORAGE } from "@/constants";
-import { useIsFirstRender } from "@/hooks";
-import { useUser } from "@/queries";
+
+import { LOCAL_STORAGE } from "@/constants/localStorage";
+import { useIsFirstRender } from "@/hooks/isFirstRender";
+import { useUser } from "@/queries/user";
+import { Button } from "@/components/button/button";
+import { Dropdown } from "@/components/dropdown/dropdown";
+
+import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
-import { Button, Dropdown } from "@/components";
 import { LogOut } from "lucide-react";
 
 const UserNav: React.FC = () => {

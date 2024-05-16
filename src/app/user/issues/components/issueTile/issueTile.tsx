@@ -1,7 +1,11 @@
+"use client";
+
 import styles from "./issueTile.module.css";
+
+import { Issue } from "@/types/models/issue";
+import { issueStore } from "@/libs/client/stores/issue";
+
 import { Info } from "lucide-react";
-import { Issue } from "@/types";
-import { issueStore } from "@/libs/client";
 import { useSnapshot } from "valtio";
 
 type IssueTileProps = {

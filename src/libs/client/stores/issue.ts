@@ -1,4 +1,5 @@
-import { Valtio_Issue } from "@/types";
+import { Valtio_Issue } from "@/types/valito/issue";
+
 import { proxy } from "valtio";
 
 const issueStore: Valtio_Issue = proxy<Valtio_Issue>({

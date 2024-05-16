@@ -1,5 +1,7 @@
 import styles from "./chatTitleBar.module.css";
-import { issueStore } from "@/libs/client";
+
+import { issueStore } from "@/libs/client/stores/issue";
+
 import { ArrowLeft, Info } from "lucide-react";
 import { useSnapshot } from "valtio";
 

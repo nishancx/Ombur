@@ -1,6 +1,6 @@
-import { Clients } from "@/libs/server/models";
+import { Clients } from "@/libs/server/models/client";
 import { connectDB } from "@/libs/server/mongo";
-import { AuthUser } from "@/types";
+import { AuthUser } from "@/types/auth";
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 
