@@ -37,3 +37,15 @@
   overflow: hidden;
   padding: 20px 0;
 }
+
+.buttonText {
+  width: 100%;
+  text-align: left;
+}
+
+.contentButton {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+}
