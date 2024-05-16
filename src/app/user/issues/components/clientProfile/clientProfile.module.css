@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+}
+
+.clientAvatar {
+  border-radius: 100%;
+}
+
+.clientName {
+  line-height: 20px;
+  height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}

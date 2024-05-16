@@ -1,6 +1,7 @@
 import { Clients } from "@/libs/server/models";
 import { connectDB } from "@/libs/server/mongo";
-import NextAuth, { User } from "next-auth";
+import { AuthUser } from "@/types";
+import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -14,7 +15,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   trustHost: true,
 });
 
-const createClient = async ({ user }: { user: User }) => {
+const createClient = async ({ user }: { user: AuthUser }) => {
   await connectDB();
 
   const preExistingClient = await Clients.findOne({ email: user.email });

@@ -1,0 +1,10 @@
+.container {
+  height: 100%;
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.1);
+  }
+}
