@@ -1,12 +1,14 @@
 "use client";
 
 import styles from "./issuesList.module.css";
-import { useQuery } from "@tanstack/react-query";
-import { getIssuesServerAction } from "../leftPane/serverActions";
-import { Loader } from "lucide-react";
-import { User } from "@/types";
-import { Empty } from "antd";
 import { IssueTile } from "../issueTile/issueTile";
+import { getIssuesServerAction } from "../leftPane/serverActions";
+
+import { User } from "@/types/models/user";
+
+import { Loader } from "lucide-react";
+import { Empty } from "antd";
+import { useQuery } from "@tanstack/react-query";
 import { isEmpty } from "lodash";
 
 type IssuesListProps = {

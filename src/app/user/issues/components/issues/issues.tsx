@@ -1,9 +1,14 @@
+"use client";
+
 import styles from "./issues.module.css";
-import clsx from "clsx";
-import { LeftPane, RightPane } from "..";
-import { User } from "@/types";
+import { LeftPane } from "../leftPane/leftPane";
+import { RightPane } from "../rightPane/rightPane";
+
+import { User } from "@/types/models/user";
+import { issueStore } from "@/libs/client/stores/issueStore";
+
 import { useSnapshot } from "valtio";
-import { issueStore } from "@/libs/client";
+import clsx from "clsx";
 
 type IssuesProps = {
   clientId: string;

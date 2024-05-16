@@ -1,4 +1,5 @@
-import { Valtio_Modals } from "@/types";
+import { Valtio_Modals } from "@/types/valito/modals";
+
 import { proxy } from "valtio";
 
 const modalStore: Valtio_Modals = proxy<Valtio_Modals>({

@@ -1,5 +1,6 @@
-import mongoose, { Mongoose } from "mongoose";
 import { serverConfig } from "./config";
+
+import mongoose, { Mongoose } from "mongoose";
 
 declare global {
   var mongoose: {

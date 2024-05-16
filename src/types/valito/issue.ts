@@ -1,4 +1,4 @@
-import { Issue } from "@/types/models";
+import { Issue } from "@/types/models/issue";
 
 type Valtio_Users_Current_Issue = {
   currentIssue: Issue | null;

@@ -1,10 +1,12 @@
 "use client";
 
-import { CreateUser, Issues } from "./components";
-import { useIsFirstRender } from "@/hooks";
-import { useSearchParams } from "next/navigation";
+import { CreateUser } from "./components/createUser/createUser";
+import { Issues } from "./components/issues/issues";
+import { useIsFirstRender } from "@/hooks/isFirstRender";
 import { getClientDataFromSearchParam } from "./utils";
-import { useUser } from "@/queries";
+import { useUser } from "@/queries/user";
+
+import { useSearchParams } from "next/navigation";
 
 export default function CreateIssue() {
   const searchParams = useSearchParams();

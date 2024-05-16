@@ -1,5 +1,6 @@
 import { auth } from "@/../auth";
-import { ClientNav, Modals } from "./components";
+import { ClientNav } from "./components/clientNav/clientNav";
+import { Modals } from "./components/modals/modals";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -1,8 +1,9 @@
 "use server";
 
-import { Issues, connectDB } from "@/libs/server";
-import { Issue } from "@/types";
-import { serializeObject } from "@/utils";
+import { Issues } from "@/libs/server/models/issue";
+import { connectDB } from "@/libs/server/mongo";
+import { Issue } from "@/types/models/issue";
+import { serializeObject } from "@/utils/object";
 import { IssueDTO, issueValidationSchema } from "@/validations";
 
 const createIssueServerAction = async ({

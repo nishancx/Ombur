@@ -1,5 +1,5 @@
-import { ClientDataSearchParam } from "@/types";
-import { jsonParse } from "@/utils";
+import { ClientDataSearchParam } from "@/types/searchParams";
+import { jsonParse } from "@/utils/object";
 
 const getClientDataFromSearchParam = ({
   clientDataParam,

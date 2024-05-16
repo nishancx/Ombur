@@ -1,14 +1,17 @@
+"use client";
+
 import styles from "./createIssue.module.css";
-import { issueStore, modalStore } from "@/libs/client";
+import { issueStore } from "@/libs/client/stores/issueStore";
+import { modalStore } from "@/libs/client/stores/modalStore";
 import { Input, Modal, Select } from "antd";
 import { useSnapshot } from "valtio";
 import { Controller, useForm } from "react-hook-form";
 import { IssueDTO, issueValidationSchema } from "@/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
-import { ISSUE } from "@/constants";
+import { ISSUE } from "@/constants/issue";
 import { createIssueServerAction } from "./serverActions";
-import { useUser } from "@/queries";
+import { useUser } from "@/queries/user";
 import { useQueryClient } from "@tanstack/react-query";
 
 const CreateIssueModal: React.FC = () => {

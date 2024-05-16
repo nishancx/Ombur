@@ -1,6 +1,7 @@
 import { getUserServerAction } from "@/app/user/components/userNav/serverActions";
-import { LOCAL_STORAGE } from "@/constants";
-import { getItemFromLocalStorage } from "@/libs/client";
+import { LOCAL_STORAGE } from "@/constants/localStorage";
+import { getItemFromLocalStorage } from "@/libs/client/storage";
+
 import { useQuery } from "@tanstack/react-query";
 
 const useUser = (params?: { enabled: boolean }) => {

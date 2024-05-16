@@ -1,8 +1,11 @@
 "use server";
 
-import { Clients, Issues, connectDB } from "@/libs/server";
-import { Client, Issue } from "@/types";
-import { serializeObject } from "@/utils";
+import { Clients } from "@/libs/server/models/client";
+import { Issues } from "@/libs/server/models/issue";
+import { connectDB } from "@/libs/server/mongo";
+import { Client } from "@/types/models/client";
+import { Issue } from "@/types/models/issue";
+import { serializeObject } from "@/utils/object";
 
 const getClientProfileInfoServerAction = async ({
   clientId,

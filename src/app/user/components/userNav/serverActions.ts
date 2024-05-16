@@ -1,8 +1,9 @@
 "use server";
 
-import { Users, connectDB } from "@/libs/server";
-import { User } from "@/types";
-import { serializeObject } from "@/utils";
+import { Users } from "@/libs/server/models/user";
+import { connectDB } from "@/libs/server/mongo";
+import { User } from "@/types/models/user";
+import { serializeObject } from "@/utils/object";
 
 const getUserServerAction = async ({
   userId,

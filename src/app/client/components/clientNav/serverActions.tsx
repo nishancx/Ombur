@@ -1,8 +1,9 @@
 "use server";
 
-import { Clients, connectDB } from "@/libs/server";
+import { connectDB } from "@/libs/server/mongo";
+import { Clients } from "@/libs/server/models/client";
 import { auth } from "@/../auth";
-import { serializeObject } from "@/utils";
+import { serializeObject } from "@/utils/object";
 
 const getSessionClientServerAction = async () => {
   await connectDB();

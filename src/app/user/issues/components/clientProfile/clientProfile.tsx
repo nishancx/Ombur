@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { getClientProfileInfoServerAction } from "../leftPane/serverActions";
 import { Loader } from "lucide-react";
-import { FILE_PATHS } from "@/constants";
+import { FILE_PATHS } from "@/constants/filePaths";
 
 type ClientProfileProps = {
   clientId: string;

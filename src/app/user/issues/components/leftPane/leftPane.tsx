@@ -1,11 +1,14 @@
 "use client";
 
 import styles from "./leftPane.module.css";
-import { Button } from "@/components";
-import { ClientProfile, IssuesList } from "..";
+import { ClientProfile } from "../clientProfile/clientProfile";
+import { IssuesList } from "../issuesList/issuesList";
+
+import { Button } from "@/components/button/button";
+import { User } from "@/types/models/user";
+
 import { PlusIcon } from "lucide-react";
-import { modalStore } from "@/libs/client";
-import { User } from "@/types";
+import { modalStore } from "@/libs/client/stores/modalStore";
 
 type LeftPaneProps = {
   clientId: string;

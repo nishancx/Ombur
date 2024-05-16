@@ -1,4 +1,4 @@
-import { Client } from "@/types";
+import { Client } from "@/types/models/client";
 import mongoose, { Schema } from "mongoose";
 
 const clientSchema = new Schema<Client>(
