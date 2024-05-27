@@ -29,8 +29,8 @@ const Button: React.FC<ButtonProps> = ({
         styles.button,
         hasBackground && styles.buttonWithBackground,
         hasBorderRadius && styles.buttonWithBorderRadius,
-        className,
-        disabled && styles.disabled
+        disabled && styles.disabled,
+        className
       )}
       disabled={disabled}
     >

@@ -8,12 +8,12 @@ import { UserDTO, userValidationSchema } from "@/validations/user";
 import { saveItemToLocalStorage } from "@/libs/client/localStorage";
 import { LOCAL_STORAGE } from "@/constants/localStorage";
 import { invokeOnEnterPress } from "@/utils/dom";
+import { QUERY } from "@/constants/query";
 
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "antd";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
-import { QUERY } from "@/constants/query";
 
 const CreateUser: React.FC = () => {
   const queryClient = useQueryClient();

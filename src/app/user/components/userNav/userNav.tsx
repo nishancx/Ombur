@@ -7,11 +7,11 @@ import { useIsFirstRender } from "@/hooks/isFirstRender";
 import { useSessionUser } from "@/queries/user";
 import { Button } from "@/components/button/button";
 import { Dropdown } from "@/components/dropdown/dropdown";
+import { QUERY } from "@/constants/query";
 
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 import { LogOut } from "lucide-react";
-import { QUERY } from "@/constants/query";
 
 const UserNav: React.FC = () => {
   const isFirstRender = useIsFirstRender();
