@@ -4,8 +4,14 @@ const QUERY_KEYS = {
     "getClientProfileInfo",
     { clientId },
   ],
-  GET_ISSUES: ({ clientId, userId }: { clientId: string; userId: string }) => [
-    "getIssues",
+  GET_USER_ISSUES: ({
+    clientId,
+    userId,
+  }: {
+    clientId: string;
+    userId: string;
+  }) => [
+    "getUserIssues",
     {
       clientId,
       userId,

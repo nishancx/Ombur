@@ -2,15 +2,13 @@
 
 import styles from "./issuesList.module.css";
 import { IssueTile } from "../issueTile/issueTile";
-import { getIssuesServerAction } from "../leftPane/serverActions";
 
 import { User } from "@/types/models/user";
+import { useUserIssues } from "@/queries/issue";
 
 import { Loader } from "lucide-react";
 import { Empty } from "antd";
-import { useQuery } from "@tanstack/react-query";
 import { isEmpty } from "lodash";
-import { QUERY } from "@/constants/query";
 
 type IssuesListProps = {
   clientId: string;
@@ -18,10 +16,9 @@ type IssuesListProps = {
 };
 
 const IssuesList: React.FC<IssuesListProps> = ({ clientId, user }) => {
-  const { data, isLoading } = useQuery({
-    queryKey: QUERY.QUERY_KEYS.GET_ISSUES({ clientId, userId: user._id }),
-    queryFn: async () =>
-      await getIssuesServerAction({ clientId, userId: user._id }),
+  const { data, isLoading } = useUserIssues({
+    clientId,
+    userId: user._id,
   });
 
   if (isLoading) {
