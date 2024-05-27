@@ -8,6 +8,7 @@ import { FILE_PATHS } from "@/constants/filePaths";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { Loader } from "lucide-react";
+import { QUERY } from "@/constants/query";
 
 type ClientProfileProps = {
   clientId: string;
@@ -15,7 +16,7 @@ type ClientProfileProps = {
 
 const ClientProfile: React.FC<ClientProfileProps> = ({ clientId }) => {
   const { data: clientProfileInfo, isLoading } = useQuery({
-    queryKey: ["getClientProfileInfo", clientId],
+    queryKey: QUERY.QUERY_KEYS.GET_CLIENT_PROFILE_INFO({ clientId }),
     queryFn: async () => await getClientProfileInfoServerAction({ clientId }),
   });
 

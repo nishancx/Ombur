@@ -11,6 +11,7 @@ import { Dropdown } from "@/components/dropdown/dropdown";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 import { LogOut } from "lucide-react";
+import { QUERY } from "@/constants/query";
 
 const UserNav: React.FC = () => {
   const isFirstRender = useIsFirstRender();
@@ -20,7 +21,7 @@ const UserNav: React.FC = () => {
 
   const signOut = () => {
     localStorage.removeItem(LOCAL_STORAGE.OMBUR_USER_ID);
-    queryClient.setQueryData(["getUser"], null);
+    queryClient.setQueryData(QUERY.QUERY_KEYS.GET_USER, null);
   };
 
   // Return null if it's the first render to avoid hydration error

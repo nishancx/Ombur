@@ -13,6 +13,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Input } from "antd";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
+import { QUERY } from "@/constants/query";
 
 const CreateUser: React.FC = () => {
   const queryClient = useQueryClient();
@@ -29,7 +30,7 @@ const CreateUser: React.FC = () => {
       value: user._id,
     });
 
-    queryClient.setQueryData(["getUser"], user);
+    queryClient.setQueryData(QUERY.QUERY_KEYS.GET_USER, user);
   };
 
   return (
