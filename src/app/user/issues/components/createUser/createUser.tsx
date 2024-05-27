@@ -30,7 +30,7 @@ const CreateUser: React.FC = () => {
       value: user._id,
     });
 
-    queryClient.setQueryData(QUERY.QUERY_KEYS.GET_USER, user);
+    queryClient.setQueryData(QUERY.QUERY_KEYS.GET_SESSION_USER, user);
   };
 
   return (

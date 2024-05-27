@@ -5,19 +5,16 @@ import { getItemFromLocalStorage } from "@/libs/client/localStorage";
 
 import { useQuery } from "@tanstack/react-query";
 
-const useUser = (params?: { enabled: boolean }) => {
-  const { enabled = true } = params || {};
-
+const useSessionUser = () => {
   const savedUserId = getItemFromLocalStorage<string>({
     key: LOCAL_STORAGE.OMBUR_USER_ID,
   });
 
   return useQuery({
-    queryKey: QUERY.QUERY_KEYS.GET_USER,
-    queryFn: async () =>
-      savedUserId ? await getUserServerAction({ userId: savedUserId! }) : null,
-    enabled: enabled,
+    queryKey: QUERY.QUERY_KEYS.GET_SESSION_USER,
+    queryFn: () =>
+      savedUserId ? getUserServerAction({ userId: savedUserId! }) : null,
   });
 };
 
-export { useUser };
+export { useSessionUser };

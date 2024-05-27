@@ -4,7 +4,7 @@ import styles from "./userNav.module.css";
 
 import { LOCAL_STORAGE } from "@/constants/localStorage";
 import { useIsFirstRender } from "@/hooks/isFirstRender";
-import { useUser } from "@/queries/user";
+import { useSessionUser } from "@/queries/user";
 import { Button } from "@/components/button/button";
 import { Dropdown } from "@/components/dropdown/dropdown";
 
@@ -17,11 +17,11 @@ const UserNav: React.FC = () => {
   const isFirstRender = useIsFirstRender();
   const queryClient = useQueryClient();
 
-  const { data: user, isFetched } = useUser();
+  const { data: user, isFetched } = useSessionUser();
 
   const signOut = () => {
     localStorage.removeItem(LOCAL_STORAGE.OMBUR_USER_ID);
-    queryClient.setQueryData(QUERY.QUERY_KEYS.GET_USER, null);
+    queryClient.setQueryData(QUERY.QUERY_KEYS.GET_SESSION_USER, null);
   };
 
   // Return null if it's the first render to avoid hydration error

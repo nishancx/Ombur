@@ -5,7 +5,7 @@ import { Issues } from "./components/issues/issues";
 import { getClientDataFromSearchParam } from "./utils";
 
 import { useIsFirstRender } from "@/hooks/isFirstRender";
-import { useUser } from "@/queries/user";
+import { useSessionUser } from "@/queries/user";
 
 import { useSearchParams } from "next/navigation";
 
@@ -17,7 +17,7 @@ export default function CreateIssue() {
     clientDataParam: clientDataParam,
   });
 
-  const { data: user } = useUser();
+  const { data: user } = useSessionUser();
   const isFirstRender = useIsFirstRender();
 
   // Redirect to home page if clientData is not available
