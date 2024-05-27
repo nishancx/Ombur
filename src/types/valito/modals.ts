@@ -1,3 +1,5 @@
+import { Issue } from "../models/issue";
+
 type ModalProps = {
   isOpen: boolean;
   close: () => void;
@@ -13,7 +15,13 @@ type CreateIssueModal = ModalProps & {
   open: ({ clientId }: { clientId: string }) => void;
 };
 
+type IssueInfoModal = ModalProps & {
+  issue: null | Issue;
+  open: ({ issue }: { issue: Issue }) => void;
+};
+
 export type Valtio_Modals = {
   issueLinkModal: IssueLinkModal;
   createIssueModal: CreateIssueModal;
+  issueInfoModal: IssueInfoModal;
 };

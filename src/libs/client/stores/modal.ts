@@ -27,6 +27,18 @@ const modalStore: Valtio_Modals = proxy<Valtio_Modals>({
       modalStore.createIssueModal.isOpen = false;
     },
   },
+  issueInfoModal: {
+    isOpen: false,
+    issue: null,
+    open: ({ issue }) => {
+      modalStore.issueInfoModal.issue = issue;
+      modalStore.issueInfoModal.isOpen = true;
+    },
+    close: () => {
+      modalStore.issueInfoModal.issue = null;
+      modalStore.issueInfoModal.isOpen = false;
+    },
+  },
 });
 
 export { modalStore };
