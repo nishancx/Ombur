@@ -1,6 +1,7 @@
-import { ReactQueryClientProvider } from "./components/reactQueryClientProvider/reactQueryClientProvider";
 import { Modals } from "./components/modals/modals";
 import { UserNav } from "./components/userNav/userNav";
+
+import { ReactQueryClientProvider } from "@/components/userReactQueryClientProvider/userReactQueryClientProvider";
 
 import { Metadata } from "next";
 import { Suspense } from "react";

@@ -24,3 +24,7 @@
 .button:active {
   background: linear-gradient(45deg, #05608d 0%, #05608d 100%);
 }
+
+.disabled:hover {
+  cursor: not-allowed;
+}

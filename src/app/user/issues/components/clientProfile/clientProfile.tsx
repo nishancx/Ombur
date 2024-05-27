@@ -1,12 +1,11 @@
 "use client";
 
 import styles from "./clientProfile.module.css";
-import { getClientProfileInfoServerAction } from "../leftPane/serverActions";
 
 import { FILE_PATHS } from "@/constants/filePaths";
+import { useClientProfileInfo } from "@/queries/client";
 
 import Image from "next/image";
-import { useQuery } from "@tanstack/react-query";
 import { Loader } from "lucide-react";
 
 type ClientProfileProps = {
@@ -14,9 +13,8 @@ type ClientProfileProps = {
 };
 
 const ClientProfile: React.FC<ClientProfileProps> = ({ clientId }) => {
-  const { data: clientProfileInfo, isLoading } = useQuery({
-    queryKey: ["getClientProfileInfo", clientId],
-    queryFn: async () => await getClientProfileInfoServerAction({ clientId }),
+  const { data: clientProfileInfo, isLoading } = useClientProfileInfo({
+    clientId,
   });
 
   if (isLoading) {

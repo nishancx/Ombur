@@ -1,13 +1,13 @@
 "use client";
 
 import styles from "./clientNav.module.css";
-import { getSessionClientServerAction } from "./serverActions";
 
 import { Button } from "@/components/button/button";
 import { Dropdown } from "@/components/dropdown/dropdown";
 import { modalStore } from "@/libs/client/stores/modal";
 import { ClientDataSearchParam } from "@/types/searchParams";
 import { FILE_PATHS } from "@/constants/filePaths";
+import { useSessionClient } from "@/queries/client";
 
 import { Link, LogOut } from "lucide-react";
 import { Session } from "next-auth";
@@ -19,15 +19,10 @@ type NavProps = {
 };
 
 const ClientNav: React.FC<NavProps> = ({ session }) => {
+  const { data: client, isLoading } = useSessionClient();
+
   const handleGetIssueLink = async () => {
-    if (!session!.user!.email) return;
-
-    // to fix, store the client data in valtio
-    const sessionClient = await getSessionClientServerAction();
-
-    if (!sessionClient) return;
-
-    const clientData: ClientDataSearchParam = { id: sessionClient._id };
+    const clientData: ClientDataSearchParam = { id: client._id };
 
     const encodedClientData = btoa(
       encodeURIComponent(JSON.stringify(clientData))
@@ -67,6 +62,7 @@ const ClientNav: React.FC<NavProps> = ({ session }) => {
               <Button
                 hasBackground={false}
                 hasBorderRadius={false}
+                disabled={isLoading}
                 onClick={handleGetIssueLink}
               >
                 <div className={styles.contentButton}>

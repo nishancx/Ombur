@@ -7,6 +7,7 @@ type ButtonProps = {
   hasBackground?: boolean;
   hasBorderRadius?: boolean;
   className?: string;
+  disabled?: boolean;
 } & (
   | { text: string; children?: never }
   | { children: React.ReactNode; text?: never }
@@ -18,6 +19,7 @@ const Button: React.FC<ButtonProps> = ({
   hasBackground = true,
   hasBorderRadius = true,
   className,
+  disabled,
   onClick,
 }) => {
   return (
@@ -27,8 +29,10 @@ const Button: React.FC<ButtonProps> = ({
         styles.button,
         hasBackground && styles.buttonWithBackground,
         hasBorderRadius && styles.buttonWithBorderRadius,
+        disabled && styles.disabled,
         className
       )}
+      disabled={disabled}
     >
       {children || text}
     </button>

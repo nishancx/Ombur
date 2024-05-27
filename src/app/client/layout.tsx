@@ -1,9 +1,11 @@
 import { ClientNav } from "./components/clientNav/clientNav";
 import { Modals } from "./components/modals/modals";
 
+import { ReactQueryClientProvider } from "@/components/userReactQueryClientProvider/userReactQueryClientProvider";
 import { auth } from "@/../auth";
 
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Ombur - Client",
@@ -18,10 +20,13 @@ export default async function RootLayout({
   const session = await auth();
 
   return (
-    <>
+    <ReactQueryClientProvider>
       <Modals />
       <ClientNav session={session} />
-      {children}
-    </>
+
+      {/* added suspense to wrap useSearchParams */}
+      {/* to do, suspend issues page properly instead of whole user layout */}
+      <Suspense>{children}</Suspense>
+    </ReactQueryClientProvider>
   );
 }

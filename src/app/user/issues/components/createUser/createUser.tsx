@@ -8,6 +8,7 @@ import { UserDTO, userValidationSchema } from "@/validations/user";
 import { saveItemToLocalStorage } from "@/libs/client/localStorage";
 import { LOCAL_STORAGE } from "@/constants/localStorage";
 import { invokeOnEnterPress } from "@/utils/dom";
+import { QUERY } from "@/constants/query";
 
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "antd";
@@ -29,7 +30,7 @@ const CreateUser: React.FC = () => {
       value: user._id,
     });
 
-    queryClient.setQueryData(["getUser"], user);
+    queryClient.setQueryData(QUERY.QUERY_KEYS.GET_SESSION_USER, user);
   };
 
   return (

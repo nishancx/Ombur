@@ -7,7 +7,8 @@ import { issueStore } from "@/libs/client/stores/issue";
 import { modalStore } from "@/libs/client/stores/modal";
 import { IssueDTO, issueValidationSchema } from "@/validations/issue";
 import { ISSUE } from "@/constants/issue";
-import { useUser } from "@/queries/user";
+import { useSessionUser } from "@/queries/user";
+import { QUERY } from "@/constants/query";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
@@ -18,7 +19,7 @@ import { Controller, useForm } from "react-hook-form";
 
 const CreateIssueModal: React.FC = () => {
   const { isOpen, clientId } = useSnapshot(modalStore.createIssueModal);
-  const { data: user } = useUser();
+  const { data: user } = useSessionUser();
   const queryClient = useQueryClient();
 
   const { control, reset, handleSubmit, setValue } = useForm<IssueDTO>({
@@ -37,7 +38,10 @@ const CreateIssueModal: React.FC = () => {
 
     // to fix, use optimistic updates
     queryClient.invalidateQueries({
-      queryKey: ["getIssues", clientId, user!._id],
+      queryKey: QUERY.QUERY_KEYS.GET_USER_ISSUES({
+        clientId,
+        userId: user!._id,
+      }),
     });
 
     issueStore.usersCurrentIssue.setCurrentIssue({ currentIssue: issue });
