@@ -30,13 +30,16 @@ const modalStore: Valtio_Modals = proxy<Valtio_Modals>({
   issueInfoModal: {
     isOpen: false,
     issue: null,
-    open: ({ issue }) => {
+    sessionType: undefined,
+    open: ({ issue, sessionType }) => {
       modalStore.issueInfoModal.issue = issue;
       modalStore.issueInfoModal.isOpen = true;
+      modalStore.issueInfoModal.sessionType = sessionType;
     },
     close: () => {
       modalStore.issueInfoModal.issue = null;
       modalStore.issueInfoModal.isOpen = false;
+      modalStore.issueInfoModal.sessionType = undefined;
     },
   },
 });

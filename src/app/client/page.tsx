@@ -4,16 +4,12 @@ import { auth } from "@/../auth";
 
 import { redirect } from "next/navigation";
 
-export default async function Home({
-  params: { currentIssueId },
-}: {
-  params: { currentIssueId: string };
-}) {
+export default async function Home() {
   const session = await auth();
 
   if (!session) {
     redirect("/");
   }
 
-  return <ClientBlock currentIssueId={currentIssueId} />;
+  return <ClientBlock />;
 }

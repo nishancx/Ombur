@@ -1,20 +1,27 @@
+"use client";
+
 import styles from "./client.module.css";
 import { LeftPane } from "../leftPane/leftPane";
 
+import { issueStore } from "@/libs/client/stores/issue";
+
 import clsx from "clsx";
+import { useSnapshot } from "valtio";
 
-type ClientBlockProps = {
-  currentIssueId: string;
-};
+const ClientBlock: React.FC = () => {
+  const { currentIssue } = useSnapshot(issueStore.clientsCurrentIssue);
 
-const ClientBlock: React.FC<ClientBlockProps> = ({ currentIssueId }) => {
   return (
     <div className={styles.container}>
-      <div className={clsx(styles.left, !!currentIssueId && styles.inactive)}>
+      <div
+        className={clsx(styles.left, !!currentIssue?._id && styles.inactive)}
+      >
         <LeftPane />
       </div>
-      <div className={clsx(styles.right, !currentIssueId && styles.inactive)}>
-        right pane
+      <div
+        className={clsx(styles.right, !currentIssue?._id && styles.inactive)}
+      >
+        {currentIssue?._id}
       </div>
     </div>
   );

@@ -18,6 +18,7 @@ type CreateIssueModal = ModalProps & {
 
 type IssueInfoModal = ModalProps & {
   issue: null | Issue;
+  sessionType?: SessionType;
   open: ({
     issue,
     sessionType,
