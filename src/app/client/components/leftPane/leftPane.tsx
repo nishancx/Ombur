@@ -8,7 +8,7 @@ type LeftPaneProps = {};
 const LeftPane: React.FC<LeftPaneProps> = ({}) => {
   return (
     <div className={styles.container}>
-      <IssuesList />
+      <IssuesList className={styles.issuesList} />
     </div>
   );
 };

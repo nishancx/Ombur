@@ -10,8 +10,12 @@ import { issueStore } from "@/libs/client/stores/issue";
 import { Loader } from "lucide-react";
 import { Empty } from "antd";
 import { isEmpty } from "lodash";
+import clsx from "clsx";
+type IssuesListProps = {
+  className?: string;
+};
 
-const IssuesList: React.FC = () => {
+const IssuesList: React.FC<IssuesListProps> = ({ className }) => {
   const { data, isLoading } = useClientIssues();
 
   if (isLoading) {
@@ -31,7 +35,7 @@ const IssuesList: React.FC = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={clsx(styles.container, className)}>
       {data.map((issue) => (
         <IssueTile
           key={issue._id}
