@@ -2,7 +2,7 @@
 
 import styles from "./issuesList.module.css";
 
-import { IssueTile } from "@/app/components/issueTile/issueTile";
+import { IssueTile } from "@/components/issueTile/issueTile";
 import { User } from "@/types/models/user";
 import { useUserIssues } from "@/queries/issue";
 import { issueStore } from "@/libs/client/stores/issue";

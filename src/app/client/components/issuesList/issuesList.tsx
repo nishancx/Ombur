@@ -3,7 +3,7 @@
 import styles from "./issuesList.module.css";
 
 import { useClientIssues } from "@/queries/issue";
-import { IssueTile } from "@/app/components/issueTile/issueTile";
+import { IssueTile } from "@/components/issueTile/issueTile";
 import { AUTH } from "@/constants/auth";
 import { issueStore } from "@/libs/client/stores/issue";
 
