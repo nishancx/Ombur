@@ -3,14 +3,15 @@
 import styles from "./chat.module.css";
 
 import { issueStore } from "@/libs/client/stores/issue";
+import { Issue } from "@/types/models/issue";
 
 import { useSnapshot } from "valtio";
 
-const Chat: React.FC = () => {
-  const { currentIssue } = useSnapshot(issueStore.usersCurrentIssue);
+type ChatProps = {
+  currentIssue: Issue;
+};
 
-  if (!currentIssue) return null;
-
+const Chat: React.FC<ChatProps> = ({ currentIssue }) => {
   return <div className={styles.container}>{currentIssue._id}</div>;
 };
 

@@ -5,6 +5,8 @@ type Valtio_Users_Current_Issue = {
   setCurrentIssue: ({ currentIssue }: { currentIssue: Issue | null }) => void;
 };
 
-export type Valtio_Issue = {
+type Valtio_Issue = {
   usersCurrentIssue: Valtio_Users_Current_Issue;
 };
+
+export type { Valtio_Issue, Valtio_Users_Current_Issue };

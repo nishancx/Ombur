@@ -9,14 +9,14 @@ import { User } from "@/types/models/user";
 
 import { Empty } from "antd";
 import { useSnapshot } from "valtio";
+import { Issue } from "@/types/models/issue";
 
 type RightPaneProps = {
   user: User;
+  currentIssue: Issue | null;
 };
 
-const RightPane: React.FC<RightPaneProps> = ({ user }) => {
-  const { currentIssue } = useSnapshot(issueStore.usersCurrentIssue);
-
+const RightPane: React.FC<RightPaneProps> = ({ user, currentIssue }) => {
   if (currentIssue === undefined) return null;
 
   if (!currentIssue)
@@ -29,8 +29,8 @@ const RightPane: React.FC<RightPaneProps> = ({ user }) => {
 
   return (
     <>
-      <ChatTitleBar />
-      <Chat />
+      <ChatTitleBar currentIssue={currentIssue} />
+      <Chat currentIssue={currentIssue} />
     </>
   );
 };

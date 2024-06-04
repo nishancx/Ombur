@@ -1,19 +1,20 @@
 import styles from "./chatTitleBar.module.css";
 
 import { issueStore } from "@/libs/client/stores/issue";
+import { Issue } from "@/types/models/issue";
 
 import { ArrowLeft, Info } from "lucide-react";
-import { useSnapshot } from "valtio";
 
-const ChatTitleBar: React.FC = () => {
-  const { currentIssue } = useSnapshot(issueStore.usersCurrentIssue);
+type ChatTitleBarProps = {
+  currentIssue: Issue;
+};
+
+const ChatTitleBar: React.FC<ChatTitleBarProps> = ({ currentIssue }) => {
   const goBack = () => {
     issueStore.usersCurrentIssue.setCurrentIssue({
       currentIssue: null,
     });
   };
-
-  if (!currentIssue) return null;
 
   return (
     <div className={styles.container}>
