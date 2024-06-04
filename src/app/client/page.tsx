@@ -1,15 +1,19 @@
-import styles from "./page.module.css";
+import { ClientBlock } from "./components/client/client";
 
-import { auth } from "../../../auth";
+import { auth } from "@/../auth";
 
 import { redirect } from "next/navigation";
 
-export default async function Home() {
+export default async function Home({
+  params: { currentIssueId },
+}: {
+  params: { currentIssueId: string };
+}) {
   const session = await auth();
 
   if (!session) {
     redirect("/");
   }
 
-  return <div className={styles.title}>Client</div>;
+  return <ClientBlock currentIssueId={currentIssueId} />;
 }

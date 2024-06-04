@@ -9,6 +9,12 @@ const issueStore: Valtio_Issue = proxy<Valtio_Issue>({
       issueStore.usersCurrentIssue.currentIssue = currentIssue;
     },
   },
+  clientsCurrentIssue: {
+    currentIssue: null,
+    setCurrentIssue: ({ currentIssue }) => {
+      issueStore.clientsCurrentIssue.currentIssue = currentIssue;
+    },
+  },
 });
 
 export { issueStore };

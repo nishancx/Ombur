@@ -3,25 +3,31 @@
 import styles from "./issueTile.module.css";
 
 import { Issue } from "@/types/models/issue";
-import { issueStore } from "@/libs/client/stores/issue";
 import { modalStore } from "@/libs/client/stores/modal";
+import { SessionType } from "@/types/auth";
 
 import { Info } from "lucide-react";
 import { useSnapshot } from "valtio";
 
 type IssueTileProps = {
   issue: Issue;
+  sessionType?: SessionType;
+  currentIssueStore: any;
 };
 
-const IssueTile: React.FC<IssueTileProps> = ({ issue }) => {
-  const { currentIssue } = useSnapshot(issueStore.usersCurrentIssue);
+const IssueTile: React.FC<IssueTileProps> = ({
+  issue,
+  sessionType,
+  currentIssueStore,
+}) => {
+  const { currentIssue } = useSnapshot(currentIssueStore);
 
   const click = () => {
-    issueStore.usersCurrentIssue.setCurrentIssue({ currentIssue: issue });
+    currentIssueStore.setCurrentIssue({ currentIssue: issue });
   };
 
   const infoClick = ({ issue }: { issue: Issue }) => {
-    modalStore.issueInfoModal.open({ issue });
+    modalStore.issueInfoModal.open({ issue, sessionType });
   };
 
   return (

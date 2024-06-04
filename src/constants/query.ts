@@ -18,6 +18,7 @@ const QUERY_KEYS = {
       userId,
     },
   ],
+  GET_CLIENT_ISSUES: ["getClientIssues"],
 };
 
 export const QUERY = {

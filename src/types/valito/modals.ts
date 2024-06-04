@@ -1,3 +1,4 @@
+import { SessionType } from "../auth";
 import { Issue } from "../models/issue";
 
 type ModalProps = {
@@ -17,7 +18,13 @@ type CreateIssueModal = ModalProps & {
 
 type IssueInfoModal = ModalProps & {
   issue: null | Issue;
-  open: ({ issue }: { issue: Issue }) => void;
+  open: ({
+    issue,
+    sessionType,
+  }: {
+    issue: Issue;
+    sessionType?: SessionType;
+  }) => void;
 };
 
 export type Valtio_Modals = {

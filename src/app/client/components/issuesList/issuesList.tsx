@@ -2,25 +2,17 @@
 
 import styles from "./issuesList.module.css";
 
+import { useClientIssues } from "@/queries/issue";
 import { IssueTile } from "@/app/components/issueTile/issueTile";
-import { User } from "@/types/models/user";
-import { useUserIssues } from "@/queries/issue";
+import { AUTH } from "@/constants/auth";
 import { issueStore } from "@/libs/client/stores/issue";
 
 import { Loader } from "lucide-react";
 import { Empty } from "antd";
 import { isEmpty } from "lodash";
 
-type IssuesListProps = {
-  clientId: string;
-  user: User;
-};
-
-const IssuesList: React.FC<IssuesListProps> = ({ clientId, user }) => {
-  const { data, isLoading } = useUserIssues({
-    clientId,
-    userId: user._id,
-  });
+const IssuesList: React.FC = () => {
+  const { data, isLoading } = useClientIssues();
 
   if (isLoading) {
     return (
@@ -44,7 +36,8 @@ const IssuesList: React.FC<IssuesListProps> = ({ clientId, user }) => {
         <IssueTile
           key={issue._id}
           issue={issue}
-          currentIssueStore={issueStore.usersCurrentIssue}
+          sessionType={AUTH.SESSION_TYPES.CLIENT}
+          currentIssueStore={issueStore.clientsCurrentIssue}
         />
       ))}
     </div>
