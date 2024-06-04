@@ -15,6 +15,7 @@ const clientSchema = new Schema<Client>(
 );
 
 const Clients =
-  mongoose.models.Clients || mongoose.model<Client>("Clients", clientSchema);
+  (mongoose.models.Clients as mongoose.Model<Client, {}, {}, {}, Client>) ||
+  mongoose.model<Client>("Clients", clientSchema);
 
 export { Clients };

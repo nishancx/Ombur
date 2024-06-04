@@ -1,5 +1,5 @@
 import { SessionType } from "../auth";
-import { Issue } from "../models/issue";
+import { IssueWithUser } from "../models/issue";
 
 type ModalProps = {
   isOpen: boolean;
@@ -17,13 +17,13 @@ type CreateIssueModal = ModalProps & {
 };
 
 type IssueInfoModal = ModalProps & {
-  issue: null | Issue;
+  issue: null | IssueWithUser;
   sessionType?: SessionType;
   open: ({
     issue,
     sessionType,
   }: {
-    issue: Issue;
+    issue: IssueWithUser;
     sessionType?: SessionType;
   }) => void;
 };

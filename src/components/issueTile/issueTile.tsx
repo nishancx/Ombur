@@ -2,15 +2,16 @@
 
 import styles from "./issueTile.module.css";
 
-import { Issue } from "@/types/models/issue";
+import { Issue, IssueWithUser } from "@/types/models/issue";
 import { modalStore } from "@/libs/client/stores/modal";
 import { SessionType } from "@/types/auth";
 
-import { Info } from "lucide-react";
+import { Info, UserCircle } from "lucide-react";
 import { useSnapshot } from "valtio";
+import { AUTH } from "@/constants/auth";
 
 type IssueTileProps = {
-  issue: Issue;
+  issue: IssueWithUser;
   sessionType?: SessionType;
   currentIssueStore: any;
 };
@@ -37,13 +38,21 @@ const IssueTile: React.FC<IssueTileProps> = ({
       <div className={styles.bottom}>
         <div className={styles.type}>{issue.type}</div>
 
+        {sessionType === AUTH.SESSION_TYPES.CLIENT && (
+          <div className={styles.type}>
+            <UserCircle size={18} />
+            <div>{issue.user?.name}</div>
+          </div>
+        )}
+
         {currentIssue?._id === issue?._id ? (
-          <Info
-            size={18}
-            color="#05608d"
-            className={styles.infoButton}
-            onClick={() => infoClick({ issue })}
-          />
+          <div className={styles.infoButton}>
+            <Info
+              size={18}
+              color="#05608d"
+              onClick={() => infoClick({ issue })}
+            />
+          </div>
         ) : null}
       </div>
     </div>

@@ -26,10 +26,10 @@ const IssueInfoModal: React.FC = () => {
       cancelButtonProps={{ style: { display: "none" } }}
     >
       <div>
-        {sessionType === AUTH.SESSION_TYPES.CLIENT && (
+        {sessionType === AUTH.SESSION_TYPES.CLIENT && !!issue?.user?.name && (
           <div>
             <div>User</div>
-            <div className={styles.textBox}>{issue?.userId}</div>
+            <div className={styles.textBox}>{issue.user.name}</div>
           </div>
         )}
 
