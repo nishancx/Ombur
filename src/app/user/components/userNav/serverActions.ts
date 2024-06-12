@@ -9,7 +9,7 @@ const getUserServerAction = async ({
   userId,
 }: {
   userId: string;
-}): Promise<User> => {
+}): Promise<User | null> => {
   await connectDB();
 
   const user = await Users.findById(userId);
