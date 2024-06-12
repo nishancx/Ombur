@@ -28,10 +28,10 @@ const RightPane: React.FC<RightPaneProps> = ({ user, currentIssue }) => {
     );
 
   return (
-    <>
+    <div className={styles.container}>
       <ChatTitleBar currentIssue={currentIssue} />
       <Chat currentIssue={currentIssue} />
-    </>
+    </div>
   );
 };
 
