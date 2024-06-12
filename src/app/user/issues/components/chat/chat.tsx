@@ -12,7 +12,12 @@ type ChatProps = {
 };
 
 const Chat: React.FC<ChatProps> = ({ currentIssue }) => {
-  return <div className={styles.container}>{currentIssue._id}</div>;
+  return (
+    <div className={styles.container}>
+      <div className={styles.messageList}>{currentIssue._id}</div>
+      <div className={styles.chatInput}>chat box</div>
+    </div>
+  );
 };
 
 export { Chat };
