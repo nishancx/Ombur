@@ -1,14 +1,14 @@
 "use client";
 
-import styles from "./client.module.css";
-import { LeftPane } from "../leftPane/leftPane";
+import styles from "./index.module.css";
+import { LeftPane } from "./leftPane/leftPane";
 
 import { issueStore } from "@/libs/client/stores/issue";
 
 import clsx from "clsx";
 import { useSnapshot } from "valtio";
 
-const ClientBlock: React.FC = () => {
+const ClientPageContent: React.FC = () => {
   const { currentIssue } = useSnapshot(issueStore.clientsCurrentIssue);
 
   return (
@@ -27,4 +27,4 @@ const ClientBlock: React.FC = () => {
   );
 };
 
-export { ClientBlock };
+export { ClientPageContent };

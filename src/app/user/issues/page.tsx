@@ -1,11 +1,11 @@
 "use client";
 
 import { CreateUser } from "./components/createUser/createUser";
-import { Issues } from "./components/issues/issues";
+import { Issues } from "./components";
+import { useSessionUser } from "./queries";
 import { getClientDataFromSearchParam } from "./utils";
 
 import { useIsFirstRender } from "@/hooks/isFirstRender";
-import { useSessionUser } from "@/queries/user";
 
 import { useSearchParams } from "next/navigation";
 

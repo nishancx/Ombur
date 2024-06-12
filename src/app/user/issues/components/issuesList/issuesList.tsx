@@ -1,10 +1,10 @@
 "use client";
 
 import styles from "./issuesList.module.css";
+import { useUserIssues } from "../../queries";
 
 import { IssueTile } from "@/components/issueTile/issueTile";
 import { User } from "@/types/models/user";
-import { useUserIssues } from "@/queries/issue";
 import { issueStore } from "@/libs/client/stores/issue";
 
 import { Loader } from "lucide-react";

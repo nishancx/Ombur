@@ -1,8 +1,8 @@
 "use client";
 
-import styles from "./issues.module.css";
-import { LeftPane } from "../leftPane/leftPane";
-import { RightPane } from "../rightPane/rightPane";
+import styles from "./index.module.css";
+import { LeftPane } from "./leftPane/leftPane";
+import { RightPane } from "./rightPane/rightPane";
 
 import { User } from "@/types/models/user";
 import { issueStore } from "@/libs/client/stores/issue";

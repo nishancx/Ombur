@@ -1,4 +1,4 @@
-import { ClientBlock } from "./components/client/client";
+import { ClientPageContent } from "./components";
 
 import { auth } from "@/../auth";
 
@@ -9,5 +9,5 @@ export default async function Home() {
     return null;
   }
 
-  return <ClientBlock />;
+  return <ClientPageContent />;
 }

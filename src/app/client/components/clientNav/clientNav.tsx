@@ -1,13 +1,13 @@
 "use client";
 
 import styles from "./clientNav.module.css";
+import { useSessionClient } from "../../queries";
 
 import { Button } from "@/components/button/button";
 import { Dropdown } from "@/components/dropdown/dropdown";
 import { modalStore } from "@/libs/client/stores/modal";
 import { ClientDataSearchParam } from "@/types/searchParams";
 import { FILE_PATHS } from "@/constants/filePaths";
-import { useSessionClient } from "@/queries/client";
 
 import { Link, LogOut } from "lucide-react";
 import { Session } from "next-auth";

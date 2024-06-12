@@ -1,9 +1,9 @@
 "use client";
 
 import styles from "./clientProfile.module.css";
+import { useClientProfileInfo } from "../../queries";
 
 import { FILE_PATHS } from "@/constants/filePaths";
-import { useClientProfileInfo } from "@/queries/client";
 
 import Image from "next/image";
 import { Loader } from "lucide-react";

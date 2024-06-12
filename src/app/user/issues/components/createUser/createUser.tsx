@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./createUser.module.css";
-import { createUserServerAction } from "./serverActions";
+import { createUserServerAction } from "../../serverActions";
 
 import { Button } from "@/components/button/button";
 import { UserDTO, userValidationSchema } from "@/validations/user";
