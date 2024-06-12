@@ -22,7 +22,7 @@ const ClientNav: React.FC<NavProps> = ({ session }) => {
   const { data: client, isLoading } = useSessionClient();
 
   const handleGetIssueLink = async () => {
-    const clientData: ClientDataSearchParam = { id: client._id };
+    const clientData: ClientDataSearchParam = { id: client!._id };
 
     const encodedClientData = btoa(
       encodeURIComponent(JSON.stringify(clientData))
