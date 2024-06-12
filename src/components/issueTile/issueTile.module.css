@@ -14,8 +14,8 @@
   display: flex;
   height: 30px;
   margin-top: 10px;
-  justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
 .type {
@@ -23,15 +23,21 @@
   padding: 3px 6px;
   border-radius: 5px;
   font-size: 12px;
+  display: flex;
   color: #2f2f2f;
+  align-items: center;
+  gap: 5px;
 }
 
 .infoButton {
   display: none;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 @media (min-width: 768px) {
   .infoButton {
-    display: block;
+    display: flex;
   }
 }

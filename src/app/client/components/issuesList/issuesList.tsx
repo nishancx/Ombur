@@ -2,25 +2,21 @@
 
 import styles from "./issuesList.module.css";
 
+import { useClientIssues } from "@/queries/issue";
 import { IssueTile } from "@/components/issueTile/issueTile";
-import { User } from "@/types/models/user";
-import { useUserIssues } from "@/queries/issue";
+import { AUTH } from "@/constants/auth";
 import { issueStore } from "@/libs/client/stores/issue";
 
 import { Loader } from "lucide-react";
 import { Empty } from "antd";
 import { isEmpty } from "lodash";
-
+import clsx from "clsx";
 type IssuesListProps = {
-  clientId: string;
-  user: User;
+  className?: string;
 };
 
-const IssuesList: React.FC<IssuesListProps> = ({ clientId, user }) => {
-  const { data, isLoading } = useUserIssues({
-    clientId,
-    userId: user._id,
-  });
+const IssuesList: React.FC<IssuesListProps> = ({ className }) => {
+  const { data, isLoading } = useClientIssues();
 
   if (isLoading) {
     return (
@@ -39,12 +35,13 @@ const IssuesList: React.FC<IssuesListProps> = ({ clientId, user }) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={clsx(styles.container, className)}>
       {data.map((issue) => (
         <IssueTile
           key={issue._id}
           issue={issue}
-          currentIssueStore={issueStore.usersCurrentIssue}
+          sessionType={AUTH.SESSION_TYPES.CLIENT}
+          currentIssueStore={issueStore.clientsCurrentIssue}
         />
       ))}
     </div>

@@ -1,7 +1,13 @@
-import styles from "./page.module.css";
+import { ClientBlock } from "./components/client/client";
+
+import { auth } from "@/../auth";
 
 export default async function Home() {
-  return (
-    <div className={styles.title}>Client</div>
-  );
+  const session = await auth();
+
+  if (!session) {
+    return null;
+  }
+
+  return <ClientBlock />;
 }

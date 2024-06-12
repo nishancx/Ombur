@@ -10,4 +10,10 @@ type Issue = {
   updatedAt: Date;
 };
 
-export type { Issue };
+type IssueWithUser = Issue & {
+  user?: {
+    name: string;
+  };
+};
+
+export type { Issue, IssueWithUser };

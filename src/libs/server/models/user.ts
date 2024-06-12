@@ -13,6 +13,7 @@ const userSchema = new Schema<User>(
 );
 
 const Users =
-  mongoose.models.Users || mongoose.model<User>("Users", userSchema);
+  (mongoose.models.Users as mongoose.Model<User, {}, {}, {}, User>) ||
+  mongoose.model<User>("Users", userSchema);
 
 export { Users };

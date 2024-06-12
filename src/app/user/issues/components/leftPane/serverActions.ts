@@ -23,7 +23,7 @@ const getClientProfileInfoServerAction = async ({
   return serializeObject(user);
 };
 
-const getIssuesServerAction = async ({
+const getUsersIssuesServerAction = async ({
   clientId,
   userId,
 }: {
@@ -40,4 +40,4 @@ const getIssuesServerAction = async ({
   return serializeObject(issues);
 };
 
-export { getClientProfileInfoServerAction, getIssuesServerAction };
+export { getClientProfileInfoServerAction, getUsersIssuesServerAction };

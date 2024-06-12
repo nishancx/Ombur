@@ -28,7 +28,7 @@ const Issues: React.FC<IssuesProps> = ({ clientId, user }) => {
       <div
         className={clsx(styles.right, !currentIssue?._id && styles.inactive)}
       >
-        <RightPane user={user} />
+        <RightPane currentIssue={currentIssue} user={user} />
       </div>
     </div>
   );

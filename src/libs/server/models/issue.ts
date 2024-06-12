@@ -17,6 +17,7 @@ const issueSchema = new Schema<Issue>(
 );
 
 const Issues =
-  mongoose.models.Issues || mongoose.model<Issue>("Issues", issueSchema);
+  (mongoose.models.Issues as mongoose.Model<Issue, {}, {}, {}, Issue>) ||
+  mongoose.model<Issue>("Issues", issueSchema);
 
 export { Issues };

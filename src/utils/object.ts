@@ -1,7 +1,7 @@
-const serializeObject = (obj: any) => {
-  if (obj === null || obj === undefined) return null;
+const serializeObject = <T>(obj: T): T => {
+  if (obj === null || obj === undefined) return obj;
 
-  return jsonParse(JSON.stringify(obj));
+  return JSON.parse(JSON.stringify(obj));
 };
 
 const jsonParse = (str: string) => {

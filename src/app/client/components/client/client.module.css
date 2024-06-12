@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  height: calc(100vh - var(--navbar-height));
+}
+
+.left {
+  flex-grow: 1;
+}
+
+.right {
+  flex: 1;
+}
+
+.left.inactive {
+  display: none;
+}
+
+.right.inactive {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .left {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 300px;
+  }
+
+  .left.inactive {
+    width: 300px;
+
+    display: block;
+  }
+
+  .right.inactive {
+    display: block;
+  }
+}
