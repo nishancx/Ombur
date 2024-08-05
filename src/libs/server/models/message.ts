@@ -9,7 +9,10 @@ const messageSchema = new Schema<Message>(
     sender: {
       type: String,
       enum: {
-        values: [MESSAGE.SENDER_TYPES.CLIENT, MESSAGE.SENDER_TYPES.USER],
+        values: [
+          MESSAGE.SENDER_TYPE_INDEX.CLIENT,
+          MESSAGE.SENDER_TYPE_INDEX.USER,
+        ],
         message: "Transaction Type is not supported",
       },
       required: true,
