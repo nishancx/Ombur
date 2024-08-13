@@ -8,22 +8,22 @@ import { Input } from "antd";
 import { useState } from "react";
 
 type ChatInputProps = {
-  onSendMessage: (message: string) => void;
+  onSendMessage: ({ text }: { text: string }) => void;
 };
 
 const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
-  const [message, setMessage] = useState("");
+  const [messageText, setMessageText] = useState("");
 
   const sendMessage = () => {
-    onSendMessage(message);
-    setMessage("");
+    onSendMessage({ text: messageText });
+    setMessageText("");
   };
 
   return (
     <div className={styles.container}>
       <Input
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
+        value={messageText}
+        onChange={(e) => setMessageText(e.target.value)}
         placeholder="Type a message..."
         className={styles.input}
         onPressEnter={sendMessage}

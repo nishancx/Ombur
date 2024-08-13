@@ -11,7 +11,7 @@ const issueValidationSchema = z.object({
 type IssueDTO = z.infer<typeof issueValidationSchema>;
 
 const createMessageValidationSchema = z.object({
-  message: z.string({ required_error: "Message is required" }).min(1),
+  text: z.string({ required_error: "Message text is required" }).min(1),
   sender: z.enum([
     MESSAGE.SENDER_TYPE_INDEX.CLIENT,
     MESSAGE.SENDER_TYPE_INDEX.USER,

@@ -4,10 +4,13 @@ import { MESSAGE } from "@/constants/message";
 import { Messages } from "@/libs/server/models/message";
 import { connectDB } from "@/libs/server/mongo";
 import { serializeObject } from "@/utils/object";
-import { CreateMessageDTO } from "@/validations/issue";
+import {
+  CreateMessageDTO,
+  createMessageValidationSchema,
+} from "@/validations/issue";
 
 const createMessage = async ({
-  message,
+  text,
   issueId,
   userId,
   clientId,
@@ -15,12 +18,24 @@ const createMessage = async ({
 }: CreateMessageDTO) => {
   await connectDB();
 
+  const isPayloadValid = createMessageValidationSchema.safeParse({
+    text,
+    issueId,
+    userId,
+    clientId,
+    sender,
+  });
+
+  if (!isPayloadValid.success) {
+    throw new Error("Invalid form data.");
+  }
+
   const newMessage = await Messages.create({
     sender: MESSAGE.SENDER_TYPE_INDEX.USER,
     issueId,
     userId,
     clientId,
-    message,
+    text,
   });
 
   return serializeObject(newMessage);
