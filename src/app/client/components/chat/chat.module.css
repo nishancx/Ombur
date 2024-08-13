@@ -1,0 +1,21 @@
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.messageList {
+  overflow-y: auto;
+  padding: 10px;
+  flex: 1;
+}
+
+.chatInput {
+  height: 60px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.1);
+  }
+}

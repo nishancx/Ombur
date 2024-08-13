@@ -2,6 +2,7 @@
 
 import styles from "./index.module.css";
 import { LeftPane } from "./leftPane/leftPane";
+import { RightPane } from "./rightPane/rightPane";
 
 import { issueStore } from "@/libs/client/stores/issue";
 
@@ -21,7 +22,7 @@ const ClientPageContent: React.FC = () => {
       <div
         className={clsx(styles.right, !currentIssue?._id && styles.inactive)}
       >
-        {currentIssue?._id}
+        <RightPane currentIssue={currentIssue} />
       </div>
     </div>
   );

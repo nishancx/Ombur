@@ -74,6 +74,8 @@ const getClientIssuesServerAction = async () => {
         type: 1,
         "user.name": 1,
         createdAt: 1,
+        clientId: 1,
+        userId: 1,
       },
     },
     {
