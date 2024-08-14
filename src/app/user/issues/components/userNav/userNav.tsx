@@ -1,10 +1,10 @@
 "use client";
 
 import styles from "./userNav.module.css";
+import { useSessionUser } from "../../queries";
 
 import { LOCAL_STORAGE } from "@/constants/localStorage";
 import { useIsFirstRender } from "@/hooks/isFirstRender";
-import { useSessionUser } from "@/queries/user";
 import { Button } from "@/components/button/button";
 import { Dropdown } from "@/components/dropdown/dropdown";
 import { QUERY } from "@/constants/query";

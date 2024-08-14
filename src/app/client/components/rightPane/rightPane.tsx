@@ -2,19 +2,17 @@
 
 import styles from "./rightPane.module.css";
 import { Chat } from "../chat/chat";
-import { ChatTitleBar } from "../chatTitleBar/chatTitleBar";
 
-import { User } from "@/types/models/user";
+import { Issue } from "@/types/models/issue";
+import { ChatTitleBar } from "@/app/user/issues/components/chatTitleBar/chatTitleBar";
 
 import { Empty } from "antd";
-import { Issue } from "@/types/models/issue";
 
 type RightPaneProps = {
-  user: User;
   currentIssue: Issue | null;
 };
 
-const RightPane: React.FC<RightPaneProps> = ({ user, currentIssue }) => {
+const RightPane: React.FC<RightPaneProps> = ({ currentIssue }) => {
   if (currentIssue === undefined) return null;
 
   if (!currentIssue)

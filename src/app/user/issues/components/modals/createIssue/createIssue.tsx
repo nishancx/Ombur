@@ -1,13 +1,13 @@
 "use client";
 
 import styles from "./createIssue.module.css";
-import { createIssueServerAction } from "./serverActions";
+import { createIssueServerAction } from "../../../serverActions";
+import { useSessionUser } from "../../../queries";
 
 import { issueStore } from "@/libs/client/stores/issue";
 import { modalStore } from "@/libs/client/stores/modal";
 import { IssueDTO, issueValidationSchema } from "@/validations/issue";
 import { ISSUE } from "@/constants/issue";
-import { useSessionUser } from "@/queries/user";
 import { QUERY } from "@/constants/query";
 
 import { zodResolver } from "@hookform/resolvers/zod";

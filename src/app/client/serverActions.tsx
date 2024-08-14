@@ -1,11 +1,29 @@
 "use server";
 
-import { Issues } from "@/libs/server/models/issue";
 import { connectDB } from "@/libs/server/mongo";
-import { serializeObject } from "@/utils/object";
-import { auth } from "@/../auth";
 import { Clients } from "@/libs/server/models/client";
+import { auth } from "@/../auth";
+import { serializeObject } from "@/utils/object";
+import { Issues } from "@/libs/server/models/issue";
 import { IssueWithUser } from "@/types/models/issue";
+
+const getSessionClientServerAction = async () => {
+  await connectDB();
+
+  const session = await auth();
+
+  if (!session?.user) {
+    return null;
+  }
+
+  const client = await Clients.findOne({ email: session.user.email });
+
+  if (!client) {
+    return null;
+  }
+
+  return serializeObject(client);
+};
 
 const getClientIssuesServerAction = async () => {
   await connectDB();
@@ -56,6 +74,8 @@ const getClientIssuesServerAction = async () => {
         type: 1,
         "user.name": 1,
         createdAt: 1,
+        clientId: 1,
+        userId: 1,
       },
     },
     {
@@ -68,4 +88,4 @@ const getClientIssuesServerAction = async () => {
   return serializeObject(issues);
 };
 
-export { getClientIssuesServerAction };
+export { getSessionClientServerAction, getClientIssuesServerAction };

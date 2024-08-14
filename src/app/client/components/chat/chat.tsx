@@ -25,7 +25,7 @@ const Chat: React.FC<ChatProps> = ({ currentIssue }) => {
       issueId: currentIssue._id,
       userId: currentIssue.userId,
       clientId: currentIssue.clientId,
-      sender: MESSAGE.SENDER_TYPE_INDEX.USER,
+      sender: MESSAGE.SENDER_TYPE_INDEX.CLIENT,
     });
   };
 
