@@ -24,7 +24,7 @@ const fetchChat = async ({
     issueId,
   })
     .sort({ createdAt: -1 })
-    .skip(page * 10)
+    .skip(page * 50)
     .limit(50);
 
   return serializeObject({

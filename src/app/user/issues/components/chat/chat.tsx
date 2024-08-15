@@ -3,6 +3,7 @@
 import styles from "./chat.module.css";
 import { createMessage } from "./serverActions";
 
+import { ClientChatList } from "@/components/chatList/chatList";
 import { ChatInput } from "@/components/chatInput/chatInput";
 import { MESSAGE } from "@/constants/message";
 import { Issue } from "@/types/models/issue";
@@ -31,7 +32,10 @@ const UserChat: React.FC<ChatProps> = ({ currentIssue }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.messageList}>{currentIssue._id}</div>
+      <ClientChatList
+        issueId={currentIssue._id}
+        sender={MESSAGE.SENDER_TYPE_INDEX.USER}
+      />
 
       <ChatInput onSendMessage={onSendMessage} />
     </div>

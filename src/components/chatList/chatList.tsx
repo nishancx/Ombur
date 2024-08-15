@@ -6,25 +6,34 @@ import { fetchChat } from "./serverActions";
 import { GlobalPageParams } from "@/types/query";
 import { Message } from "@/types/models/message";
 import { reduceInfiniteData } from "@/utils/query";
+import { MESSAGE } from "@/constants/message";
 
 import { Loader } from "lucide-react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { MESSAGE } from "@/constants/message";
 import clsx from "clsx";
 
 type ClientChatListProps = {
   issueId: string;
+  sender:
+    | typeof MESSAGE.SENDER_TYPE_INDEX.CLIENT
+    | typeof MESSAGE.SENDER_TYPE_INDEX.USER;
 };
 
-const ClientChatList: React.FC<ClientChatListProps> = ({ issueId }) => {
+const ClientChatList: React.FC<ClientChatListProps> = ({ issueId, sender }) => {
   const {
     data: messages,
     isLoading: isLoadingMessages,
     fetchNextPage,
+    isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ["fetchChat", { issueId }],
+    queryKey: [
+      sender === MESSAGE.SENDER_TYPE_INDEX.CLIENT
+        ? "fetchClientChat"
+        : "fetchUserChat",
+      { issueId },
+    ],
     queryFn: ({ pageParam = 0 }) => fetchChat({ issueId, page: pageParam }),
     getNextPageParam: (lastPage: GlobalPageParams<Message>) => {
       if (lastPage?.data?.length) {
@@ -68,7 +77,7 @@ const ClientChatList: React.FC<ClientChatListProps> = ({ issueId }) => {
             key={message._id}
             className={clsx(
               styles.messageContainer,
-              message.sender === MESSAGE.SENDER_TYPE_INDEX.CLIENT
+              message.sender === sender
                 ? styles.rightMessageContainer
                 : styles.leftMessageContainer
             )}

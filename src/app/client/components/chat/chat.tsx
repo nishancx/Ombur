@@ -3,13 +3,13 @@
 import styles from "./chat.module.css";
 import { createMessage } from "./serverActions";
 
+import { ClientChatList } from "@/components/chatList/chatList";
 import { ChatInput } from "@/components/chatInput/chatInput";
 import { MESSAGE } from "@/constants/message";
 import { Issue } from "@/types/models/issue";
 import { CreateMessageDTO } from "@/validations/issue";
 
 import { useMutation } from "@tanstack/react-query";
-import { ClientChatList } from "../chatList/chatList";
 
 type ChatProps = {
   currentIssue: Issue;
@@ -32,7 +32,10 @@ const ClientChat: React.FC<ChatProps> = ({ currentIssue }) => {
 
   return (
     <div className={styles.container}>
-      <ClientChatList issueId={currentIssue._id} />
+      <ClientChatList
+        issueId={currentIssue._id}
+        sender={MESSAGE.SENDER_TYPE_INDEX.CLIENT}
+      />
 
       <ChatInput onSendMessage={onSendMessage} />
     </div>
