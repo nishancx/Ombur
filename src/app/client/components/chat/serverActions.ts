@@ -49,7 +49,7 @@ const createMessage = async ({
   }
 
   const newMessage = await Messages.create({
-    sender: MESSAGE.SENDER_TYPE_INDEX.USER,
+    sender: MESSAGE.SENDER_TYPE_INDEX.CLIENT,
     issueId,
     userId,
     clientId,

@@ -10,6 +10,8 @@ import { reduceInfiniteData } from "@/utils/query";
 import { Loader } from "lucide-react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { MESSAGE } from "@/constants/message";
+import clsx from "clsx";
 
 type ClientChatListProps = {
   issueId: string;
@@ -62,7 +64,15 @@ const ClientChatList: React.FC<ClientChatListProps> = ({ issueId }) => {
         className={styles.scrollContainer}
       >
         {messageList.map((message) => (
-          <div key={message._id} style={{ height: 100 }}>
+          <div
+            key={message._id}
+            className={clsx(
+              styles.messageContainer,
+              message.sender === MESSAGE.SENDER_TYPE_INDEX.CLIENT
+                ? styles.rightMessageContainer
+                : styles.leftMessageContainer
+            )}
+          >
             <div>{message.text}</div>
           </div>
         ))}
