@@ -2,6 +2,9 @@
   overflow-y: auto;
   padding: 10px;
   flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .loaderContainer {
@@ -9,4 +12,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.scrollContainer {
+  display: flex;
+  flex-direction: column-reverse;
+  overflow: visible;
+}
+
+.nextLoaderContainer {
+  display: flex;
+  justify-content: center;
 }

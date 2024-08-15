@@ -9,13 +9,19 @@ import { reduceInfiniteData } from "@/utils/query";
 
 import { Loader } from "lucide-react";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 type ClientChatListProps = {
   issueId: string;
 };
 
 const ClientChatList: React.FC<ClientChatListProps> = ({ issueId }) => {
-  const { data: messages, isLoading: isLoadingMessages } = useInfiniteQuery({
+  const {
+    data: messages,
+    isLoading: isLoadingMessages,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery({
     queryKey: ["fetchChat", { issueId }],
     queryFn: ({ pageParam = 0 }) => fetchChat({ issueId, page: pageParam }),
     getNextPageParam: (lastPage: GlobalPageParams<Message>) => {
@@ -29,6 +35,7 @@ const ClientChatList: React.FC<ClientChatListProps> = ({ issueId }) => {
       return data;
     },
   });
+
   const messageList = reduceInfiniteData(messages?.pages);
 
   if (isLoadingMessages) {
@@ -40,12 +47,26 @@ const ClientChatList: React.FC<ClientChatListProps> = ({ issueId }) => {
   }
 
   return (
-    <div className={styles.container}>
-      {messageList.map((message) => (
-        <div key={message._id}>
-          <div>{message.text}</div>
-        </div>
-      ))}
+    <div className={styles.container} id="scrollableDiv">
+      <InfiniteScroll
+        dataLength={messageList.length}
+        scrollableTarget="scrollableDiv"
+        next={fetchNextPage}
+        hasMore={hasNextPage}
+        loader={
+          <div className={styles.nextLoaderContainer}>
+            <Loader />
+          </div>
+        }
+        inverse={true}
+        className={styles.scrollContainer}
+      >
+        {messageList.map((message) => (
+          <div key={message._id} style={{ height: 100 }}>
+            <div>{message.text}</div>
+          </div>
+        ))}
+      </InfiniteScroll>
     </div>
   );
 };
