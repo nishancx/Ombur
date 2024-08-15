@@ -9,6 +9,7 @@ import { Issue } from "@/types/models/issue";
 import { CreateMessageDTO } from "@/validations/issue";
 
 import { useMutation } from "@tanstack/react-query";
+import { ClientChatList } from "../chatList/chatList";
 
 type ChatProps = {
   currentIssue: Issue;
@@ -31,7 +32,7 @@ const ClientChat: React.FC<ChatProps> = ({ currentIssue }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.messageList}>{currentIssue._id}</div>
+      <ClientChatList issueId={currentIssue._id} />
 
       <ChatInput onSendMessage={onSendMessage} />
     </div>
