@@ -15,7 +15,7 @@ type LeftPaneProps = {
   user: User;
 };
 
-const LeftPane: React.FC<LeftPaneProps> = ({ clientId, user }) => {
+const UserLeftPane: React.FC<LeftPaneProps> = ({ clientId, user }) => {
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -40,4 +40,4 @@ const LeftPane: React.FC<LeftPaneProps> = ({ clientId, user }) => {
   );
 };
 
-export { LeftPane };
+export { UserLeftPane };

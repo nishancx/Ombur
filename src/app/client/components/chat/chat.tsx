@@ -14,7 +14,7 @@ type ChatProps = {
   currentIssue: Issue;
 };
 
-const Chat: React.FC<ChatProps> = ({ currentIssue }) => {
+const ClientChat: React.FC<ChatProps> = ({ currentIssue }) => {
   const { mutateAsync: sendMessage } = useMutation({
     mutationFn: (props: CreateMessageDTO) => createMessage(props),
   });
@@ -38,4 +38,4 @@ const Chat: React.FC<ChatProps> = ({ currentIssue }) => {
   );
 };
 
-export { Chat };
+export { ClientChat };

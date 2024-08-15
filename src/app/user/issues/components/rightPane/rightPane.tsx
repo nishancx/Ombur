@@ -1,20 +1,20 @@
 "use client";
 
 import styles from "./rightPane.module.css";
-import { Chat } from "../chat/chat";
-import { ChatTitleBar } from "../chatTitleBar/chatTitleBar";
+import { UserChat } from "../chat/chat";
 
 import { User } from "@/types/models/user";
+import { ChatTitleBar } from "@/components/chatTitleBar/chatTitleBar";
+import { Issue } from "@/types/models/issue";
 
 import { Empty } from "antd";
-import { Issue } from "@/types/models/issue";
 
 type RightPaneProps = {
   user: User;
   currentIssue: Issue | null;
 };
 
-const RightPane: React.FC<RightPaneProps> = ({ user, currentIssue }) => {
+const UserRightPane: React.FC<RightPaneProps> = ({ user, currentIssue }) => {
   if (currentIssue === undefined) return null;
 
   if (!currentIssue)
@@ -28,9 +28,9 @@ const RightPane: React.FC<RightPaneProps> = ({ user, currentIssue }) => {
   return (
     <div className={styles.container}>
       <ChatTitleBar currentIssue={currentIssue} />
-      <Chat currentIssue={currentIssue} />
+      <UserChat currentIssue={currentIssue} />
     </div>
   );
 };
 
-export { RightPane };
+export { UserRightPane };

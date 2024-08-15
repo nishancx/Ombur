@@ -5,7 +5,7 @@ import styles from "./leftPane.module.css";
 
 type LeftPaneProps = {};
 
-const LeftPane: React.FC<LeftPaneProps> = ({}) => {
+const ClientLeftPane: React.FC<LeftPaneProps> = ({}) => {
   return (
     <div className={styles.container}>
       <IssuesList className={styles.issuesList} />
@@ -13,4 +13,4 @@ const LeftPane: React.FC<LeftPaneProps> = ({}) => {
   );
 };
 
-export { LeftPane };
+export { ClientLeftPane };
