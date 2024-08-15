@@ -1,8 +1,8 @@
 "use client";
 
 import styles from "./index.module.css";
-import { LeftPane } from "./leftPane/leftPane";
-import { RightPane } from "./rightPane/rightPane";
+import { ClientLeftPane } from "./leftPane/leftPane";
+import { ClientRightPane } from "./rightPane/rightPane";
 
 import { issueStore } from "@/libs/client/stores/issue";
 
@@ -17,12 +17,12 @@ const ClientPageContent: React.FC = () => {
       <div
         className={clsx(styles.left, !!currentIssue?._id && styles.inactive)}
       >
-        <LeftPane />
+        <ClientLeftPane />
       </div>
       <div
         className={clsx(styles.right, !currentIssue?._id && styles.inactive)}
       >
-        <RightPane currentIssue={currentIssue} />
+        <ClientRightPane currentIssue={currentIssue} />
       </div>
     </div>
   );

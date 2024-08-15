@@ -3,6 +3,7 @@
 import styles from "./chat.module.css";
 import { createMessage } from "./serverActions";
 
+import { ClientChatList } from "@/components/chatList/chatList";
 import { ChatInput } from "@/components/chatInput/chatInput";
 import { MESSAGE } from "@/constants/message";
 import { Issue } from "@/types/models/issue";
@@ -14,7 +15,7 @@ type ChatProps = {
   currentIssue: Issue;
 };
 
-const Chat: React.FC<ChatProps> = ({ currentIssue }) => {
+const ClientChat: React.FC<ChatProps> = ({ currentIssue }) => {
   const { mutateAsync: sendMessage } = useMutation({
     mutationFn: (props: CreateMessageDTO) => createMessage(props),
   });
@@ -31,11 +32,14 @@ const Chat: React.FC<ChatProps> = ({ currentIssue }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.messageList}>{currentIssue._id}</div>
+      <ClientChatList
+        issueId={currentIssue._id}
+        sender={MESSAGE.SENDER_TYPE_INDEX.CLIENT}
+      />
 
       <ChatInput onSendMessage={onSendMessage} />
     </div>
   );
 };
 
-export { Chat };
+export { ClientChat };
