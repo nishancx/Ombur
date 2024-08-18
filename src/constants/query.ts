@@ -19,6 +19,14 @@ const QUERY_KEYS = {
     },
   ],
   GET_CLIENT_ISSUES: ["getClientIssues"],
+  GET_CLIENT_CHAT: ({ issueId }: { issueId: string }) => [
+    "fetchClientChat",
+    { issueId },
+  ],
+  GET_USER_CHAT: ({ issueId }: { issueId: string }) => [
+    "fetchUserChat",
+    { issueId },
+  ],
 };
 
 export const QUERY = {
