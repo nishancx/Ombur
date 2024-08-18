@@ -12,6 +12,7 @@ import { Loader } from "lucide-react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
 import clsx from "clsx";
+import { QUERY } from "@/constants/query";
 
 type ClientChatListProps = {
   issueId: string;
@@ -25,15 +26,12 @@ const ClientChatList: React.FC<ClientChatListProps> = ({ issueId, sender }) => {
     data: messages,
     isLoading: isLoadingMessages,
     fetchNextPage,
-    isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: [
+    queryKey:
       sender === MESSAGE.SENDER_TYPE_INDEX.CLIENT
-        ? "fetchClientChat"
-        : "fetchUserChat",
-      { issueId },
-    ],
+        ? QUERY.QUERY_KEYS.GET_CLIENT_CHAT({ issueId })
+        : QUERY.QUERY_KEYS.GET_USER_CHAT({ issueId }),
     queryFn: ({ pageParam = 0 }) => fetchChat({ issueId, page: pageParam }),
     getNextPageParam: (lastPage: GlobalPageParams<Message>) => {
       if (lastPage?.data?.length) {

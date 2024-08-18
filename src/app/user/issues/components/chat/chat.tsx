@@ -9,15 +9,55 @@ import { MESSAGE } from "@/constants/message";
 import { Issue } from "@/types/models/issue";
 import { CreateMessageDTO } from "@/validations/issue";
 
-import { useMutation } from "@tanstack/react-query";
+import {
+  InfiniteData,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
+import { Message } from "@/types/models/message";
+import { QUERY } from "@/constants/query";
 
 type ChatProps = {
   currentIssue: Issue;
 };
 
 const UserChat: React.FC<ChatProps> = ({ currentIssue }) => {
+  const queryClient = useQueryClient();
   const { mutateAsync: sendMessage } = useMutation({
     mutationFn: (props: CreateMessageDTO) => createMessage(props),
+    onMutate: async (props) => {
+      const previousMessages:
+        | InfiniteData<
+            {
+              data: Message[];
+              page: number;
+            },
+            number
+          >
+        | undefined = queryClient.getQueryData(
+        QUERY.QUERY_KEYS.GET_USER_CHAT({ issueId: currentIssue._id })
+      );
+      queryClient.setQueryData(
+        QUERY.QUERY_KEYS.GET_USER_CHAT({ issueId: currentIssue._id }),
+        {
+          pages: [
+            {
+              data: [
+                {
+                  ...props,
+                  _id: Math.random().toString(36).substring(2, 9),
+                  createdAt: new Date().toISOString(),
+                },
+                ...(previousMessages?.pages?.[0]?.data || []),
+              ],
+              page: 0,
+            },
+            ...(previousMessages?.pages ? previousMessages.pages.slice(1) : []),
+          ],
+          pageParams: previousMessages?.pageParams,
+        }
+      );
+    },
   });
 
   const onSendMessage = async ({ text }: { text: string }) => {
