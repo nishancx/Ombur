@@ -2,8 +2,8 @@ import { MESSAGE } from "@/constants/message";
 import { z } from "zod";
 
 const issueValidationSchema = z.object({
-  title: z.string({ required_error: "Title is required" }).min(3),
-  description: z.string({ required_error: "Description is required" }).min(3),
+  title: z.string({ required_error: "Title is required" }).min(1),
+  description: z.string({ required_error: "Description is required" }).min(1),
   type: z.string({ required_error: "Type is required" }),
   clientId: z.string({ required_error: "Client ID is required" }),
   userId: z.string({ required_error: "User ID is required" }),
