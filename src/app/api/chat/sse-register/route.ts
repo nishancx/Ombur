@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+
 export async function GET(request: Request) {
   try {
     let responseStream = new TransformStream();
@@ -7,12 +8,6 @@ export async function GET(request: Request) {
     const encoder = new TextEncoder();
 
     writer.write(encoder.encode("hello world!"));
-
-    setInterval(() => {
-      writer.write(
-        encoder.encode("data: " + new Date().toISOString() + "\n\n")
-      );
-    }, 1000);
 
     return new Response(responseStream.readable, {
       headers: {
