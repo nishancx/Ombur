@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const userValidationSchema = z.object({
-  name: z.string({ required_error: "Name is required" }).min(3),
+  name: z.string({ required_error: "Name is required" }).min(1),
 });
 
 type UserDTO = z.infer<typeof userValidationSchema>;
