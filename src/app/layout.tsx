@@ -1,8 +1,10 @@
 import "./globals.css";
 
+import { Modals } from "./components/modals/modals";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Modals } from "./components/modals/modals";
+import { SessionContextValue, SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,14 +15,18 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
+  params: { session },
 }: Readonly<{
   children: React.ReactNode;
+  params: { session: SessionContextValue };
 }>) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        {children}
-        <Modals />
+        <SessionProvider session={session?.data}>
+          {children}
+          <Modals />
+        </SessionProvider>
       </body>
     </html>
   );

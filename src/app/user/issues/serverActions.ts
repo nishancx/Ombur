@@ -23,16 +23,19 @@ const getUserServerAction = async ({
   return serializeObject(user);
 };
 
-const createUserServerAction = async ({ name }: UserDTO): Promise<User> => {
+const createUserServerAction = async ({
+  name,
+  username,
+}: UserDTO): Promise<User> => {
   await connectDB();
 
-  const isPayloadValid = userValidationSchema.safeParse({ name });
+  const isPayloadValid = userValidationSchema.safeParse({ name, username });
 
   if (!isPayloadValid.success) {
     throw new Error("Invalid form data.");
   }
 
-  const user = await Users.create({ name });
+  const user = await Users.create({ name, username });
 
   return serializeObject(user);
 };

@@ -5,6 +5,7 @@ import mongoose, { Schema } from "mongoose";
 const userSchema = new Schema<User>(
   {
     name: { type: String, required: true },
+    username: { type: String, required: true },
     isDeleted: { type: Boolean, default: false },
   },
   {
