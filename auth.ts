@@ -39,7 +39,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
       return true;
     },
-    async session({ session }) {
+    async session({ session }): Promise<any> {
       const email = session.user.email;
 
       if (!!email && email.includes("@")) {
