@@ -3,6 +3,7 @@ import { connectDB } from "@/libs/server/mongo";
 import { AuthUser } from "@/types/auth";
 import { createUserServerAction } from "@/app/user/issues/serverActions";
 import { Users } from "@/libs/server/models/user";
+import { MESSAGE } from "@/constants/message";
 
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
@@ -46,7 +47,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         if (!!client) {
           return {
-            user: { ...session.user, id: client._id },
+            user: {
+              ...session.user,
+              id: client._id,
+              type: MESSAGE.SENDER_TYPE_INDEX.CLIENT,
+            },
             expires: new Date().toDateString(),
           };
         }
@@ -57,7 +62,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         if (!!user) {
           return {
-            user: { username: email, name: session.user.name, id: user._id },
+            user: {
+              username: email,
+              name: session.user.name,
+              id: user._id,
+              type: MESSAGE.SENDER_TYPE_INDEX.USER,
+            },
             expires: new Date().toDateString(),
           };
         }
