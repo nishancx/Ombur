@@ -16,7 +16,7 @@ const getSessionClientServerAction = async () => {
     return null;
   }
 
-  const client = await Clients.findOne({ email: session.user.email });
+  const client = await Clients.findOne({ _id: session.user.id });
 
   if (!client) {
     return null;
@@ -34,14 +34,6 @@ const getClientIssuesServerAction = async () => {
     throw new Error("Unauthorized");
   }
 
-  const client = await Clients.findOne({
-    email: session.user.email,
-  });
-
-  if (!client) {
-    throw new Error("Client not found");
-  }
-
   const issues: IssueWithUser[] = await Issues.aggregate([
     {
       $addFields: {
@@ -52,7 +44,7 @@ const getClientIssuesServerAction = async () => {
     },
     {
       $match: {
-        clientId: client._id.toString(),
+        clientId: session.user.id,
       },
     },
     {

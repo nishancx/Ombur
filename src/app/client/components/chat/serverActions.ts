@@ -10,6 +10,7 @@ import {
 } from "@/validations/issue";
 import { auth } from "../../../../../auth";
 import { Clients } from "@/libs/server/models/client";
+import { Users } from "@/libs/server/models/user";
 
 const createMessage = async ({
   text,
@@ -32,19 +33,29 @@ const createMessage = async ({
     throw new Error("Invalid form data.");
   }
 
+  const session = await auth();
+
+  if (!session || !session?.user) {
+    throw new Error("Unauthorized");
+  }
+
   if (sender === MESSAGE.SENDER_TYPE_INDEX.CLIENT) {
-    const session = await auth();
-
-    if (!session?.user) {
-      throw new Error("Unauthorized");
-    }
-
     const client = await Clients.findOne({
-      email: session.user.email,
+      _id: session.user.id,
     });
 
-    if (!client || client._id.toString() !== clientId) {
+    if (!client) {
       throw new Error("Client not found");
+    }
+  }
+
+  if (sender === MESSAGE.SENDER_TYPE_INDEX.USER) {
+    const user = await Users.findOne({
+      _id: session.user.id,
+    });
+
+    if (!user) {
+      throw new Error("User not found");
     }
   }
 
