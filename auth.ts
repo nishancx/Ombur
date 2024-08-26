@@ -1,6 +1,7 @@
 import { Clients } from "@/libs/server/models/client";
 import { connectDB } from "@/libs/server/mongo";
 import { AuthUser } from "@/types/auth";
+
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 
@@ -10,6 +11,26 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async signIn(args) {
       await createClient({ user: args.user });
       return true;
+    },
+    async session({ session }): Promise<any> {
+      const email = session.user.email;
+
+      const client = await Clients.findOne({ email });
+
+      if (!!client) {
+        return {
+          user: {
+            ...session.user,
+            id: client._id,
+          },
+          expires: new Date().toDateString(),
+        };
+      }
+
+      return {
+        user: {},
+        expires: new Date().toDateString(),
+      };
     },
   },
   trustHost: true,

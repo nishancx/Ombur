@@ -23,6 +23,7 @@ type ChatProps = {
 
 const UserChat: React.FC<ChatProps> = ({ currentIssue }) => {
   const queryClient = useQueryClient();
+
   const { mutateAsync: sendMessage } = useMutation({
     mutationFn: (props: CreateMessageDTO) => createMessage(props),
     onMutate: async (props) => {
