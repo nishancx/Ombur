@@ -1,7 +1,6 @@
 "use client";
 
 import styles from "./clientNav.module.css";
-import { useSessionClient } from "../../queries";
 
 import { Button } from "@/components/button/button";
 import { Dropdown } from "@/components/dropdown/dropdown";
@@ -19,10 +18,12 @@ type NavProps = {
 };
 
 const ClientNav: React.FC<NavProps> = ({ session }) => {
-  const { data: client, isLoading } = useSessionClient();
-
   const handleGetIssueLink = async () => {
-    const clientData: ClientDataSearchParam = { id: client!._id };
+    if (!session?.user?.id) {
+      return;
+    }
+
+    const clientData: ClientDataSearchParam = { id: session.user.id };
 
     const encodedClientData = btoa(
       encodeURIComponent(JSON.stringify(clientData))
@@ -62,7 +63,6 @@ const ClientNav: React.FC<NavProps> = ({ session }) => {
               <Button
                 hasBackground={false}
                 hasBorderRadius={false}
-                disabled={isLoading}
                 onClick={handleGetIssueLink}
               >
                 <div className={styles.contentButton}>
