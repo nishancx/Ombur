@@ -16,7 +16,6 @@ import {
 } from "@tanstack/react-query";
 import { Message } from "@/types/models/message";
 import { QUERY } from "@/constants/query";
-// import { useEffect, useState } from "react";
 
 type ChatProps = {
   currentIssue: Issue;
@@ -24,8 +23,6 @@ type ChatProps = {
 
 const UserChat: React.FC<ChatProps> = ({ currentIssue }) => {
   const queryClient = useQueryClient();
-  // const [messages, setMessages] = useState([]);
-  // const [listening, setListening] = useState(false);
 
   const { mutateAsync: sendMessage } = useMutation({
     mutationFn: (props: CreateMessageDTO) => createMessage(props),
@@ -73,22 +70,6 @@ const UserChat: React.FC<ChatProps> = ({ currentIssue }) => {
       sender: MESSAGE.SENDER_TYPE_INDEX.USER,
     });
   };
-
-  // useEffect(() => {
-  //   if (!listening) {
-  //     const events = new EventSource(
-  //       "http://localhost:3000/api/chat/sse-register"
-  //     );
-
-  //     events.onmessage = (message) => {
-  //       setMessages((messages) => messages.concat(message.data));
-  //     };
-
-  //     setListening(true);
-  //   }
-  // }, [listening, messages]);
-
-  // console.log({ messages });
 
   return (
     <div className={styles.container}>
