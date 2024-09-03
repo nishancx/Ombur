@@ -59,3 +59,17 @@
   gap: 5px;
   justify-content: center;
 }
+
+.signInButton {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid #747775 !important;
+}
+
+.dashboardButton {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

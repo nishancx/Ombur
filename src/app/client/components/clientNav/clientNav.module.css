@@ -28,14 +28,6 @@
   border-radius: 100%;
 }
 
-.signInButton {
-  padding: 0 10px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  border: 1px solid #747775 !important;
-}
-
 .content {
   display: flex;
   flex-direction: column;
