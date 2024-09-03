@@ -19,7 +19,7 @@ const ClientRightPane: React.FC<RightPaneProps> = ({ currentIssue }) => {
 
   return (
     <div className={styles.container}>
-      <ChatTitleBar currentIssue={currentIssue} />
+      <ChatTitleBar currentIssue={currentIssue} chatType="client" />
 
       <ClientChat currentIssue={currentIssue} />
     </div>

@@ -7,10 +7,20 @@ import { ArrowLeft, Info } from "lucide-react";
 
 type ChatTitleBarProps = {
   currentIssue: Issue;
+  chatType: "client" | "user";
 };
 
-const ChatTitleBar: React.FC<ChatTitleBarProps> = ({ currentIssue }) => {
+const ChatTitleBar: React.FC<ChatTitleBarProps> = ({
+  currentIssue,
+  chatType,
+}) => {
   const goBack = () => {
+    if (chatType === "client") {
+      return issueStore.clientsCurrentIssue.setCurrentIssue({
+        currentIssue: null,
+      });
+    }
+
     issueStore.usersCurrentIssue.setCurrentIssue({
       currentIssue: null,
     });
