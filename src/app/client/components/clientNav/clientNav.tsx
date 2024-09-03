@@ -85,8 +85,13 @@ const ClientNav: React.FC<NavProps> = ({ session }) => {
           }
         />
       ) : (
-        <Button onClick={async () => await signIn("google")}>
-          <div className={styles.signInButtonText}>Sign in</div>
+        <Button
+          className={styles.signInButton}
+          onClick={async () => await signIn("google")}
+          hasBackground={false}
+        >
+          <Image src="/google.svg" alt="Google" width={20} height={20} />
+          <div>Sign in with Google</div>
         </Button>
       )}
     </nav>
