@@ -8,5 +8,5 @@ const FullSpanLoader: React.FC = () => {
     </div>
   );
 };
-
+ 
 export { FullSpanLoader };

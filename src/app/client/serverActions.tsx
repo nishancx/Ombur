@@ -23,7 +23,7 @@ const getSessionClientServerAction = async () => {
   }
 
   return serializeObject(client);
-};
+}; 
 
 const getClientIssuesServerAction = async () => {
   await connectDB();
