@@ -6,9 +6,9 @@ import { useClientIssues } from "../../queries";
 import { IssueTile } from "@/components/issueTile/issueTile";
 import { AUTH } from "@/constants/auth";
 import { issueStore } from "@/libs/client/stores/issue";
+import { Empty } from "@/components/empty/empty";
 
 import { Loader } from "lucide-react";
-import { Empty } from "antd";
 import { isEmpty } from "lodash";
 import clsx from "clsx";
 
@@ -30,7 +30,7 @@ const IssuesList: React.FC<IssuesListProps> = ({ className }) => {
   if (!data || isEmpty(data)) {
     return (
       <div className={styles.container}>
-        <Empty description="No issues" className={styles.empty} />
+        <Empty description="No issues" />
       </div>
     );
   }

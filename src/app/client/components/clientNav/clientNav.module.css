@@ -28,10 +28,6 @@
   border-radius: 100%;
 }
 
-.signInButtonText {
-  padding: 0 10px;
-}
-
 .content {
   display: flex;
   flex-direction: column;

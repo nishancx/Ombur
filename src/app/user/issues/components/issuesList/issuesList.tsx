@@ -6,9 +6,9 @@ import { useUserIssues } from "../../queries";
 import { IssueTile } from "@/components/issueTile/issueTile";
 import { User } from "@/types/models/user";
 import { issueStore } from "@/libs/client/stores/issue";
+import { Empty } from "@/components/empty/empty";
 
 import { Loader } from "lucide-react";
-import { Empty } from "antd";
 import { isEmpty } from "lodash";
 
 type IssuesListProps = {
@@ -33,7 +33,7 @@ const IssuesList: React.FC<IssuesListProps> = ({ clientId, user }) => {
   if (!data || isEmpty(data)) {
     return (
       <div className={styles.container}>
-        <Empty description="No issues" className={styles.empty} />
+        <Empty description="No issues" />
       </div>
     );
   }

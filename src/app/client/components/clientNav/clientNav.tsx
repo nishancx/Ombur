@@ -8,13 +8,13 @@ import { modalStore } from "@/libs/client/stores/modal";
 import { ClientDataSearchParam } from "@/types/searchParams";
 import { FILE_PATHS } from "@/constants/filePaths";
 
+import Image from "next/image";
 import { Link, LogOut } from "lucide-react";
 import { Session } from "next-auth";
-import { signIn, signOut } from "next-auth/react";
-import Image from "next/image";
+import { signOut } from "next-auth/react";
 
 type NavProps = {
-  session: Session | null;
+  session: Session;
 };
 
 const ClientNav: React.FC<NavProps> = ({ session }) => {
@@ -42,7 +42,7 @@ const ClientNav: React.FC<NavProps> = ({ session }) => {
         <div className={styles.title}>Ombur</div>
       </div>
 
-      {session?.user ? (
+      {!!session?.user && (
         <Dropdown
           handle={
             <Image
@@ -84,10 +84,6 @@ const ClientNav: React.FC<NavProps> = ({ session }) => {
             </div>
           }
         />
-      ) : (
-        <Button onClick={async () => await signIn("google")}>
-          <div className={styles.signInButtonText}>Sign in</div>
-        </Button>
       )}
     </nav>
   );
