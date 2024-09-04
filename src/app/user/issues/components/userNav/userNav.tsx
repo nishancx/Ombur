@@ -1,37 +1,16 @@
 "use client";
 
 import styles from "./userNav.module.css";
-import { useSessionUser } from "../../queries";
 
-import { LOCAL_STORAGE } from "@/constants/localStorage";
-import { useIsFirstRender } from "@/hooks/isFirstRender";
 import { Button } from "@/components/button/button";
 import { Dropdown } from "@/components/dropdown/dropdown";
-import { QUERY } from "@/constants/query";
 
 import Image from "next/image";
-import { useQueryClient } from "@tanstack/react-query";
-import { LogOut } from "lucide-react";
+import { Loader, LogOut } from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
 
 const UserNav: React.FC = () => {
-  const isFirstRender = useIsFirstRender();
-  const queryClient = useQueryClient();
-
-  const { data: user, isFetched } = useSessionUser();
-
-  const signOut = () => {
-    localStorage.removeItem(LOCAL_STORAGE.OMBUR_USER_ID);
-    queryClient.setQueryData(QUERY.QUERY_KEYS.GET_SESSION_USER, null);
-  };
-
-  // Return null if it's the first render to avoid hydration error
-  if (isFirstRender) {
-    return null;
-  }
-
-  if (isFetched && !user) {
-    signOut();
-  }
+  const session = useSession();
 
   return (
     <nav className={styles.nav}>
@@ -40,9 +19,13 @@ const UserNav: React.FC = () => {
         <div className={styles.title}>Ombur</div>
       </div>
 
-      {user ? (
+      {session?.status === "loading" ? (
+        <Loader />
+      ) : session?.status === "authenticated" ? (
         <Dropdown
-          handle={<div className={styles.right}>{user.name} </div>}
+          handle={
+            <div className={styles.right}>{session?.data?.user?.name} </div>
+          }
           content={
             <div className={styles.content}>
               <Button

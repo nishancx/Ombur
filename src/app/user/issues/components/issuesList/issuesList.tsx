@@ -4,12 +4,12 @@ import styles from "./issuesList.module.css";
 import { useUserIssues } from "../../queries";
 
 import { IssueTile } from "@/components/issueTile/issueTile";
-import { User } from "@/types/models/user";
 import { issueStore } from "@/libs/client/stores/issue";
 import { Empty } from "@/components/empty/empty";
 
-import { Loader } from "lucide-react";
-import { isEmpty } from "lodash";
+import _ from "lodash";
+import { User } from "next-auth";
+import { Loading } from "@/components/loading/loading";
 
 type IssuesListProps = {
   clientId: string;
@@ -19,18 +19,18 @@ type IssuesListProps = {
 const IssuesList: React.FC<IssuesListProps> = ({ clientId, user }) => {
   const { data, isLoading } = useUserIssues({
     clientId,
-    userId: user._id,
+    userId: user.id || "",
   });
 
   if (isLoading) {
     return (
       <div className={styles.container}>
-        <Loader className={styles.loader} />
+        <Loading className={styles.loader} />
       </div>
     );
   }
 
-  if (!data || isEmpty(data)) {
+  if (!data || _.isEmpty(data)) {
     return (
       <div className={styles.container}>
         <Empty description="No issues" />

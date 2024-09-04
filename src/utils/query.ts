@@ -1,10 +1,10 @@
+import _ from "lodash";
 import { GlobalPageParams } from "@/types/query";
-import { isArray } from "lodash";
 
 const reduceInfiniteData = <T extends { _id: string }>(
   data?: GlobalPageParams<T>[]
 ) => {
-  if (!data || !isArray(data)) return [];
+  if (!data || !_.isArray(data)) return [];
 
   return data
     ?.flatMap((page) => page?.data)

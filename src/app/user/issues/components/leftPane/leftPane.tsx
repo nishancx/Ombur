@@ -5,10 +5,10 @@ import { ClientProfile } from "../clientProfile/clientProfile";
 import { IssuesList } from "../issuesList/issuesList";
 
 import { Button } from "@/components/button/button";
-import { User } from "@/types/models/user";
+import { modalStore } from "@/libs/client/stores/modal";
 
 import { PlusIcon } from "lucide-react";
-import { modalStore } from "@/libs/client/stores/modal";
+import { User } from "next-auth";
 
 type LeftPaneProps = {
   clientId: string;

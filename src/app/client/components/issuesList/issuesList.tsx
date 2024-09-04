@@ -7,9 +7,9 @@ import { IssueTile } from "@/components/issueTile/issueTile";
 import { AUTH } from "@/constants/auth";
 import { issueStore } from "@/libs/client/stores/issue";
 import { Empty } from "@/components/empty/empty";
+import { Loading } from "@/components/loading/loading";
 
-import { Loader } from "lucide-react";
-import { isEmpty } from "lodash";
+import _ from "lodash";
 import clsx from "clsx";
 
 type IssuesListProps = {
@@ -21,13 +21,13 @@ const IssuesList: React.FC<IssuesListProps> = ({ className }) => {
 
   if (isLoading) {
     return (
-      <div className={styles.container}>
-        <Loader className={styles.loader} />
+      <div className={clsx(styles.container, styles.loaderContainer)}>
+        <Loading />
       </div>
     );
   }
 
-  if (!data || isEmpty(data)) {
+  if (!data || _.isEmpty(data)) {
     return (
       <div className={styles.container}>
         <Empty description="No issues" />

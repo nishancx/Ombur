@@ -1,9 +1,17 @@
 import { ClientPageContent } from "./components";
 
 import { auth } from "@/../auth";
+import { FullSpanLoader } from "@/components/fullSpanLoader/fullSpanLoader";
+import { MESSAGE } from "@/constants/message";
+import { redirect } from "next/navigation";
 
-export default async function Home() {
+export default async function Client() {
   const session = await auth();
+
+  if (session?.user?.type === MESSAGE.SENDER_TYPE_INDEX.USER) {
+    redirect("/");
+    return <FullSpanLoader />;
+  }
 
   if (!session) {
     return null;

@@ -15,6 +15,8 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
   const [messageText, setMessageText] = useState("");
 
   const sendMessage = () => {
+    if (!messageText) return;
+
     onSendMessage({ text: messageText });
     setMessageText("");
   };
