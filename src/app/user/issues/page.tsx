@@ -1,17 +1,17 @@
 "use client";
 
+import styles from "./page.module.css";
 import { CreateUser } from "./components/createUser/createUser";
 import { Issues } from "./components";
-import { useSessionUser } from "./queries";
 import { getClientDataFromSearchParam } from "./utils";
 
-import { useIsFirstRender } from "@/hooks/isFirstRender";
+import { FullSpanLoader } from "@/components/fullSpanLoader/fullSpanLoader";
+import { MESSAGE } from "@/constants/message";
+import { Loading } from "@/components/loading/loading";
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Loader } from "lucide-react";
-import { FullSpanLoader } from "@/components/fullSpanLoader/fullSpanLoader";
-import { MESSAGE } from "@/constants/message";
+
 
 export default function CreateIssue() {
   const searchParams = useSearchParams();
@@ -22,12 +22,10 @@ export default function CreateIssue() {
     clientDataParam: clientDataParam,
   });
 
-  // const { data: user } = useSessionUser();
   const session = useSession();
-  console.log(session);
 
   if (session?.status === "loading") {
-    return <Loader />;
+    return <Loading className={styles.loader} />;
   }
 
   if (session?.data?.user?.type === MESSAGE.SENDER_TYPE_INDEX.CLIENT) {
@@ -40,7 +38,10 @@ export default function CreateIssue() {
     return (window.location.href = "/");
   }
 
+  if (!session?.data?.user) {
+    return <CreateUser />;
+  }
+
   // If userId is available, show user's issues for the client
-  // return <Issues clientId={clientData.id} user={user} />;
-  return <div>issues</div>;
+  return <Issues clientId={clientData.id} user={session?.data?.user} />;
 }

@@ -4,11 +4,11 @@ import styles from "./index.module.css";
 import { UserLeftPane } from "./leftPane/leftPane";
 import { UserRightPane } from "./rightPane/rightPane";
 
-import { User } from "@/types/models/user";
 import { issueStore } from "@/libs/client/stores/issue";
 
-import { useSnapshot } from "valtio";
 import clsx from "clsx";
+import { useSnapshot } from "valtio";
+import { User } from "next-auth";
 
 type IssuesProps = {
   clientId: string;

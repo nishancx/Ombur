@@ -3,10 +3,11 @@
 import styles from "./rightPane.module.css";
 import { UserChat } from "../chat/chat";
 
-import { User } from "@/types/models/user";
 import { ChatTitleBar } from "@/components/chatTitleBar/chatTitleBar";
 import { Issue } from "@/types/models/issue";
 import { Empty } from "@/components/empty/empty";
+
+import { User } from "next-auth";
 
 type RightPaneProps = {
   user: User;

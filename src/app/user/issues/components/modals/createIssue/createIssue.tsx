@@ -2,7 +2,6 @@
 
 import styles from "./createIssue.module.css";
 import { createIssueServerAction } from "../../../serverActions";
-import { useSessionUser } from "../../../queries";
 
 import { issueStore } from "@/libs/client/stores/issue";
 import { modalStore } from "@/libs/client/stores/modal";
@@ -16,10 +15,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Input, Modal, Select } from "antd";
 import { useSnapshot } from "valtio";
 import { Controller, useForm } from "react-hook-form";
+import { useSession } from "next-auth/react";
 
 const CreateIssueModal: React.FC = () => {
   const { isOpen, clientId } = useSnapshot(modalStore.createIssueModal);
-  const { data: user } = useSessionUser();
+  const session = useSession();
   const queryClient = useQueryClient();
 
   const { control, reset, handleSubmit, setValue } = useForm<IssueDTO>({
@@ -40,7 +40,7 @@ const CreateIssueModal: React.FC = () => {
     queryClient.invalidateQueries({
       queryKey: QUERY.QUERY_KEYS.GET_USER_ISSUES({
         clientId,
-        userId: user!._id,
+        userId: session?.data?.user?.id || "",
       }),
     });
 
@@ -49,14 +49,14 @@ const CreateIssueModal: React.FC = () => {
   };
 
   useEffect(() => {
-    if (user) {
-      setValue("userId", user._id);
+    if (session?.data?.user && session?.data?.user?.id) {
+      setValue("userId", session?.data?.user?.id);
     }
 
     if (clientId) {
       setValue("clientId", clientId);
     }
-  }, [setValue, user, clientId]);
+  }, [setValue, clientId, session?.data?.user]);
 
   return (
     <Modal

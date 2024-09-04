@@ -9,11 +9,9 @@ import { invokeOnEnterPress } from "@/utils/dom";
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "antd";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
 
 const CreateUser: React.FC = () => {
-  const queryClient = useQueryClient();
   const { control, handleSubmit } = useForm<UserDTO>({
     mode: "onSubmit",
     resolver: zodResolver(userValidationSchema),
@@ -24,14 +22,6 @@ const CreateUser: React.FC = () => {
 
   const createUser = async (data: UserDTO) => {
     await signIn("credentials", data);
-    // const user = await createUserServerAction(data);
-
-    // saveItemToLocalStorage({
-    //   key: LOCAL_STORAGE.OMBUR_USER_ID,
-    //   value: user._id,
-    // });
-
-    // queryClient.setQueryData(QUERY.QUERY_KEYS.GET_SESSION_USER, user);
   };
 
   return (
