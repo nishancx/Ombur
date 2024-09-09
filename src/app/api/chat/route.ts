@@ -82,7 +82,7 @@ export async function POST(request: Request) {
   }
 
   const newMessage = await Messages.create({
-    sender: MESSAGE.SENDER_TYPE_INDEX.CLIENT,
+    sender,
     issueId,
     userId,
     clientId,

@@ -11,7 +11,6 @@ import { Message } from "@/types/models/message";
 import { QUERY } from "@/constants/query";
 import { createMessage } from "@/libs/client/routes";
 
-import { useEffect, useState } from "react";
 import {
   InfiniteData,
   useMutation,
@@ -24,10 +23,6 @@ type ChatProps = {
 
 const UserChat: React.FC<ChatProps> = ({ currentIssue }) => {
   const queryClient = useQueryClient();
-  const [messages, setMessages] = useState([]);
-  const [sseStatus, setSseStatus] = useState<null | "connecting" | "connected">(
-    null
-  );
 
   const { mutateAsync: sendMessage } = useMutation({
     mutationFn: (props: CreateMessageDTO) => createMessage(props),
@@ -75,22 +70,6 @@ const UserChat: React.FC<ChatProps> = ({ currentIssue }) => {
       sender: MESSAGE.SENDER_TYPE_INDEX.USER,
     });
   };
-
-  useEffect(() => {
-    if (!sseStatus) {
-      const events = new EventSource(
-        `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/api/chat`
-      );
-
-      events.onmessage = (message) => {
-        setMessages((messages) => messages.concat(JSON.parse(message.data)));
-      };
-
-      setSseStatus("connected");
-    }
-  }, [sseStatus, messages]);
-
-  console.log({ messages });
 
   return (
     <div className={styles.container}>
