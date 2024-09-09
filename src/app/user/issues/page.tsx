@@ -2,7 +2,7 @@
 
 import styles from "./page.module.css";
 import { CreateUser } from "./components/createUser/createUser";
-import { Issues } from "./components";
+import { IssuesContent } from "./components";
 import { getClientDataFromSearchParam } from "./utils";
 
 import { FullSpanLoader } from "@/components/fullSpanLoader/fullSpanLoader";
@@ -11,7 +11,6 @@ import { Loading } from "@/components/loading/loading";
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-
 
 export default function CreateIssue() {
   const searchParams = useSearchParams();
@@ -43,5 +42,5 @@ export default function CreateIssue() {
   }
 
   // If userId is available, show user's issues for the client
-  return <Issues clientId={clientData.id} user={session?.data?.user} />;
+  return <IssuesContent clientId={clientData.id} user={session?.data?.user} />;
 }

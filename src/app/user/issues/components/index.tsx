@@ -10,12 +10,12 @@ import clsx from "clsx";
 import { useSnapshot } from "valtio";
 import { User } from "next-auth";
 
-type IssuesProps = {
+type IssuesContentProps = {
   clientId: string;
   user: User;
 };
 
-const Issues: React.FC<IssuesProps> = ({ clientId, user }) => {
+const IssuesContent: React.FC<IssuesContentProps> = ({ clientId, user }) => {
   const { currentIssue } = useSnapshot(issueStore.usersCurrentIssue);
 
   return (
@@ -34,4 +34,4 @@ const Issues: React.FC<IssuesProps> = ({ clientId, user }) => {
   );
 };
 
-export { Issues };
+export { IssuesContent };
