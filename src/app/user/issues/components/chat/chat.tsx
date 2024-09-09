@@ -1,21 +1,21 @@
 "use client";
 
 import styles from "./chat.module.css";
-import { createMessage } from "./serverActions";
 
-import { ClientChatList } from "@/components/chatList/chatList";
+import { ChatList } from "@/components/chatList/chatList";
 import { ChatInput } from "@/components/chatInput/chatInput";
 import { MESSAGE } from "@/constants/message";
 import { Issue } from "@/types/models/issue";
 import { CreateMessageDTO } from "@/validations/issue";
+import { Message } from "@/types/models/message";
+import { QUERY } from "@/constants/query";
+import { createMessage } from "@/libs/client/routes";
 
 import {
   InfiniteData,
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { Message } from "@/types/models/message";
-import { QUERY } from "@/constants/query";
 
 type ChatProps = {
   currentIssue: Issue;
@@ -73,7 +73,7 @@ const UserChat: React.FC<ChatProps> = ({ currentIssue }) => {
 
   return (
     <div className={styles.container}>
-      <ClientChatList
+      <ChatList
         issueId={currentIssue._id}
         sender={MESSAGE.SENDER_TYPE_INDEX.USER}
       />

@@ -14,14 +14,14 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import clsx from "clsx";
 import { QUERY } from "@/constants/query";
 
-type ClientChatListProps = {
+type ChatListProps = {
   issueId: string;
   sender:
     | typeof MESSAGE.SENDER_TYPE_INDEX.CLIENT
     | typeof MESSAGE.SENDER_TYPE_INDEX.USER;
 };
 
-const ClientChatList: React.FC<ClientChatListProps> = ({ issueId, sender }) => {
+const ChatList: React.FC<ChatListProps> = ({ issueId, sender }) => {
   const {
     data: messages,
     isLoading: isLoadingMessages,
@@ -88,4 +88,4 @@ const ClientChatList: React.FC<ClientChatListProps> = ({ issueId, sender }) => {
   );
 };
 
-export { ClientChatList };
+export { ChatList };

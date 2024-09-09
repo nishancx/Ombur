@@ -8,7 +8,7 @@ import {
   CreateMessageDTO,
   createMessageValidationSchema,
 } from "@/validations/issue";
-import { auth } from "../../../../../auth";
+import { auth } from "@/../auth";
 import { Clients } from "@/libs/server/models/client";
 import { Users } from "@/libs/server/models/user";
 
