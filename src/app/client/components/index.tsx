@@ -21,10 +21,13 @@ const ClientPageContent: React.FC = () => {
   const queryClient = useQueryClient();
 
   useEffect(() => {
+    let events: EventSource;
+
     if (!sseStatus) {
-      const events = new EventSource(
+      events = new EventSource(
         `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/api/chat`
       );
+
       events.onmessage = (rawMessage) => {
         const message = JSON.parse(rawMessage.data);
 
@@ -43,6 +46,7 @@ const ClientPageContent: React.FC = () => {
           | undefined = queryClient.getQueryData(
           QUERY.QUERY_KEYS.GET_CLIENT_CHAT({ issueId })
         );
+
         queryClient.setQueryData(
           QUERY.QUERY_KEYS.GET_CLIENT_CHAT({ issueId }),
           {
@@ -62,6 +66,12 @@ const ClientPageContent: React.FC = () => {
 
       setSseStatus("connected");
     }
+
+    return () => {
+      if (sseStatus) {
+        events?.close();
+      }
+    };
   }, [sseStatus, queryClient]);
 
   return (

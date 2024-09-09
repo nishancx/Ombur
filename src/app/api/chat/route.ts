@@ -24,6 +24,7 @@ export async function GET(req: Request) {
 
     req.signal.onabort = () => {
       writer.close();
+      sseIdMap.delete(senderId);
     };
 
     sseIdMap.set(senderId, writer);

@@ -27,8 +27,10 @@ const IssuesContent: React.FC<IssuesContentProps> = ({ clientId, user }) => {
   const queryClient = useQueryClient();
 
   useEffect(() => {
+    let events: EventSource;
+
     if (!sseStatus) {
-      const events = new EventSource(
+      events = new EventSource(
         `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/api/chat`
       );
       events.onmessage = (rawMessage) => {
@@ -49,25 +51,27 @@ const IssuesContent: React.FC<IssuesContentProps> = ({ clientId, user }) => {
           | undefined = queryClient.getQueryData(
           QUERY.QUERY_KEYS.GET_USER_CHAT({ issueId })
         );
-        queryClient.setQueryData(
-          QUERY.QUERY_KEYS.GET_USER_CHAT({ issueId }),
-          {
-            pages: [
-              {
-                data: [message, ...(previousMessages?.pages?.[0]?.data || [])],
-                page: 0,
-              },
-              ...(previousMessages?.pages
-                ? previousMessages.pages.slice(1)
-                : []),
-            ],
-            pageParams: previousMessages?.pageParams,
-          }
-        );
+
+        queryClient.setQueryData(QUERY.QUERY_KEYS.GET_USER_CHAT({ issueId }), {
+          pages: [
+            {
+              data: [message, ...(previousMessages?.pages?.[0]?.data || [])],
+              page: 0,
+            },
+            ...(previousMessages?.pages ? previousMessages.pages.slice(1) : []),
+          ],
+          pageParams: previousMessages?.pageParams,
+        });
       };
 
       setSseStatus("connected");
     }
+
+    return () => {
+      if (sseStatus) {
+        events?.close();
+      }
+    };
   }, [sseStatus, queryClient]);
 
   return (
