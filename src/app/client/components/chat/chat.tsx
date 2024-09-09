@@ -1,21 +1,23 @@
 "use client";
 
 import styles from "./chat.module.css";
-import { createMessage } from "./serverActions";
 
 import { ClientChatList } from "@/components/chatList/chatList";
 import { ChatInput } from "@/components/chatInput/chatInput";
 import { MESSAGE } from "@/constants/message";
 import { Issue } from "@/types/models/issue";
 import { CreateMessageDTO } from "@/validations/issue";
+import { Message } from "@/types/models/message";
+import { QUERY } from "@/constants/query";
 
+import { createMessage } from "@/libs/client/routes";
+
+import { useEffect, useState } from "react";
 import {
   InfiniteData,
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { QUERY } from "@/constants/query";
-import { Message } from "@/types/models/message";
 
 type ChatProps = {
   currentIssue: Issue;
@@ -23,6 +25,26 @@ type ChatProps = {
 
 const ClientChat: React.FC<ChatProps> = ({ currentIssue }) => {
   const queryClient = useQueryClient();
+  const [messages, setMessages] = useState([]);
+  const [sseStatus, setSseStatus] = useState<null | "connecting" | "connected">(
+    null
+  );
+
+  useEffect(() => {
+    if (!sseStatus) {
+      const events = new EventSource(
+        `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/api/chat`
+      );
+      events.onmessage = (message) => {
+        setMessages((messages) => messages.concat(JSON.parse(message.data)));
+      };
+
+      setSseStatus("connected");
+    }
+  }, [sseStatus, messages]);
+
+  console.log({ messages });
+
   const { mutateAsync: sendMessage } = useMutation({
     mutationFn: (props: CreateMessageDTO) => createMessage(props),
     onMutate: async (props) => {

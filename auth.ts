@@ -52,7 +52,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               id: client._id,
               type: MESSAGE.SENDER_TYPE_INDEX.CLIENT,
             },
-            expires: new Date().toDateString(),
+            expires: new Date(
+              new Date().setDate(new Date().getDate() + 1)
+            ).toDateString(),
           };
         }
       }
@@ -68,7 +70,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               id: user._id,
               type: MESSAGE.SENDER_TYPE_INDEX.USER,
             },
-            expires: new Date().toDateString(),
+            expires: new Date(
+              new Date().setFullYear(new Date().getFullYear() + 1)
+            ).toDateString(),
           };
         }
       }
