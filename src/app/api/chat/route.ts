@@ -116,7 +116,7 @@ export async function POST(request: Request) {
   return NextResponse.json({ data: null }, { status: 200 });
 }
 
-export const getSessionForMongoRest = async () => {
+const getSessionForMongoRest = async () => {
   let sessionToken: RequestCookie | undefined = {
     name: "",
     value: "",
