@@ -1,3 +1,6 @@
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 import { createMessageValidationSchema } from "@/validations/issue";
 import { auth } from "@/../auth";
 import { MESSAGE } from "@/constants/message";
