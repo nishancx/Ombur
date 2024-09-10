@@ -1,8 +1,9 @@
+import { getClient, getUser } from "./authActions";
+
 import { Clients } from "@/libs/server/models/client";
 import { connectDB } from "@/libs/server/mongo";
 import { AuthUser } from "@/types/auth";
 import { createUserServerAction } from "@/app/user/issues/serverActions";
-import { Users } from "@/libs/server/models/user";
 import { MESSAGE } from "@/constants/message";
 
 import NextAuth from "next-auth";
@@ -43,7 +44,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       const email = session.user.email;
 
       if (!!email && email.includes("@")) {
-        const client = await Clients.findOne({ email });
+        const client = await getClient({ email });
 
         if (!!client) {
           return {
@@ -60,7 +61,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
 
       if (!!email && email.includes("-")) {
-        const user = await Users.findOne({ username: session.user.email });
+        const user = await getUser({ username: session.user.email });
 
         if (!!user) {
           return {
