@@ -1,5 +1,4 @@
 export const runtime = "edge";
-// export const dynamic = "force-dynamic";
 
 import { Client } from "@/types/models/client";
 import { User } from "@/types/models/user";
@@ -13,9 +12,8 @@ import { cookies } from "next/dist/client/components/headers";
 import { decode } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
-import { sendSse } from "../serverActions";
 
-var sseIdMap: Map<string, TransformStream<any, any>> = new Map();
+var sseIdMap: Map<string, WritableStreamDefaultWriter<any>> = new Map();
 
 export async function GET(req: Request) {
   try {
@@ -35,13 +33,14 @@ export async function GET(req: Request) {
     }
 
     let responseStream = new TransformStream();
+    const writer = responseStream.writable.getWriter();
 
     req.signal.onabort = () => {
-      // writer.close();
+      writer.close();
       sseIdMap.delete(senderId);
     };
 
-    sseIdMap.set(senderId, responseStream);
+    sseIdMap.set(senderId, writer);
 
     return new Response(responseStream.readable, {
       headers: {
@@ -104,18 +103,13 @@ export async function POST(request: Request) {
   const receiverId =
     sender === MESSAGE.SENDER_TYPE_INDEX.CLIENT ? userId : clientId;
 
-  console.log("fetching writer for receiverId", receiverId, {
-    keys: Array.from(sseIdMap.keys()),
-  });
-  const responseStream = sseIdMap.get(receiverId);
-  if (responseStream) {
-    await sendSse({ responseStream, message: newMessage });
-    //   const writer = responseStream.writable.getWriter();
-    //   const encoder = new TextEncoder();
-    //   await writer.write(
-    //     encoder.encode(`data: ${Date.now()}\n\n`)
-    //     // encoder.encode(`data: ${JSON.stringify(newMessage)}\n\n`)
-    //   );
+  const receiverWriter = sseIdMap.get(receiverId);
+  if (receiverWriter) {
+    const encoder = new TextEncoder();
+
+    await receiverWriter.write(
+      encoder.encode(`data: ${JSON.stringify(newMessage)}\n\n`)
+    );
   }
 
   return NextResponse.json({ data: null }, { status: 200 });
