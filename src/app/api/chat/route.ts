@@ -15,6 +15,7 @@ import { NextResponse } from "next/server";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 var sseIdMap: Map<string, WritableStreamDefaultWriter<any>> = new Map();
+console.log("sseIdMap", sseIdMap);
 
 export async function GET(req: Request) {
   try {
