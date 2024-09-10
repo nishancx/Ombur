@@ -40,7 +40,11 @@ export async function GET(req: Request) {
       writer.close();
       sseIdMap.delete(senderId);
     };
+    const encoder = new TextEncoder();
 
+    setInterval(() => {
+      writer.write(encoder.encode(`data: ${Date.now()}\n\n`));
+    }, 1000);
     console.log("storing writer for senderId", senderId);
     sseIdMap.set(senderId, writer);
 
