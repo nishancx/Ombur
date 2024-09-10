@@ -107,6 +107,7 @@ export async function POST(request: Request) {
     keys: Array.from(sseIdMap.keys()),
   });
   const responseStream = sseIdMap.get(receiverId);
+  console.log("responseStream", responseStream);
   // if (responseStream) {
   //   const writer = responseStream.writable.getWriter();
   //   const encoder = new TextEncoder();
