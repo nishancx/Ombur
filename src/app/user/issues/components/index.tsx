@@ -34,34 +34,35 @@ const IssuesContent: React.FC<IssuesContentProps> = ({ clientId, user }) => {
         `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/api/chat`
       );
       events.onmessage = (rawMessage) => {
-        const message = JSON.parse(rawMessage.data);
+        return console.log("rawMessage", rawMessage);
+        // const message = JSON.parse(rawMessage.data);
 
-        const issueId = message?.issueId;
+        // const issueId = message?.issueId;
 
-        if (!issueId) return;
+        // if (!issueId) return;
 
-        const previousMessages:
-          | InfiniteData<
-              {
-                data: Message[];
-                page: number;
-              },
-              number
-            >
-          | undefined = queryClient.getQueryData(
-          QUERY.QUERY_KEYS.GET_USER_CHAT({ issueId })
-        );
+        // const previousMessages:
+        //   | InfiniteData<
+        //       {
+        //         data: Message[];
+        //         page: number;
+        //       },
+        //       number
+        //     >
+        //   | undefined = queryClient.getQueryData(
+        //   QUERY.QUERY_KEYS.GET_USER_CHAT({ issueId })
+        // );
 
-        queryClient.setQueryData(QUERY.QUERY_KEYS.GET_USER_CHAT({ issueId }), {
-          pages: [
-            {
-              data: [message, ...(previousMessages?.pages?.[0]?.data || [])],
-              page: 0,
-            },
-            ...(previousMessages?.pages ? previousMessages.pages.slice(1) : []),
-          ],
-          pageParams: previousMessages?.pageParams,
-        });
+        // queryClient.setQueryData(QUERY.QUERY_KEYS.GET_USER_CHAT({ issueId }), {
+        //   pages: [
+        //     {
+        //       data: [message, ...(previousMessages?.pages?.[0]?.data || [])],
+        //       page: 0,
+        //     },
+        //     ...(previousMessages?.pages ? previousMessages.pages.slice(1) : []),
+        //   ],
+        //   pageParams: previousMessages?.pageParams,
+        // });
       };
 
       setSseStatus("connected");

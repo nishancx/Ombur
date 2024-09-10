@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 export const runtime = "edge";
 
 import { Client } from "@/types/models/client";
@@ -35,6 +35,12 @@ export async function GET(req: Request) {
 
     let responseStream = new TransformStream();
     const writer = responseStream.writable.getWriter();
+
+    const encoder = new TextEncoder();
+
+    setInterval(() => {
+      writer.write(encoder.encode(`data: ${Date.now()}\n\n`));
+    }, 1000);
 
     req.signal.onabort = () => {
       writer.close();
