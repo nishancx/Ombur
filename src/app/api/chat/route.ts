@@ -14,8 +14,7 @@ import { decode } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
-var sseIdMap: Map<string, WritableStreamDefaultWriter<any>> = new Map();
-console.log("sseIdMap", sseIdMap);
+var sseIdMap: Map<string, TransformStream<any, any>> = new Map();
 
 export async function GET(req: Request) {
   try {
@@ -35,15 +34,13 @@ export async function GET(req: Request) {
     }
 
     let responseStream = new TransformStream();
-    const writer = responseStream.writable.getWriter();
 
     req.signal.onabort = () => {
-      writer.close();
+      // writer.close();
       sseIdMap.delete(senderId);
     };
 
-    console.log("storing writer for senderId", senderId);
-    sseIdMap.set(senderId, writer);
+    sseIdMap.set(senderId, responseStream);
 
     return new Response(responseStream.readable, {
       headers: {
@@ -109,12 +106,12 @@ export async function POST(request: Request) {
   console.log("fetching writer for receiverId", receiverId, {
     keys: Array.from(sseIdMap.keys()),
   });
-  const receiverWriter = sseIdMap.get(receiverId);
-  if (receiverWriter) {
-    console.log("writing message");
+  const responseStream = sseIdMap.get(receiverId);
+  if (responseStream) {
+    const writer = responseStream.writable.getWriter();
     const encoder = new TextEncoder();
 
-    await receiverWriter.write(
+    await writer.write(
       encoder.encode(`data: ${Date.now()}\n\n`)
       // encoder.encode(`data: ${JSON.stringify(newMessage)}\n\n`)
     );
