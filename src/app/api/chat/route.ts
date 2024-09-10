@@ -1,8 +1,12 @@
-export const dynamic = "force-dynamic";
 export const runtime = "edge";
 
 import { Client } from "@/types/models/client";
 import { User } from "@/types/models/user";
+import {
+  CreateMessageDTO,
+  createMessageValidationSchema,
+} from "@/validations/issue";
+import { MESSAGE } from "@/constants/message";
 
 import { cookies } from "next/dist/client/components/headers";
 import { decode } from "next-auth/jwt";
@@ -13,7 +17,7 @@ var sseIdMap: Map<string, WritableStreamDefaultWriter<any>> = new Map();
 
 export async function GET(req: Request) {
   try {
-    const session = await getSession();
+    const session = await getSessionForMongoRest();
 
     const senderEmail = session?.email;
 
@@ -51,75 +55,68 @@ export async function GET(req: Request) {
 }
 
 export async function POST(request: Request) {
-  // const body = await request.json();
-  // const { text, issueId, userId, clientId, sender } = body;
+  const body = await request.json();
+  const { text, issueId, userId, clientId, sender } = body;
 
-  // const isPayloadValid = createMessageValidationSchema.safeParse({
-  //   text,
-  //   issueId,
-  //   userId,
-  //   clientId,
-  //   sender,
-  // });
+  const isPayloadValid = createMessageValidationSchema.safeParse({
+    text,
+    issueId,
+    userId,
+    clientId,
+    sender,
+  });
 
-  // if (!isPayloadValid.success) {
-  //   return NextResponse.json({ error: isPayloadValid.error }, { status: 400 });
-  // }
+  if (!isPayloadValid.success) {
+    return NextResponse.json({ error: isPayloadValid.error }, { status: 400 });
+  }
 
-  // await connectDB();
+  const session = await getSessionForMongoRest();
 
-  // const session = await auth();
+  if (!session || !session?.email) {
+    throw new Error("Unauthorized");
+  }
 
-  // if (!session || !session?.user) {
-  //   throw new Error("Unauthorized");
-  // }
+  if (sender === MESSAGE.SENDER_TYPE_INDEX.CLIENT) {
+    const client = await fetchClientByEmail({ email: session?.email || "" });
 
-  // if (sender === MESSAGE.SENDER_TYPE_INDEX.CLIENT) {
-  //   const client = await Clients.findOne({
-  //     _id: session.user.id,
-  //   });
+    if (!client) {
+      throw new Error("Client not found");
+    }
+  }
 
-  //   if (!client) {
-  //     throw new Error("Client not found");
-  //   }
-  // }
+  if (sender === MESSAGE.SENDER_TYPE_INDEX.USER) {
+    const user = await fetchUserByUsername({ username: session?.email || "" });
 
-  // if (sender === MESSAGE.SENDER_TYPE_INDEX.USER) {
-  //   const user = await Users.findOne({
-  //     _id: session.user.id,
-  //   });
+    if (!user) {
+      throw new Error("User not found");
+    }
+  }
 
-  //   if (!user) {
-  //     throw new Error("User not found");
-  //   }
-  // }
+  const newMessage = await createMessage({
+    sender,
+    issueId,
+    userId,
+    clientId,
+    text,
+  });
 
-  // const newMessage = await Messages.create({
-  //   sender,
-  //   issueId,
-  //   userId,
-  //   clientId,
-  //   text,
-  // });
+  const receiverId =
+    sender === MESSAGE.SENDER_TYPE_INDEX.CLIENT ? userId : clientId;
 
-  // const receiverId =
-  //   sender === MESSAGE.SENDER_TYPE_INDEX.CLIENT ? userId : clientId;
+  const receiverWriter = sseIdMap.get(receiverId);
 
-  // const receiverWriter = sseIdMap.get(receiverId);
+  if (receiverWriter) {
+    const encoder = new TextEncoder();
 
-  // if (receiverWriter) {
-  //   const encoder = new TextEncoder();
+    receiverWriter.write(
+      encoder.encode(`data: ${JSON.stringify(newMessage)}\n\n`)
+    );
+  }
 
-  //   receiverWriter.write(
-  //     encoder.encode(`data: ${JSON.stringify(newMessage)}\n\n`)
-  //   );
-  // }
-
-  // return NextResponse.json(newMessage, { status: 200 });
-  return NextResponse.json({}, { status: 200 });
+  return NextResponse.json({ data: null }, { status: 200 });
 }
 
-const getSession = async () => {
+export const getSessionForMongoRest = async () => {
   let sessionToken: RequestCookie | undefined = {
     name: "",
     value: "",
@@ -174,25 +171,6 @@ const fetchClientByEmail = async ({
   return senderResponse.data || null;
 };
 
-const fetchClientById = async ({
-  id,
-}: {
-  id: string;
-}): Promise<Client | null> => {
-  const senderResponseRaw = await fetch(
-    `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/api/client/getById/${id}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${process.env.MONGO_REST_TOKEN}`,
-      },
-    }
-  );
-  const senderResponse = await senderResponseRaw.json();
-
-  return senderResponse.data || null;
-};
-
 const fetchUserByUsername = async ({
   username,
 }: {
@@ -212,17 +190,30 @@ const fetchUserByUsername = async ({
   return senderResponse.data || null;
 };
 
-const fetchUserById = async ({ id }: { id: string }): Promise<User | null> => {
+const createMessage = async ({
+  sender,
+  issueId,
+  userId,
+  clientId,
+  text,
+}: CreateMessageDTO) => {
   const senderResponseRaw = await fetch(
-    `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/api/user/getById/${id}`,
+    `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/api/message`,
     {
-      method: "GET",
+      method: "POST",
       headers: {
         Authorization: `Bearer ${process.env.MONGO_REST_TOKEN}`,
       },
+      body: JSON.stringify({
+        sender,
+        issueId,
+        userId,
+        clientId,
+        text,
+      }),
     }
   );
-  const senderResponse = await senderResponseRaw.json();
+  const messageResponse = await senderResponseRaw.json();
 
-  return senderResponse.data || null;
+  return messageResponse.data || null;
 };
