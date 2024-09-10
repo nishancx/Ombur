@@ -98,8 +98,7 @@ export async function POST(request: Request) {
     sender === MESSAGE.SENDER_TYPE_INDEX.CLIENT ? userId : clientId;
 
   const receiverWriter = sseIdMap.get(receiverId);
-  console.log("keys", Array.from(sseIdMap.keys()));
-  console.log("receiverWriter", receiverWriter);
+
   if (receiverWriter) {
     const encoder = new TextEncoder();
 
