@@ -40,49 +40,50 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
       return true;
     },
-    // async session({ session }): Promise<any> {
-    //   const email = session.user.email;
+    async session({ session }): Promise<any> {
+      const email = session.user.email;
 
-    //   if (!!email && email.includes("@")) {
-    //     const client = await getClient({ email });
+      if (!!email && email.includes("@")) {
+        const client = await getClient({ email });
 
-    //     if (!!client) {
-    //       return {
-    //         user: {
-    //           ...session.user,
-    //           id: client._id,
-    //           type: MESSAGE.SENDER_TYPE_INDEX.CLIENT,
-    //         },
-    //         expires: new Date(
-    //           new Date().setDate(new Date().getDate() + 1)
-    //         ).toDateString(),
-    //       };
-    //     }
-    //   }
+        if (!!client) {
+          return session;
+          // return {
+          //   user: {
+          //     ...session.user,
+          //     id: client._id,
+          //     type: MESSAGE.SENDER_TYPE_INDEX.CLIENT,
+          //   },
+          //   expires: new Date(
+          //     new Date().setDate(new Date().getDate() + 1)
+          //   ).toDateString(),
+          // };
+        }
+      }
 
-    //   if (!!email && email.includes("-")) {
-    //     const user = await getUser({ username: session.user.email });
+      if (!!email && email.includes("-")) {
+        const user = await getUser({ username: session.user.email });
 
-    //     if (!!user) {
-    //       return {
-    //         user: {
-    //           username: email,
-    //           name: session.user.name,
-    //           id: user._id,
-    //           type: MESSAGE.SENDER_TYPE_INDEX.USER,
-    //         },
-    //         expires: new Date(
-    //           new Date().setFullYear(new Date().getFullYear() + 1)
-    //         ).toDateString(),
-    //       };
-    //     }
-    //   }
+        if (!!user) {
+          return {
+            user: {
+              username: email,
+              name: session.user.name,
+              id: user._id,
+              type: MESSAGE.SENDER_TYPE_INDEX.USER,
+            },
+            expires: new Date(
+              new Date().setFullYear(new Date().getFullYear() + 1)
+            ).toDateString(),
+          };
+        }
+      }
 
-    //   return {
-    //     user: {},
-    //     expires: new Date().toDateString(),
-    //   };
-    // },
+      return {
+        user: {},
+        expires: new Date().toDateString(),
+      };
+    },
   },
   trustHost: true,
 });
