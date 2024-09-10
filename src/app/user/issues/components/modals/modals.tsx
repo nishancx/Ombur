@@ -2,10 +2,16 @@
 
 import { CreateIssueModal } from "./createIssue/createIssue";
 
-export const Modals = () => {
+import { Session } from "next-auth";
+
+type ModalsProps = {
+  session: Session | null;
+};
+
+export const Modals: React.FC<ModalsProps> = ({ session }) => {
   return (
     <>
-      <CreateIssueModal />
+      <CreateIssueModal session={session} />
     </>
   );
 };

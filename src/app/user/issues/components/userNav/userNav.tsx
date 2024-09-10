@@ -6,12 +6,15 @@ import { Button } from "@/components/button/button";
 import { Dropdown } from "@/components/dropdown/dropdown";
 
 import Image from "next/image";
-import { Loader, LogOut } from "lucide-react";
-import { signOut, useSession } from "next-auth/react";
+import { LogOut } from "lucide-react";
+import { signOut } from "next-auth/react";
+import { Session } from "next-auth";
 
-const UserNav: React.FC = () => {
-  const session = useSession();
+type UserNavProps = {
+  session: Session | null;
+};
 
+const UserNav: React.FC<UserNavProps> = ({ session }) => {
   return (
     <nav className={styles.nav}>
       <div className={styles.left}>
@@ -19,13 +22,9 @@ const UserNav: React.FC = () => {
         <div className={styles.title}>Ombur</div>
       </div>
 
-      {session?.status === "loading" ? (
-        <Loader />
-      ) : session?.status === "authenticated" ? (
+      {!!session ? (
         <Dropdown
-          handle={
-            <div className={styles.right}>{session?.data?.user?.name} </div>
-          }
+          handle={<div className={styles.right}>{session?.user?.name} </div>}
           content={
             <div className={styles.content}>
               <Button
