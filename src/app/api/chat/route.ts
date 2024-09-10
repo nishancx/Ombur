@@ -13,6 +13,7 @@ import { cookies } from "next/dist/client/components/headers";
 import { decode } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { sendSse } from "../serverActions";
 
 var sseIdMap: Map<string, TransformStream<any, any>> = new Map();
 
@@ -107,16 +108,15 @@ export async function POST(request: Request) {
     keys: Array.from(sseIdMap.keys()),
   });
   const responseStream = sseIdMap.get(receiverId);
-  console.log("responseStream", responseStream);
-  // if (responseStream) {
-  //   const writer = responseStream.writable.getWriter();
-  //   const encoder = new TextEncoder();
-
-  //   await writer.write(
-  //     encoder.encode(`data: ${Date.now()}\n\n`)
-  //     // encoder.encode(`data: ${JSON.stringify(newMessage)}\n\n`)
-  //   );
-  // }
+  if (responseStream) {
+    await sendSse({ responseStream, message: newMessage });
+    //   const writer = responseStream.writable.getWriter();
+    //   const encoder = new TextEncoder();
+    //   await writer.write(
+    //     encoder.encode(`data: ${Date.now()}\n\n`)
+    //     // encoder.encode(`data: ${JSON.stringify(newMessage)}\n\n`)
+    //   );
+  }
 
   return NextResponse.json({ data: null }, { status: 200 });
 }
