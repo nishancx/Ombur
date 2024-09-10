@@ -4,7 +4,7 @@ export async function GET() {
   try {
     const version = process.env.VERCEL_GIT_COMMIT_SHA || 'local';
 
-    return NextResponse.json({ version }, { status: 201 });
+    return NextResponse.json({ version }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
