@@ -41,25 +41,24 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return true;
     },
     async session({ session }) {
+      const email = session.user.email;
+
+      if (!!email && email.includes("@")) {
+          const client = await getClient({ email });
+        //   if (!!client) {
+        //     return {
+        //       user: {
+        //         ...session.user,
+        //         id: client._id,
+        //         type: MESSAGE.SENDER_TYPE_INDEX.CLIENT,
+        //       },
+        //       expires: new Date(
+        //         new Date().setDate(new Date().getDate() + 1)
+        //       ).toDateString(),
+        //     };
+        //   }
+      }
       return session;
-      // const email = session.user.email;
-
-      // if (!!email && email.includes("@")) {
-      //   const client = await getClient({ email });
-
-      //   if (!!client) {
-      //     return {
-      //       user: {
-      //         ...session.user,
-      //         id: client._id,
-      //         type: MESSAGE.SENDER_TYPE_INDEX.CLIENT,
-      //       },
-      //       expires: new Date(
-      //         new Date().setDate(new Date().getDate() + 1)
-      //       ).toDateString(),
-      //     };
-      //   }
-      // }
 
       // if (!!email && email.includes("-")) {
       //   const user = await getUser({ username: session.user.email });
