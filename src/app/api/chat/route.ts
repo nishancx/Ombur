@@ -109,8 +109,8 @@ export async function POST(request: Request) {
     keys: Array.from(sseIdMap.keys()),
   });
   const receiverWriter = sseIdMap.get(receiverId);
-  console.log("receiverWriter", receiverWriter);
   if (receiverWriter) {
+    console.log("writing message");
     const encoder = new TextEncoder();
 
     receiverWriter.write(
