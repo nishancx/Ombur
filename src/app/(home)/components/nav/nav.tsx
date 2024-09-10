@@ -2,17 +2,16 @@
 
 import styles from "./nav.module.css";
 
-import { signIn, useSession } from "next-auth/react";
-
-import Image from "next/image";
 import { Button } from "@/components/button/button";
 import { Loading } from "@/components/loading/loading";
+
+import Image from "next/image";
+import Link from "next/link";
+import { signIn, useSession } from "next-auth/react";
 import { ArrowRight } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 const Nav: React.FC = () => {
   const session = useSession();
-  const router = useRouter();
 
   return (
     <nav className={styles.nav}>
@@ -33,13 +32,12 @@ const Nav: React.FC = () => {
           <div>Sign in with Google</div>
         </Button>
       ) : (
-        <Button
-          className={styles.dashboardButton}
-          onClick={() => router.push("/client")}
-        >
-          <div>Go to dashboard</div>
-          <ArrowRight size={24} />
-        </Button>
+        <Link href="/client" className={styles.dashboardButtonLink}>
+          <Button className={styles.dashboardButton}>
+            <div>Go to dashboard</div>
+            <ArrowRight size={24} />
+          </Button>
+        </Link>
       )}
     </nav>
   );

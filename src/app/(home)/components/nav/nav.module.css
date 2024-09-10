@@ -68,6 +68,10 @@
   border: 1px solid #747775 !important;
 }
 
+.dashboardButtonLink {
+  text-decoration: none;
+}
+
 .dashboardButton {
   display: flex;
   align-items: center;

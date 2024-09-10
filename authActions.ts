@@ -10,7 +10,7 @@ const getClient = async ({ email }: { email: string }) => {
     async () => {
       return await Clients.findOne({ email });
     },
-    undefined,
+    ["getUser", email],
     { tags: ["getClient", email], revalidate: 60 }
   )();
 };
@@ -20,7 +20,7 @@ const getUser = async ({ username }: { username: string }) => {
     async () => {
       return await Users.findOne({ username });
     },
-    undefined,
+    ["getUser", username],
     { tags: ["getUser", username], revalidate: 60 }
   )();
 };
