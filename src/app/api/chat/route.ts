@@ -8,6 +8,7 @@ import { Users } from "@/libs/server/models/user";
 import { Messages } from "@/libs/server/models/message";
 
 import { NextResponse } from "next/server";
+import { connectDB } from "@/libs/server/mongo";
 
 var sseIdMap: Map<string, WritableStreamDefaultWriter<any>> = new Map();
 
@@ -57,6 +58,8 @@ export async function POST(request: Request) {
   if (!isPayloadValid.success) {
     return NextResponse.json({ error: isPayloadValid.error }, { status: 400 });
   }
+
+  await connectDB();
 
   const session = await auth();
 
