@@ -107,15 +107,15 @@ export async function POST(request: Request) {
     keys: Array.from(sseIdMap.keys()),
   });
   const responseStream = sseIdMap.get(receiverId);
-  if (responseStream) {
-    const writer = responseStream.writable.getWriter();
-    const encoder = new TextEncoder();
+  // if (responseStream) {
+  //   const writer = responseStream.writable.getWriter();
+  //   const encoder = new TextEncoder();
 
-    await writer.write(
-      encoder.encode(`data: ${Date.now()}\n\n`)
-      // encoder.encode(`data: ${JSON.stringify(newMessage)}\n\n`)
-    );
-  }
+  //   await writer.write(
+  //     encoder.encode(`data: ${Date.now()}\n\n`)
+  //     // encoder.encode(`data: ${JSON.stringify(newMessage)}\n\n`)
+  //   );
+  // }
 
   return NextResponse.json({ data: null }, { status: 200 });
 }
