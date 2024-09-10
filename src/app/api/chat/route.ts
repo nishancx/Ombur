@@ -40,11 +40,7 @@ export async function GET(req: Request) {
       writer.close();
       sseIdMap.delete(senderId);
     };
-    const encoder = new TextEncoder();
 
-    setInterval(() => {
-      writer.write(encoder.encode(`data: ${Date.now()}\n\n`));
-    }, 1000);
     console.log("storing writer for senderId", senderId);
     sseIdMap.set(senderId, writer);
 
@@ -117,7 +113,7 @@ export async function POST(request: Request) {
     console.log("writing message");
     const encoder = new TextEncoder();
 
-    receiverWriter.write(
+    await receiverWriter.write(
       encoder.encode(`data: ${Date.now()}\n\n`)
       // encoder.encode(`data: ${JSON.stringify(newMessage)}\n\n`)
     );
