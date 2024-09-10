@@ -1,4 +1,5 @@
 export const runtime = "edge";
+export const dynamic = "force-dynamic";
 
 import { Client } from "@/types/models/client";
 import { User } from "@/types/models/user";
