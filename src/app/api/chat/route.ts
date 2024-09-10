@@ -27,6 +27,12 @@ export async function GET(req: Request) {
       sseIdMap.delete(senderId);
     };
 
+    setInterval(() => {
+      const encoder = new TextEncoder();
+
+      writer.write(encoder.encode(`data: ${Date.now()}\n\n`));
+    }, 1000);
+
     sseIdMap.set(senderId, writer);
 
     return new Response(responseStream.readable, {
