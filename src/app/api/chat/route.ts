@@ -47,6 +47,7 @@ export async function GET(req: Request) {
       sseIdMap.delete(senderId);
     };
 
+    console.log("storing writer for senderId", senderId);
     sseIdMap.set(senderId, writer);
 
     return new Response(responseStream.readable, {
@@ -110,8 +111,11 @@ export async function POST(request: Request) {
   const receiverId =
     sender === MESSAGE.SENDER_TYPE_INDEX.CLIENT ? userId : clientId;
 
+  console.log("fetching writer for receiverId", receiverId, {
+    keys: Array.from(sseIdMap.keys()),
+  });
   const receiverWriter = sseIdMap.get(receiverId);
-
+  console.log("receiverWriter", receiverWriter);
   if (receiverWriter) {
     const encoder = new TextEncoder();
 
