@@ -66,6 +66,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (!!user) {
           return {
             user: {
+              ...session.user,
               username: email,
               name: session.user.name,
               id: user._id,
