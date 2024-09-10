@@ -114,7 +114,8 @@ export async function POST(request: Request) {
     const encoder = new TextEncoder();
 
     receiverWriter.write(
-      encoder.encode(`data: ${JSON.stringify(newMessage)}\n\n`)
+      encoder.encode(`data: ${Date.now()}\n\n`)
+      // encoder.encode(`data: ${JSON.stringify(newMessage)}\n\n`)
     );
   }
 
