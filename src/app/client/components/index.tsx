@@ -29,40 +29,39 @@ const ClientPageContent: React.FC = () => {
       );
 
       events.onmessage = (rawMessage) => {
-        console.log('raw message', rawMessage);
-        // const message = JSON.parse(rawMessage.data);
+        const message = JSON.parse(rawMessage.data);
 
-        // const issueId = message?.issueId;
+        const issueId = message?.issueId;
 
-        // if (!issueId) return;
+        if (!issueId) return;
 
-        // const previousMessages:
-        //   | InfiniteData<
-        //       {
-        //         data: Message[];
-        //         page: number;
-        //       },
-        //       number
-        //     >
-        //   | undefined = queryClient.getQueryData(
-        //   QUERY.QUERY_KEYS.GET_CLIENT_CHAT({ issueId })
-        // );
+        const previousMessages:
+          | InfiniteData<
+              {
+                data: Message[];
+                page: number;
+              },
+              number
+            >
+          | undefined = queryClient.getQueryData(
+          QUERY.QUERY_KEYS.GET_CLIENT_CHAT({ issueId })
+        );
 
-        // queryClient.setQueryData(
-        //   QUERY.QUERY_KEYS.GET_CLIENT_CHAT({ issueId }),
-        //   {
-        //     pages: [
-        //       {
-        //         data: [message, ...(previousMessages?.pages?.[0]?.data || [])],
-        //         page: 0,
-        //       },
-        //       ...(previousMessages?.pages
-        //         ? previousMessages.pages.slice(1)
-        //         : []),
-        //     ],
-        //     pageParams: previousMessages?.pageParams,
-        //   }
-        // );
+        queryClient.setQueryData(
+          QUERY.QUERY_KEYS.GET_CLIENT_CHAT({ issueId }),
+          {
+            pages: [
+              {
+                data: [message, ...(previousMessages?.pages?.[0]?.data || [])],
+                page: 0,
+              },
+              ...(previousMessages?.pages
+                ? previousMessages.pages.slice(1)
+                : []),
+            ],
+            pageParams: previousMessages?.pageParams,
+          }
+        );
       };
 
       setSseStatus("connected");
