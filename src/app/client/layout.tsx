@@ -18,20 +18,21 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
+  return <div>{children}</div>;
+  // const session = await auth();
 
-  if (!session) {
-    redirect("/");
-  }
+  // if (!session) {
+  //   redirect("/");
+  // }
 
-  return (
-    <ReactQueryClientProvider>
-      <Modals />
-      <ClientNav session={session} />
+  // return (
+  //   <ReactQueryClientProvider>
+  //     <Modals />
+  //     <ClientNav session={session} />
 
-      {/* added suspense to wrap useSearchParams */}
-      {/* to do, suspend issues page properly instead of whole user layout */}
-      <Suspense>{children}</Suspense>
-    </ReactQueryClientProvider>
-  );
+  //     {/* added suspense to wrap useSearchParams */}
+  //     {/* to do, suspend issues page properly instead of whole user layout */}
+  //     <Suspense>{children}</Suspense>
+  //   </ReactQueryClientProvider>
+  // );
 }
