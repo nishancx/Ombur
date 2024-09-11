@@ -36,7 +36,6 @@ const ClientPageContent: React.FC<ClientPageContentProps> = ({ authToken }) => {
       fetchEventSource(
         `${process.env.NEXT_PUBLIC_SERVICES_WEB_DOMAIN_URL}/register-sse`,
         {
-          mode: "no-cors",
           headers: {
             Authorization: `Bearer ${authToken}`,
           },
