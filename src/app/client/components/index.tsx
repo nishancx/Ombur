@@ -25,43 +25,45 @@ const ClientPageContent: React.FC = () => {
 
     if (!sseStatus) {
       events = new EventSource(
-        `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/api/chat`
+        `${process.env.NEXT_PUBLIC_SERVICES_WEB_DOMAIN_URL}/register-sse`,
+        { withCredentials: true }
       );
 
       events.onmessage = (rawMessage) => {
-        const message = JSON.parse(rawMessage.data);
+        console.log("rawMessage", rawMessage);
+        //   const message = JSON.parse(rawMessage.data);
 
-        const issueId = message?.issueId;
+        //   const issueId = message?.issueId;
 
-        if (!issueId) return;
+        //   if (!issueId) return;
 
-        const previousMessages:
-          | InfiniteData<
-              {
-                data: Message[];
-                page: number;
-              },
-              number
-            >
-          | undefined = queryClient.getQueryData(
-          QUERY.QUERY_KEYS.GET_CLIENT_CHAT({ issueId })
-        );
+        //   const previousMessages:
+        //     | InfiniteData<
+        //         {
+        //           data: Message[];
+        //           page: number;
+        //         },
+        //         number
+        //       >
+        //     | undefined = queryClient.getQueryData(
+        //     QUERY.QUERY_KEYS.GET_CLIENT_CHAT({ issueId })
+        //   );
 
-        queryClient.setQueryData(
-          QUERY.QUERY_KEYS.GET_CLIENT_CHAT({ issueId }),
-          {
-            pages: [
-              {
-                data: [message, ...(previousMessages?.pages?.[0]?.data || [])],
-                page: 0,
-              },
-              ...(previousMessages?.pages
-                ? previousMessages.pages.slice(1)
-                : []),
-            ],
-            pageParams: previousMessages?.pageParams,
-          }
-        );
+        //   queryClient.setQueryData(
+        //     QUERY.QUERY_KEYS.GET_CLIENT_CHAT({ issueId }),
+        //     {
+        //       pages: [
+        //         {
+        //           data: [message, ...(previousMessages?.pages?.[0]?.data || [])],
+        //           page: 0,
+        //         },
+        //         ...(previousMessages?.pages
+        //           ? previousMessages.pages.slice(1)
+        //           : []),
+        //       ],
+        //       pageParams: previousMessages?.pageParams,
+        //     }
+        //   );
       };
 
       setSseStatus("connected");
