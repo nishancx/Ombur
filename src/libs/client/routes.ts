@@ -7,9 +7,14 @@ const createMessage = ({
   clientId,
   sender,
 }: CreateMessageDTO) =>
-  fetch(`${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/api/chat`, {
+  fetch(`${process.env.NEXT_PUBLIC_SERVICES_WEB_DOMAIN_URL}/send-message`, {
     method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
+      asdf:'asdf',
       text,
       issueId,
       userId,

@@ -14,10 +14,7 @@ import { useSnapshot } from "valtio";
 import { InfiniteData, useQueryClient } from "@tanstack/react-query";
 import { fetchEventSource } from "@microsoft/fetch-event-source";
 
-type ClientPageContentProps = {
-  authToken: string;
-};
-const ClientPageContent: React.FC<ClientPageContentProps> = ({ authToken }) => {
+const ClientPageContent: React.FC = () => {
   const { currentIssue } = useSnapshot(issueStore.clientsCurrentIssue);
   const [sseStatus, setSseStatus] = useState<null | "connecting" | "connected">(
     null
@@ -28,62 +25,52 @@ const ClientPageContent: React.FC<ClientPageContentProps> = ({ authToken }) => {
     let events: EventSource;
 
     if (!sseStatus) {
-      // events = new EventSource(
-      //   `${process.env.NEXT_PUBLIC_SERVICES_WEB_DOMAIN_URL}/register-sse`,
-      //   { withCredentials: true }
-      // );
-
       fetchEventSource(
         `${process.env.NEXT_PUBLIC_SERVICES_WEB_DOMAIN_URL}/register-sse`,
         {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
+          credentials: "include",
           onmessage(ev) {
-            console.log(ev.data);
+            const message = JSON.parse(ev.data);
+            const issueId = message?.issueId;
+
+            if (!issueId) return;
+
+            const previousMessages:
+              | InfiniteData<
+                  {
+                    data: Message[];
+                    page: number;
+                  },
+                  number
+                >
+              | undefined = queryClient.getQueryData(
+              QUERY.QUERY_KEYS.GET_CLIENT_CHAT({ issueId })
+            );
+
+            queryClient.setQueryData(
+              QUERY.QUERY_KEYS.GET_CLIENT_CHAT({ issueId }),
+              {
+                pages: [
+                  {
+                    data: [
+                      message,
+                      ...(previousMessages?.pages?.[0]?.data || []),
+                    ],
+                    page: 0,
+                  },
+                  ...(previousMessages?.pages
+                    ? previousMessages.pages.slice(1)
+                    : []),
+                ],
+                pageParams: previousMessages?.pageParams,
+              }
+            );
           },
           openWhenHidden: true,
         }
-      );
-      // events.onmessage = (rawMessage) => {
-      //   console.log("rawMessage", rawMessage);
-      // };
-      //   const message = JSON.parse(rawMessage.data);
-
-      //   const issueId = message?.issueId;
-
-      //   if (!issueId) return;
-
-      //   const previousMessages:
-      //     | InfiniteData<
-      //         {
-      //           data: Message[];
-      //           page: number;
-      //         },
-      //         number
-      //       >
-      //     | undefined = queryClient.getQueryData(
-      //     QUERY.QUERY_KEYS.GET_CLIENT_CHAT({ issueId })
-      //   );
-
-      //   queryClient.setQueryData(
-      //     QUERY.QUERY_KEYS.GET_CLIENT_CHAT({ issueId }),
-      //     {
-      //       pages: [
-      //         {
-      //           data: [message, ...(previousMessages?.pages?.[0]?.data || [])],
-      //           page: 0,
-      //         },
-      //         ...(previousMessages?.pages
-      //           ? previousMessages.pages.slice(1)
-      //           : []),
-      //       ],
-      //       pageParams: previousMessages?.pageParams,
-      //     }
-      //   );
-      // };
-
-      setSseStatus("connected");
+      ).then(() => {
+        setSseStatus("connected");
+      });
     }
 
     return () => {
