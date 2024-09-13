@@ -6,8 +6,6 @@ import { auth } from "@/../auth";
 
 import { Metadata } from "next";
 import { Suspense } from "react";
-import { redirect } from "next/navigation";
-import { MESSAGE } from "@/constants/message";
 
 export const metadata: Metadata = {
   title: "Ombur - Client",
@@ -20,10 +18,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth();
-
-  if (!session || session?.user?.type === MESSAGE.SENDER_TYPE_INDEX.USER) {
-    redirect("/");
-  }
 
   return (
     <ReactQueryClientProvider>

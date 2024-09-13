@@ -8,22 +8,32 @@ import { ClientRightPane } from "./rightPane/rightPane";
 import { issueStore } from "@/libs/client/stores/issue";
 import { Message } from "@/types/models/message";
 import { QUERY } from "@/constants/query";
+import { FullSpanLoader } from "@/components/fullSpanLoader/fullSpanLoader";
+import { MESSAGE } from "@/constants/message";
 
 import clsx from "clsx";
 import { useSnapshot } from "valtio";
 import { InfiniteData, useQueryClient } from "@tanstack/react-query";
 import { fetchEventSource } from "@microsoft/fetch-event-source";
+import { Session } from "next-auth";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 type ClientPageContentProps = {
   authToken: string;
+  user: Session["user"];
 };
 
-const ClientPageContent: React.FC<ClientPageContentProps> = ({ authToken }) => {
+const ClientPageContent: React.FC<ClientPageContentProps> = ({
+  authToken,
+  user,
+}) => {
   const { currentIssue } = useSnapshot(issueStore.clientsCurrentIssue);
   const [sseStatus, setSseStatus] = useState<null | "connecting" | "connected">(
     null
   );
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   useEffect(() => {
     let events: EventSource;
@@ -85,6 +95,18 @@ const ClientPageContent: React.FC<ClientPageContentProps> = ({ authToken }) => {
       }
     };
   }, [sseStatus, queryClient, authToken]);
+
+  useEffect(() => {
+    if (user?.type === MESSAGE.SENDER_TYPE_INDEX.USER) {
+      toast.error("Please sign in again.");
+    }
+  }, [user?.type]);
+
+  if (user?.type === MESSAGE.SENDER_TYPE_INDEX.USER) {
+    router.push("/");
+
+    return <FullSpanLoader />;
+  }
 
   return (
     <div className={styles.container}>

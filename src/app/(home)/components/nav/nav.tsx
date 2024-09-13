@@ -22,7 +22,8 @@ const Nav: React.FC = () => {
 
       {session.status === "loading" ? (
         <Loading />
-      ) : session.status === "unauthenticated" ? (
+      ) : session.status === "unauthenticated" ||
+        session?.data?.user?.type === "user" ? (
         <Button
           className={styles.signInButton}
           onClick={async () => await signIn("google")}

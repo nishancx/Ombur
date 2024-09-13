@@ -14,7 +14,7 @@ import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
 
 type NavProps = {
-  session: Session;
+  session: Session | null;
 };
 
 const ClientNav: React.FC<NavProps> = ({ session }) => {

@@ -8,17 +8,20 @@ import { getClientDataFromSearchParam } from "../utils";
 import { issueStore } from "@/libs/client/stores/issue";
 import { Message } from "@/types/models/message";
 import { QUERY } from "@/constants/query";
+import { FullSpanLoader } from "@/components/fullSpanLoader/fullSpanLoader";
+import { MESSAGE } from "@/constants/message";
 
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { useSnapshot } from "valtio";
-import { User } from "next-auth";
+import { Session } from "next-auth";
 import { InfiniteData, useQueryClient } from "@tanstack/react-query";
 import { fetchEventSource } from "@microsoft/fetch-event-source";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { toast } from "react-toastify";
 
 type IssuesContentProps = {
-  user: User;
+  user: Session["user"];
   authToken: string;
 };
 
@@ -33,6 +36,7 @@ const IssuesContent: React.FC<IssuesContentProps> = ({ user, authToken }) => {
   const clientData = getClientDataFromSearchParam({
     clientDataParam: clientDataParam,
   });
+  const router = useRouter();
 
   useEffect(() => {
     let events: EventSource;
@@ -94,6 +98,20 @@ const IssuesContent: React.FC<IssuesContentProps> = ({ user, authToken }) => {
       }
     };
   }, [sseStatus, queryClient, authToken]);
+
+  useEffect(() => {
+    if (user?.type === MESSAGE.SENDER_TYPE_INDEX.CLIENT) {
+      toast.error(
+        "You are already signed in as a client. Please sign out first."
+      );
+    }
+  }, [user?.type]);
+
+  if (user?.type === MESSAGE.SENDER_TYPE_INDEX.CLIENT) {
+    router.push("/");
+
+    return <FullSpanLoader containerClassName={styles.loader} />;
+  }
 
   return (
     <div className={styles.container}>
