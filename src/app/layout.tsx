@@ -2,7 +2,7 @@ import "./globals.css";
 
 import { Modals } from "./components/modals/modals";
 
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SessionContextValue, SessionProvider } from "next-auth/react";
