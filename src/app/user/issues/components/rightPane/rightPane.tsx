@@ -12,9 +12,14 @@ import { User } from "next-auth";
 type RightPaneProps = {
   user: User;
   currentIssue: Issue | null;
+  authToken: string;
 };
 
-const UserRightPane: React.FC<RightPaneProps> = ({ user, currentIssue }) => {
+const UserRightPane: React.FC<RightPaneProps> = ({
+  user,
+  currentIssue,
+  authToken,
+}) => {
   if (currentIssue === undefined) return null;
 
   if (!currentIssue)
@@ -24,7 +29,7 @@ const UserRightPane: React.FC<RightPaneProps> = ({ user, currentIssue }) => {
     <div className={styles.container}>
       <ChatTitleBar currentIssue={currentIssue} chatType="user" />
 
-      <UserChat currentIssue={currentIssue} />
+      <UserChat currentIssue={currentIssue} authToken={authToken} />
     </div>
   );
 };

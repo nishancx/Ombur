@@ -1,20 +1,20 @@
 import { CreateMessageDTO } from "@/validations/issue";
 
 const createMessage = ({
-  text,
-  issueId,
-  userId,
-  clientId,
-  sender,
-}: CreateMessageDTO) =>
+  payload: { text, issueId, userId, clientId, sender },
+  authToken,
+}: {
+  payload: CreateMessageDTO;
+  authToken: string;
+}) =>
   fetch(`${process.env.NEXT_PUBLIC_SERVICES_WEB_DOMAIN_URL}/send-message`, {
     method: "POST",
-    credentials: "include",
     headers: {
+      Authorization: `Bearer ${authToken}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      asdf:'asdf',
+      asdf: "asdf",
       text,
       issueId,
       userId,

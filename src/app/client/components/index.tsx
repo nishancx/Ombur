@@ -14,7 +14,11 @@ import { useSnapshot } from "valtio";
 import { InfiniteData, useQueryClient } from "@tanstack/react-query";
 import { fetchEventSource } from "@microsoft/fetch-event-source";
 
-const ClientPageContent: React.FC = () => {
+type ClientPageContentProps = {
+  authToken: string;
+};
+
+const ClientPageContent: React.FC<ClientPageContentProps> = ({ authToken }) => {
   const { currentIssue } = useSnapshot(issueStore.clientsCurrentIssue);
   const [sseStatus, setSseStatus] = useState<null | "connecting" | "connected">(
     null
@@ -28,7 +32,9 @@ const ClientPageContent: React.FC = () => {
       fetchEventSource(
         `${process.env.NEXT_PUBLIC_SERVICES_WEB_DOMAIN_URL}/register-sse`,
         {
-          credentials: "include",
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
           onmessage(ev) {
             const message = JSON.parse(ev.data);
             const issueId = message?.issueId;
@@ -78,7 +84,7 @@ const ClientPageContent: React.FC = () => {
         events?.close();
       }
     };
-  }, [sseStatus, queryClient]);
+  }, [sseStatus, queryClient, authToken]);
 
   return (
     <div className={styles.container}>
@@ -90,7 +96,7 @@ const ClientPageContent: React.FC = () => {
       <div
         className={clsx(styles.right, !currentIssue?._id && styles.inactive)}
       >
-        <ClientRightPane currentIssue={currentIssue} />
+        <ClientRightPane currentIssue={currentIssue} authToken={authToken} />
       </div>
     </div>
   );

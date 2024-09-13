@@ -19,9 +19,10 @@ import { useSearchParams } from "next/navigation";
 
 type IssuesContentProps = {
   user: User;
+  authToken: string;
 };
 
-const IssuesContent: React.FC<IssuesContentProps> = ({ user }) => {
+const IssuesContent: React.FC<IssuesContentProps> = ({ user, authToken }) => {
   const { currentIssue } = useSnapshot(issueStore.usersCurrentIssue);
   const [sseStatus, setSseStatus] = useState<null | "connecting" | "connected">(
     null
@@ -40,7 +41,9 @@ const IssuesContent: React.FC<IssuesContentProps> = ({ user }) => {
       fetchEventSource(
         `${process.env.NEXT_PUBLIC_SERVICES_WEB_DOMAIN_URL}/register-sse`,
         {
-          credentials: "include",
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
           onmessage(ev) {
             const message = JSON.parse(ev.data);
             const issueId = message?.issueId;
@@ -90,7 +93,7 @@ const IssuesContent: React.FC<IssuesContentProps> = ({ user }) => {
         events?.close();
       }
     };
-  }, [sseStatus, queryClient]);
+  }, [sseStatus, queryClient, authToken]);
 
   return (
     <div className={styles.container}>
@@ -102,7 +105,11 @@ const IssuesContent: React.FC<IssuesContentProps> = ({ user }) => {
       <div
         className={clsx(styles.right, !currentIssue?._id && styles.inactive)}
       >
-        <UserRightPane currentIssue={currentIssue} user={user} />
+        <UserRightPane
+          currentIssue={currentIssue}
+          user={user}
+          authToken={authToken}
+        />
       </div>
     </div>
   );

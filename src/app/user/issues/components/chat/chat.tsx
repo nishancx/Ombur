@@ -19,13 +19,15 @@ import {
 
 type ChatProps = {
   currentIssue: Issue;
+  authToken: string;
 };
 
-const UserChat: React.FC<ChatProps> = ({ currentIssue }) => {
+const UserChat: React.FC<ChatProps> = ({ currentIssue, authToken }) => {
   const queryClient = useQueryClient();
 
   const { mutateAsync: sendMessage } = useMutation({
-    mutationFn: (props: CreateMessageDTO) => createMessage(props),
+    mutationFn: (props: CreateMessageDTO) =>
+      createMessage({ payload: props, authToken }),
     onMutate: async (props) => {
       const previousMessages:
         | InfiniteData<

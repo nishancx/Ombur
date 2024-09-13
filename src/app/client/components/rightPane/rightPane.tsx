@@ -9,9 +9,13 @@ import { Empty } from "@/components/empty/empty";
 
 type RightPaneProps = {
   currentIssue: Issue | null;
+  authToken: string;
 };
 
-const ClientRightPane: React.FC<RightPaneProps> = ({ currentIssue }) => {
+const ClientRightPane: React.FC<RightPaneProps> = ({
+  currentIssue,
+  authToken,
+}) => {
   if (currentIssue === undefined) return null;
 
   if (!currentIssue)
@@ -21,7 +25,7 @@ const ClientRightPane: React.FC<RightPaneProps> = ({ currentIssue }) => {
     <div className={styles.container}>
       <ChatTitleBar currentIssue={currentIssue} chatType="client" />
 
-      <ClientChat currentIssue={currentIssue} />
+      <ClientChat currentIssue={currentIssue} authToken={authToken} />
     </div>
   );
 };

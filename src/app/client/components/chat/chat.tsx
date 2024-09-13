@@ -9,7 +9,6 @@ import { Issue } from "@/types/models/issue";
 import { CreateMessageDTO } from "@/validations/issue";
 import { Message } from "@/types/models/message";
 import { QUERY } from "@/constants/query";
-
 import { createMessage } from "@/libs/client/routes";
 
 import {
@@ -20,13 +19,15 @@ import {
 
 type ChatProps = {
   currentIssue: Issue;
+  authToken: string;
 };
 
-const ClientChat: React.FC<ChatProps> = ({ currentIssue }) => {
+const ClientChat: React.FC<ChatProps> = ({ currentIssue, authToken }) => {
   const queryClient = useQueryClient();
 
   const { mutateAsync: sendMessage } = useMutation({
-    mutationFn: (props: CreateMessageDTO) => createMessage(props),
+    mutationFn: (props: CreateMessageDTO) =>
+      createMessage({ payload: props, authToken }),
     onMutate: async (props) => {
       const previousMessages:
         | InfiniteData<
