@@ -11,6 +11,7 @@ const useClientIssues = () => {
   return useQuery({
     queryKey: QUERY.QUERY_KEYS.GET_CLIENT_ISSUES,
     queryFn: () => getClientIssuesServerAction(),
+    refetchOnWindowFocus: "always",
   });
 };
 

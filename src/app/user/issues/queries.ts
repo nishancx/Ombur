@@ -15,6 +15,7 @@ const useUserIssues = ({
   return useQuery({
     queryKey: QUERY.QUERY_KEYS.GET_USER_ISSUES({ clientId, userId }),
     queryFn: () => getUsersIssuesServerAction({ clientId, userId }),
+    refetchOnWindowFocus: "always",
   });
 };
 

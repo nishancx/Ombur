@@ -43,6 +43,7 @@ const ChatList: React.FC<ChatListProps> = ({ issueId, sender }) => {
     select(data) {
       return data;
     },
+    refetchOnWindowFocus: "always",
   });
 
   const messageList = reduceInfiniteData(messages?.pages);
