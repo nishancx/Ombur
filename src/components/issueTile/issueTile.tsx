@@ -5,10 +5,10 @@ import styles from "./issueTile.module.css";
 import { Issue, IssueWithUser } from "@/types/models/issue";
 import { modalStore } from "@/libs/client/stores/modal";
 import { SessionType } from "@/types/auth";
+import { AUTH } from "@/constants/auth";
 
 import { Info, UserCircle } from "lucide-react";
 import { useSnapshot } from "valtio";
-import { AUTH } from "@/constants/auth";
 
 type IssueTileProps = {
   issue: IssueWithUser;
@@ -41,7 +41,7 @@ const IssueTile: React.FC<IssueTileProps> = ({
         {sessionType === AUTH.SESSION_TYPES.CLIENT && (
           <div className={styles.type}>
             <UserCircle size={18} />
-            <div>{issue.user?.name}</div>
+            <div className={styles.typeName}>{issue.user?.name}</div>
           </div>
         )}
 

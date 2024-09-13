@@ -2,11 +2,10 @@ import { getClient, getUser } from "./authActions";
 
 import { Clients } from "@/libs/server/models/client";
 import { connectDB } from "@/libs/server/mongo";
-import { AuthUser } from "@/types/auth";
 import { createUserServerAction } from "@/app/user/issues/serverActions";
 import { MESSAGE } from "@/constants/message";
 
-import NextAuth from "next-auth";
+import NextAuth, { User } from "next-auth";
 import Google from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -88,7 +87,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   trustHost: true,
 });
 
-const createClient = async ({ user }: { user: AuthUser }) => {
+const createClient = async ({ user }: { user: User }) => {
   await connectDB();
 
   const preExistingClient = await Clients.findOne({ email: user.email });

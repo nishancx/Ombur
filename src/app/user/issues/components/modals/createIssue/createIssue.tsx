@@ -8,6 +8,7 @@ import { modalStore } from "@/libs/client/stores/modal";
 import { IssueDTO, issueValidationSchema } from "@/validations/issue";
 import { ISSUE } from "@/constants/issue";
 import { QUERY } from "@/constants/query";
+import { AuthSession } from "@/types/auth";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
@@ -15,10 +16,9 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Input, Modal, Select } from "antd";
 import { useSnapshot } from "valtio";
 import { Controller, useForm } from "react-hook-form";
-import { Session } from "next-auth";
 
 type CreateIssueModalProps = {
-  session: Session | null;
+  session: AuthSession | null;
 };
 
 const CreateIssueModal: React.FC<CreateIssueModalProps> = ({ session }) => {

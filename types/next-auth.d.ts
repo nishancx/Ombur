@@ -1,5 +1,6 @@
-import { MESSAGE } from "@/constants/message";
 import NextAuth, { DefaultSession } from "next-auth";
+import { MESSAGE } from "@/constants/message";
+import { SessionType } from "@/types/auth";
 
 declare module "next-auth" {
   /**
@@ -7,7 +8,7 @@ declare module "next-auth" {
    */
   interface Session {
     user: {
-      type: (typeof MESSAGE.SENDER_TYPE_INDEX)[keyof typeof MESSAGE.SENDER_TYPE_INDEX];
+      type: SessionType;
     } & DefaultSession["user"];
   }
 }

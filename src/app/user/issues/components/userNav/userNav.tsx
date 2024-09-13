@@ -4,14 +4,14 @@ import styles from "./userNav.module.css";
 
 import { Button } from "@/components/button/button";
 import { Dropdown } from "@/components/dropdown/dropdown";
+import { AuthSession } from "@/types/auth";
 
 import Image from "next/image";
 import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
-import { Session } from "next-auth";
 
 type UserNavProps = {
-  session: Session | null;
+  session: AuthSession | null;
 };
 
 const UserNav: React.FC<UserNavProps> = ({ session }) => {

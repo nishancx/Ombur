@@ -8,6 +8,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 95dvw;
 }
 
 .bottom {
@@ -27,6 +28,14 @@
   color: #2f2f2f;
   align-items: center;
   gap: 5px;
+}
+
+.typeName {
+  max-width: 130px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 1;
 }
 
 .infoButton {

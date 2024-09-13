@@ -2,10 +2,10 @@
 
 import { CreateIssueModal } from "./createIssue/createIssue";
 
-import { Session } from "next-auth";
+import { AuthSession } from "@/types/auth";
 
 type ModalsProps = {
-  session: Session | null;
+  session: AuthSession | null;
 };
 
 export const Modals: React.FC<ModalsProps> = ({ session }) => {

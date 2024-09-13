@@ -1,6 +1,15 @@
 import { AUTH } from "@/constants/auth";
-import { User } from "next-auth";
+
+import { Session, User } from "next-auth";
 
 type SessionType = (typeof AUTH.SESSION_TYPES)[keyof typeof AUTH.SESSION_TYPES];
 
-export type { User as AuthUser, SessionType };
+type AuthUser = User & {
+  type: SessionType;
+};
+
+type AuthSession = Session & {
+  user: AuthUser;
+};
+
+export type { AuthUser, AuthSession, SessionType };

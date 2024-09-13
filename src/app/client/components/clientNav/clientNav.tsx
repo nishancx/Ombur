@@ -7,14 +7,15 @@ import { Dropdown } from "@/components/dropdown/dropdown";
 import { modalStore } from "@/libs/client/stores/modal";
 import { ClientDataSearchParam } from "@/types/searchParams";
 import { FILE_PATHS } from "@/constants/filePaths";
+import { AuthSession } from "@/types/auth";
 
 import Image from "next/image";
-import { Link, LogOut } from "lucide-react";
-import { Session } from "next-auth";
+import Link from "next/link";
+import { Link as LinkIcon, LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
 
 type NavProps = {
-  session: Session | null;
+  session: AuthSession | null;
 };
 
 const ClientNav: React.FC<NavProps> = ({ session }) => {
@@ -37,10 +38,10 @@ const ClientNav: React.FC<NavProps> = ({ session }) => {
 
   return (
     <nav className={styles.nav}>
-      <div className={styles.left}>
+      <Link href="/" className={styles.left}>
         <Image src="/icon.webp" alt="Ombur" width={32} height={32} />
         <div className={styles.title}>Ombur</div>
-      </div>
+      </Link>
 
       {!!session?.user && (
         <Dropdown
@@ -66,7 +67,7 @@ const ClientNav: React.FC<NavProps> = ({ session }) => {
                 onClick={handleGetIssueLink}
               >
                 <div className={styles.contentButton}>
-                  <Link size={16} />
+                  <LinkIcon size={16} />
                   <div className={styles.buttonText}>Get issue link</div>
                 </div>
               </Button>

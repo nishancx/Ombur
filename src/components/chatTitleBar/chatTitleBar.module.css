@@ -21,7 +21,7 @@
   text-overflow: ellipsis;
   padding: 0 10px;
   text-align: center;
-  max-width: calc(100vw - 50px);
+  max-width: calc(100vw - 70px);
 }
 
 @media (min-width: 768px) {

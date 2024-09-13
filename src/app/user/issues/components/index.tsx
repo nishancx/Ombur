@@ -10,18 +10,18 @@ import { Message } from "@/types/models/message";
 import { QUERY } from "@/constants/query";
 import { FullSpanLoader } from "@/components/fullSpanLoader/fullSpanLoader";
 import { MESSAGE } from "@/constants/message";
+import { AuthUser } from "@/types/auth";
 
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { useSnapshot } from "valtio";
-import { Session } from "next-auth";
 import { InfiniteData, useQueryClient } from "@tanstack/react-query";
 import { fetchEventSource } from "@microsoft/fetch-event-source";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 
 type IssuesContentProps = {
-  user: Session["user"];
+  user: AuthUser;
   authToken: string;
 };
 

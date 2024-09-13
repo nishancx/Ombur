@@ -10,18 +10,18 @@ import { Message } from "@/types/models/message";
 import { QUERY } from "@/constants/query";
 import { FullSpanLoader } from "@/components/fullSpanLoader/fullSpanLoader";
 import { MESSAGE } from "@/constants/message";
+import { AuthUser } from "@/types/auth";
 
 import clsx from "clsx";
 import { useSnapshot } from "valtio";
 import { InfiniteData, useQueryClient } from "@tanstack/react-query";
 import { fetchEventSource } from "@microsoft/fetch-event-source";
-import { Session } from "next-auth";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
 type ClientPageContentProps = {
   authToken: string;
-  user: Session["user"];
+  user: AuthUser;
 };
 
 const ClientPageContent: React.FC<ClientPageContentProps> = ({
