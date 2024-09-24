@@ -1,4 +1,5 @@
 import styles from "./button.module.css";
+import { FullSpanLoader } from "../fullSpanLoader/fullSpanLoader";
 
 import clsx from "clsx";
 
@@ -8,6 +9,7 @@ type ButtonProps = {
   hasBorderRadius?: boolean;
   className?: string;
   disabled?: boolean;
+  loading?: boolean;
 } & (
   | { text: string; children?: never }
   | { children: React.ReactNode; text?: never }
@@ -20,6 +22,7 @@ const Button: React.FC<ButtonProps> = ({
   hasBorderRadius = true,
   className,
   disabled,
+  loading,
   onClick,
 }) => {
   return (
@@ -35,6 +38,11 @@ const Button: React.FC<ButtonProps> = ({
       disabled={disabled}
     >
       {children || text}
+      {loading && (
+        <div className={styles.loader}>
+          <FullSpanLoader dotClassName={styles.loaderDots} />
+        </div>
+      )}
     </button>
   );
 };

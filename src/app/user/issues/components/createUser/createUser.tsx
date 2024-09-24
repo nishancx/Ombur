@@ -11,6 +11,7 @@ import { Input } from "antd";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { v4 as uuidv4 } from "uuid";
+import { useState } from "react";
 
 const CreateUser: React.FC = () => {
   const { control, handleSubmit } = useForm<UserDTO>({
@@ -20,8 +21,10 @@ const CreateUser: React.FC = () => {
       username: uuidv4(),
     },
   });
+  const [submitted, setSubmitted] = useState(false);
 
   const createUser = async (data: UserDTO) => {
+    setSubmitted(true);
     await signIn("credentials", data);
   };
 
@@ -49,6 +52,7 @@ const CreateUser: React.FC = () => {
         <Button
           onClick={handleSubmit(createUser)}
           className={styles.submitButton}
+          loading={submitted}
         >
           Save
         </Button>

@@ -4,14 +4,16 @@ import { Loading } from "../loading/loading";
 
 type FullSpanLoaderProps = {
   containerClassName?: string;
+  dotClassName?: string;
 };
 
 const FullSpanLoader: React.FC<FullSpanLoaderProps> = ({
   containerClassName,
+  dotClassName,
 }) => {
   return (
     <div className={clsx(styles.container, containerClassName)}>
-      <Loading />
+      <Loading dotClassName={dotClassName} />
     </div>
   );
 };
