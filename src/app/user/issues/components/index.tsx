@@ -115,19 +115,21 @@ const IssuesContent: React.FC<IssuesContentProps> = ({ user, authToken }) => {
 
   return (
     <div className={styles.container}>
-      <div
-        className={clsx(styles.left, !!currentIssue?._id && styles.inactive)}
-      >
-        <UserLeftPane clientId={clientData?.id || ""} user={user} />
-      </div>
-      <div
-        className={clsx(styles.right, !currentIssue?._id && styles.inactive)}
-      >
-        <UserRightPane
-          currentIssue={currentIssue}
-          user={user}
-          authToken={authToken}
-        />
+      <div className={styles.innerContainer}>
+        <div
+          className={clsx(styles.left, !!currentIssue?._id && styles.inactive)}
+        >
+          <UserLeftPane clientId={clientData?.id || ""} user={user} />
+        </div>
+        <div
+          className={clsx(styles.right, !currentIssue?._id && styles.inactive)}
+        >
+          <UserRightPane
+            currentIssue={currentIssue}
+            user={user}
+            authToken={authToken}
+          />
+        </div>
       </div>
     </div>
   );

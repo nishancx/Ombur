@@ -1,6 +1,13 @@
 .container {
   display: flex;
+  justify-content: center;
   height: calc(100dvh - var(--navbar-height));
+}
+
+.innerContainer {
+  flex: 1;
+  max-width: 1500px;
+  display: flex;
 }
 
 .loader {

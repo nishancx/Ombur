@@ -17,30 +17,32 @@ type UserNavProps = {
 const UserNav: React.FC<UserNavProps> = ({ session }) => {
   return (
     <nav className={styles.nav}>
-      <div className={styles.left}>
-        <Image src="/icon.webp" alt="Ombur" width={32} height={32} />
-        <div className={styles.title}>Ombur</div>
-      </div>
+      <div className={styles.container}>
+        <div className={styles.left}>
+          <Image src="/icon.webp" alt="Ombur" width={32} height={32} />
+          <div className={styles.title}>Ombur</div>
+        </div>
 
-      {!!session ? (
-        <Dropdown
-          handle={<div className={styles.right}>{session?.user?.name} </div>}
-          content={
-            <div className={styles.content}>
-              <Button
-                onClick={async () => signOut()}
-                hasBackground={false}
-                hasBorderRadius={false}
-              >
-                <div className={styles.contentButton}>
-                  <LogOut size={16} />
-                  <div className={styles.buttonText}>Sign out</div>
-                </div>
-              </Button>
-            </div>
-          }
-        />
-      ) : null}
+        {!!session ? (
+          <Dropdown
+            handle={<div className={styles.right}>{session?.user?.name} </div>}
+            content={
+              <div className={styles.content}>
+                <Button
+                  onClick={async () => signOut()}
+                  hasBackground={false}
+                  hasBorderRadius={false}
+                >
+                  <div className={styles.contentButton}>
+                    <LogOut size={16} />
+                    <div className={styles.buttonText}>Sign out</div>
+                  </div>
+                </Button>
+              </div>
+            }
+          />
+        ) : null}
+      </div>
     </nav>
   );
 };

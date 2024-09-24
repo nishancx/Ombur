@@ -110,15 +110,17 @@ const ClientPageContent: React.FC<ClientPageContentProps> = ({
 
   return (
     <div className={styles.container}>
-      <div
-        className={clsx(styles.left, !!currentIssue?._id && styles.inactive)}
-      >
-        <ClientLeftPane />
-      </div>
-      <div
-        className={clsx(styles.right, !currentIssue?._id && styles.inactive)}
-      >
-        <ClientRightPane currentIssue={currentIssue} authToken={authToken} />
+      <div className={styles.innerContainer}>
+        <div
+          className={clsx(styles.left, !!currentIssue?._id && styles.inactive)}
+        >
+          <ClientLeftPane />
+        </div>
+        <div
+          className={clsx(styles.right, !currentIssue?._id && styles.inactive)}
+        >
+          <ClientRightPane currentIssue={currentIssue} authToken={authToken} />
+        </div>
       </div>
     </div>
   );

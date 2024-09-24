@@ -38,54 +38,56 @@ const ClientNav: React.FC<NavProps> = ({ session }) => {
 
   return (
     <nav className={styles.nav}>
-      <Link href="/" className={styles.left}>
-        <Image src="/icon.webp" alt="Ombur" width={32} height={32} />
-        <div className={styles.title}>Ombur</div>
-      </Link>
+      <div className={styles.container}>
+        <Link href="/" className={styles.left}>
+          <Image src="/icon.webp" alt="Ombur" width={32} height={32} />
+          <div className={styles.title}>Ombur</div>
+        </Link>
 
-      {!!session?.user && (
-        <Dropdown
-          handle={
-            <Image
-              src={session.user.image || FILE_PATHS.DEFAULT_USER_IMAGE}
-              alt="Ombur"
-              width={32}
-              height={32}
-              className={styles.clientImage}
-            />
-          }
-          content={
-            <div className={styles.content}>
-              <div className={styles.contentUserInfo}>
-                <div>{session.user.name}</div>
-                <div>{session.user.email}</div>
+        {!!session?.user && (
+          <Dropdown
+            handle={
+              <Image
+                src={session.user.image || FILE_PATHS.DEFAULT_USER_IMAGE}
+                alt="Ombur"
+                width={32}
+                height={32}
+                className={styles.clientImage}
+              />
+            }
+            content={
+              <div className={styles.content}>
+                <div className={styles.contentUserInfo}>
+                  <div>{session.user.name}</div>
+                  <div>{session.user.email}</div>
+                </div>
+
+                <Button
+                  hasBackground={false}
+                  hasBorderRadius={false}
+                  onClick={handleGetIssueLink}
+                >
+                  <div className={styles.contentButton}>
+                    <LinkIcon size={16} />
+                    <div className={styles.buttonText}>Get issue link</div>
+                  </div>
+                </Button>
+
+                <Button
+                  onClick={async () => await signOut()}
+                  hasBackground={false}
+                  hasBorderRadius={false}
+                >
+                  <div className={styles.contentButton}>
+                    <LogOut size={16} />
+                    <div className={styles.buttonText}>Sign out</div>
+                  </div>
+                </Button>
               </div>
-
-              <Button
-                hasBackground={false}
-                hasBorderRadius={false}
-                onClick={handleGetIssueLink}
-              >
-                <div className={styles.contentButton}>
-                  <LinkIcon size={16} />
-                  <div className={styles.buttonText}>Get issue link</div>
-                </div>
-              </Button>
-
-              <Button
-                onClick={async () => await signOut()}
-                hasBackground={false}
-                hasBorderRadius={false}
-              >
-                <div className={styles.contentButton}>
-                  <LogOut size={16} />
-                  <div className={styles.buttonText}>Sign out</div>
-                </div>
-              </Button>
-            </div>
-          }
-        />
-      )}
+            }
+          />
+        )}
+      </div>
     </nav>
   );
 };

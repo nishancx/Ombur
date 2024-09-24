@@ -15,7 +15,10 @@ const IssueLinkModal: React.FC = () => {
       title="Issue Link"
       open={isOpen}
       okText="Copy"
-      onOk={() => window.navigator.clipboard.writeText(issueLink)}
+      onOk={() => {
+        window.navigator.clipboard.writeText(issueLink);
+        modalStore.issueLinkModal.close();
+      }}
       onCancel={modalStore.issueLinkModal.close}
       cancelButtonProps={{ style: { display: "none" } }}
     >
