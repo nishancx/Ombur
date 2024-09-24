@@ -10,13 +10,14 @@ import { Controller, useForm } from "react-hook-form";
 import { Input } from "antd";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
+import { v4 as uuidv4 } from "uuid";
 
 const CreateUser: React.FC = () => {
   const { control, handleSubmit } = useForm<UserDTO>({
     mode: "onSubmit",
     resolver: zodResolver(userValidationSchema),
     defaultValues: {
-      username: crypto.randomUUID(),
+      username: uuidv4(),
     },
   });
 
@@ -37,6 +38,7 @@ const CreateUser: React.FC = () => {
               {...field}
               status={!!error ? "error" : ""}
               className={styles.nameInput}
+              style={{ fontSize: 16 }}
               onKeyDown={(event) =>
                 invokeOnEnterPress({ event, action: handleSubmit(createUser) })
               }

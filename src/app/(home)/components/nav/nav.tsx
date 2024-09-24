@@ -26,7 +26,9 @@ const Nav: React.FC = () => {
         session?.data?.user?.type === "user" ? (
         <Button
           className={styles.signInButton}
-          onClick={async () => await signIn("google")}
+          onClick={async () =>
+            await signIn("google", { callbackUrl: "/client" })
+          }
           hasBackground={false}
         >
           <Image src="/google.svg" alt="Google" width={20} height={20} />

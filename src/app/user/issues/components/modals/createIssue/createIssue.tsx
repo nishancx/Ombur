@@ -79,6 +79,7 @@ const CreateIssueModal: React.FC<CreateIssueModalProps> = ({ session }) => {
             <Input
               {...field}
               className={styles.input}
+              style={{ fontSize: 16 }}
               status={!!error ? "error" : ""}
             />
           </>
@@ -95,6 +96,7 @@ const CreateIssueModal: React.FC<CreateIssueModalProps> = ({ session }) => {
               {...field}
               autoSize={{ minRows: 3 }}
               className={styles.input}
+              style={{ fontSize: 16 }}
               status={!!error ? "error" : ""}
             />
           </>

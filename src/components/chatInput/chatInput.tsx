@@ -28,6 +28,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
         onChange={(e) => setMessageText(e.target.value)}
         placeholder="Type a message..."
         className={styles.input}
+        style={{ fontSize: 16 }}
         onPressEnter={sendMessage}
       />
       <Button onClick={sendMessage} className={styles.button}>
