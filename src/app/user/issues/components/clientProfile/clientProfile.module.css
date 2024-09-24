@@ -6,6 +6,10 @@
   padding: 10px;
 }
 
+.loaderContainer {
+  min-height: 70px;
+}
+
 .clientAvatar {
   border-radius: 100%;
 }

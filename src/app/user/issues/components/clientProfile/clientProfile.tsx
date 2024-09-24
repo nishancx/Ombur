@@ -5,8 +5,9 @@ import { useClientProfileInfo } from "../../queries";
 
 import { FILE_PATHS } from "@/constants/filePaths";
 
+import clsx from "clsx";
 import Image from "next/image";
-import { Loader } from "lucide-react";
+import { Loading } from "@/components/loading/loading";
 
 type ClientProfileProps = {
   clientId: string;
@@ -19,8 +20,8 @@ const ClientProfile: React.FC<ClientProfileProps> = ({ clientId }) => {
 
   if (isLoading) {
     return (
-      <div className={styles.container}>
-        <Loader />
+      <div className={clsx(styles.container, styles.loaderContainer)}>
+        <Loading />
       </div>
     );
   }

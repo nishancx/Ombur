@@ -7,13 +7,6 @@
   flex-direction: column-reverse;
 }
 
-.loaderContainer {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .scrollContainer {
   display: flex;
   flex-direction: column-reverse;
@@ -24,6 +17,7 @@
 .nextLoaderContainer {
   display: flex;
   justify-content: center;
+  padding-top: 20px;
 }
 
 .messageContainer {

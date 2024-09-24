@@ -8,11 +8,12 @@ import { Message } from "@/types/models/message";
 import { reduceInfiniteData } from "@/utils/query";
 import { MESSAGE } from "@/constants/message";
 
-import { Loader } from "lucide-react";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import InfiniteScroll from "react-infinite-scroll-component";
 import clsx from "clsx";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { QUERY } from "@/constants/query";
+import { FullSpanLoader } from "../fullSpanLoader/fullSpanLoader";
+import { Loading } from "../loading/loading";
 
 type ChatListProps = {
   issueId: string;
@@ -49,11 +50,7 @@ const ChatList: React.FC<ChatListProps> = ({ issueId, sender }) => {
   const messageList = reduceInfiniteData(messages?.pages);
 
   if (isLoadingMessages) {
-    return (
-      <div className={styles.loaderContainer}>
-        <Loader />
-      </div>
-    );
+    return <FullSpanLoader />;
   }
 
   return (
@@ -65,7 +62,7 @@ const ChatList: React.FC<ChatListProps> = ({ issueId, sender }) => {
         hasMore={hasNextPage}
         loader={
           <div className={styles.nextLoaderContainer}>
-            <Loader />
+            <Loading />
           </div>
         }
         inverse={true}
