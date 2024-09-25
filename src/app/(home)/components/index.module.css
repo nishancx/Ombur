@@ -38,3 +38,43 @@
     font-size: 3rem;
   }
 }
+
+.gettingStarted {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  padding: 20px 10px;
+  background-color: aliceblue;
+}
+
+.gettingStartedInnerContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1500px;
+}
+
+@media (min-width: 600px) {
+  .gettingStartedInnerContainer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
+
+.gettingStartedTitle {
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.gettingStartedDescription {
+  padding: 0 30px;
+}
+
+.gettingStartedList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
