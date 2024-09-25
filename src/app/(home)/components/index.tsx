@@ -135,12 +135,12 @@ const HomePageContent: React.FC = () => {
         </div>
       </div>
 
-      <div className={styles.footer}>
-        <div className={styles.footerInnerContainer}>
-          <div className={styles.footerLinkContainer}>
+      <div className={styles.reachOut}>
+        <div className={styles.reachOutInnerContainer}>
+          <div className={styles.reachOutLinkContainer}>
             Have any questions or complaints? Please reach out{" "}
             <Link
-              className={styles.footerLink}
+              className={styles.reachOutLink}
               href="https://ombur.vercel.app/user/issues?clientData=JTdCJTIyaWQlMjIlM0ElMjI2NjNmOGIwNDdmMTlkN2UyYTdlZDZkZjYlMjIlN0Q="
             >
               here
