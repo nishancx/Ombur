@@ -134,6 +134,31 @@ const HomePageContent: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <div className={styles.footer}>
+        <div className={styles.footerInnerContainer}>
+          <div className={styles.footerLinkContainer}>
+            Have any questions or complaints? Please reach out{" "}
+            <Link
+              className={styles.footerLink}
+              href="https://ombur.vercel.app/user/issues?clientData=JTdCJTIyaWQlMjIlM0ElMjI2NjNmOGIwNDdmMTlkN2UyYTdlZDZkZjYlMjIlN0Q="
+            >
+              here
+            </Link>
+            .
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.githubLinkContainer}>
+        <Link
+          className={styles.githubLink}
+          href="https://github.com/nishancx"
+          target="_blank"
+        >
+          GitHub @nishancx
+        </Link>
+      </div>
     </>
   );
 };
