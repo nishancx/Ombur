@@ -124,11 +124,7 @@ const IssuesContent: React.FC<IssuesContentProps> = ({ user, authToken }) => {
         <div
           className={clsx(styles.right, !currentIssue?._id && styles.inactive)}
         >
-          <UserRightPane
-            currentIssue={currentIssue}
-            user={user}
-            authToken={authToken}
-          />
+          <UserRightPane currentIssue={currentIssue} authToken={authToken} />
         </div>
       </div>
     </div>

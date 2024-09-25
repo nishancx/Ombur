@@ -10,13 +10,11 @@ import { Empty } from "@/components/empty/empty";
 import { User } from "next-auth";
 
 type RightPaneProps = {
-  user: User;
   currentIssue: Issue | null;
   authToken: string;
 };
 
 const UserRightPane: React.FC<RightPaneProps> = ({
-  user,
   currentIssue,
   authToken,
 }) => {

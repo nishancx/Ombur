@@ -23,7 +23,7 @@ const getSessionClientServerAction = async () => {
   }
 
   return serializeObject(client);
-}; 
+};
 
 const getClientIssuesServerAction = async () => {
   await connectDB();
@@ -68,6 +68,7 @@ const getClientIssuesServerAction = async () => {
         createdAt: 1,
         clientId: 1,
         userId: 1,
+        resolved: 1,
       },
     },
     {

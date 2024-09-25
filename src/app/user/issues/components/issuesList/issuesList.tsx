@@ -10,6 +10,8 @@ import { Empty } from "@/components/empty/empty";
 import _ from "lodash";
 import { User } from "next-auth";
 import { Loading } from "@/components/loading/loading";
+import { Checkbox } from "antd";
+import { useState } from "react";
 
 type IssuesListProps = {
   clientId: string;
@@ -21,6 +23,10 @@ const IssuesList: React.FC<IssuesListProps> = ({ clientId, user }) => {
     clientId,
     userId: user.id || "",
   });
+  const [showResolved, setShowResolved] = useState(false);
+  const dataForCurrentResolutionStatus = data?.filter(
+    (issue) => issue.resolved === showResolved
+  );
 
   if (isLoading) {
     return (
@@ -40,7 +46,23 @@ const IssuesList: React.FC<IssuesListProps> = ({ clientId, user }) => {
 
   return (
     <div className={styles.container}>
-      {data.map((issue) => (
+      {!!data.length && (
+        <div className={styles.resolvedContainer}>
+          <div>Show resolved</div>
+          <Checkbox
+            checked={showResolved}
+            onChange={(e) => setShowResolved(e.target.checked)}
+          />
+        </div>
+      )}
+
+      {!dataForCurrentResolutionStatus?.length && (
+        <div className={styles.innerEmptyContainer}>
+          <Empty description="No issues" />
+        </div>
+      )}
+
+      {dataForCurrentResolutionStatus?.map((issue) => (
         <IssueTile
           key={issue._id}
           issue={issue}
