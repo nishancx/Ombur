@@ -7,7 +7,7 @@ import { Button } from "@/components/button/button";
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Link as LinkIcon, Share, UserPlus } from "lucide-react";
 
 const HomePageContent: React.FC = () => {
   const session = useSession();
@@ -51,12 +51,24 @@ const HomePageContent: React.FC = () => {
       <div className={styles.gettingStarted}>
         <div className={styles.gettingStartedInnerContainer}>
           <div className={styles.gettingStartedTitle}>Getting started</div>
-          <div className={styles.gettingStartedDescription}>
-            <ul className={styles.gettingStartedList}>
-              <li>Sign Up</li>
-              <li>Get your URL from dropdown in navigation bar</li>
-              <li>Share the URL to your users</li>
-            </ul>
+
+          <div className={styles.gettingStartedList}>
+            <div className={styles.gettingStartedListItem}>
+              <UserPlus size={60} color="#05608d" />
+              <div className={styles.gettingStartedListItemTitle}>Sign Up</div>
+            </div>
+            <div className={styles.gettingStartedListItem}>
+              <LinkIcon size={60} color="#05608d" />
+              <div className={styles.gettingStartedListItemTitle}>
+                Get your URL
+              </div>
+            </div>
+            <div className={styles.gettingStartedListItem}>
+              <Share size={60} color="#05608d" />
+              <div className={styles.gettingStartedListItemTitle}>
+                Share the URL to your users
+              </div>
+            </div>
           </div>
         </div>
       </div>
