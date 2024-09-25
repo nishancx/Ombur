@@ -41,10 +41,6 @@
   border-radius: 100%;
 }
 
-.signInButtonText {
-  padding: 0 10px;
-}
-
 .content {
   display: flex;
   flex-direction: column;
@@ -79,6 +75,10 @@
   align-items: center;
   gap: 5px;
   border: 1px solid #747775 !important;
+}
+
+.signInButtonText {
+  padding: 0 10px;
 }
 
 .hideOnSmallScreen {

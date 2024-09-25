@@ -6,10 +6,15 @@
 .innerContainer {
   max-width: 1500px;
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
 .hero {
   margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 .heroTitle {
@@ -21,7 +26,6 @@
   text-align: center;
   padding: 0 30px;
   max-width: 800px;
-  margin: 20px auto 0 auto;
 }
 
 @media (min-width: 600px) {
@@ -40,7 +44,31 @@
   }
 }
 
-.gettingStarted {
+.signInButton {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid #747775 !important;
+}
+
+.signInButtonText {
+  padding: 0 10px;
+}
+
+.dashboardButtonLink {
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.dashboardButton {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.gettingStarted,
+.onboarding {
   display: flex;
   justify-content: center;
   margin-top: 50px;
@@ -64,13 +92,15 @@
   }
 }
 
-.gettingStartedTitle {
+.gettingStartedTitle,
+.onboardingTitle {
   font-size: 2rem;
   text-align: center;
   font-weight: 600;
 }
 
-.gettingStartedDescription {
+.gettingStartedDescription,
+.onboardingDescription {
   padding: 0 30px;
 }
 
@@ -78,6 +108,16 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.onboarding {
+  background-color: transparent;
+}
+
+.onboardingDescription {
+  text-align: center;
+  padding: 0 30px;
+  max-width: 600px;
 }
 
 .dashboard {
@@ -101,4 +141,37 @@
   height: 100%;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.stepsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 800px;
+}
+
+.step {
+  background-color: aliceblue;
+  border-radius: 10px;
+  flex: 1;
+  padding: 10px;
+}
+
+.stepTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px;
+}
+
+.stepImage {
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 600px) {
+  .stepsContainer {
+    flex-direction: row;
+  }
 }
