@@ -19,7 +19,7 @@ const UserNav: React.FC<UserNavProps> = ({ session }) => {
     <nav className={styles.nav}>
       <div className={styles.container}>
         <div className={styles.left}>
-          <Image src="/icon.webp" alt="Ombur" width={32} height={32} />
+          <Image src="/images/icon.webp" alt="Ombur" width={32} height={32} />
           <div className={styles.title}>Ombur</div>
         </div>
 

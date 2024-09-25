@@ -1,5 +1,7 @@
 import styles from "./index.module.css";
 
+import Image from "next/image";
+
 const HomePageContent: React.FC = () => {
   return (
     <>
@@ -26,6 +28,26 @@ const HomePageContent: React.FC = () => {
               <li>Get your URL from dropdown in navigation bar</li>
               <li>Share the URL to your users</li>
             </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.dashboard}>
+        <div className={styles.container}>
+          <div className={styles.innerContainer}>
+            <h2 className={styles.dashboardTitle}>
+              Manage all issues in dashboard, revisit resolved issues for
+              insights.
+            </h2>
+            <div className={styles.dashboardImageContainer}>
+              <Image
+                src="/images/dashboard.webp"
+                alt="Dashboard"
+                className={styles.dashboardImage}
+                width={800}
+                height={450}
+              />
+            </div>
           </div>
         </div>
       </div>
