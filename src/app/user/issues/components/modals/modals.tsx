@@ -2,6 +2,7 @@
 
 import { CreateIssueModal } from "./createIssue/createIssue";
 
+import { IssueInfoModal } from "@/app/components/modals/issueInfo/issueInfo";
 import { AuthSession } from "@/types/auth";
 
 type ModalsProps = {
@@ -12,6 +13,7 @@ export const Modals: React.FC<ModalsProps> = ({ session }) => {
   return (
     <>
       <CreateIssueModal session={session} />
+      <IssueInfoModal />
     </>
   );
 };

@@ -9,3 +9,9 @@
 .issueType {
   display: inline-block;
 }
+
+.resolvedContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
