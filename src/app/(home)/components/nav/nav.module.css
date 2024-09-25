@@ -11,7 +11,13 @@
   justify-content: space-between;
   align-items: center;
   height: 60px;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
+}
+
+@media (min-width: 600px) {
+  .container {
+    padding: 1rem 2rem;
+  }
 }
 
 .left {
@@ -75,8 +81,27 @@
   border: 1px solid #747775 !important;
 }
 
+.hideOnSmallScreen {
+  display: none;
+}
+
+.showOnSmallScreen {
+  display: inline;
+}
+
+@media (min-width: 600px) {
+  .hideOnSmallScreen {
+    display: inline;
+  }
+
+  .showOnSmallScreen {
+    display: none;
+  }
+}
+
 .dashboardButtonLink {
   text-decoration: none;
+  margin-left: 10px;
 }
 
 .dashboardButton {

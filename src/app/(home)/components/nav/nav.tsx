@@ -33,12 +33,21 @@ const Nav: React.FC = () => {
             hasBackground={false}
           >
             <Image src="/google.svg" alt="Google" width={20} height={20} />
-            <div>Sign in with Google</div>
+            <div>
+              Sign in
+              <span className={styles.hideOnSmallScreen}>with Google</span>
+            </div>
           </Button>
         ) : (
           <Link href="/client" className={styles.dashboardButtonLink}>
             <Button className={styles.dashboardButton}>
-              <div>Go to dashboard</div>
+              <div>
+                <span className={styles.hideOnSmallScreen}>
+                  Go to dashboard
+                </span>
+                <span className={styles.showOnSmallScreen}>Dashboard</span>
+              </div>
+
               <ArrowRight size={24} />
             </Button>
           </Link>

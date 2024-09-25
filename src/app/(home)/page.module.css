@@ -1,7 +1,40 @@
-.title {
-  height: calc(100dvh - 64px);
+.container {
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 30px;
+}
+
+.innerContainer {
+  max-width: 1500px;
+  padding: 5px;
+}
+
+.hero {
+  margin-top: 100px;
+}
+
+.heroTitle {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.heroDescription {
+  margin-top: 20px;
+  text-align: center;
+  padding: 0 30px;
+}
+
+@media (min-width: 600px) {
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+
+  .heroDescription {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .heroTitle {
+    font-size: 3rem;
+  }
 }
