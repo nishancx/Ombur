@@ -4,12 +4,20 @@
   flex-direction: column;
 }
 
+.top {
+  padding-bottom: 5px;
+}
 @media (min-width: 500px) and (max-width: 768px) {
   .top {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
+  }
+}
+@media (min-width: 768px) {
+  .top {
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
   }
 }
 

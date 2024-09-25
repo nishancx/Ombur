@@ -11,6 +11,8 @@ import { FullSpanLoader } from "@/components/fullSpanLoader/fullSpanLoader";
 
 import _ from "lodash";
 import clsx from "clsx";
+import { useState } from "react";
+import { Checkbox } from "antd";
 
 type IssuesListProps = {
   className?: string;
@@ -18,6 +20,10 @@ type IssuesListProps = {
 
 const IssuesList: React.FC<IssuesListProps> = ({ className }) => {
   const { data, isLoading } = useClientIssues();
+  const [showResolved, setShowResolved] = useState(false);
+  const dataForCurrentResolutionStatus = data?.filter(
+    (issue) => issue.resolved === showResolved
+  );
 
   if (isLoading) {
     return <FullSpanLoader containerClassName={styles.container} />;
@@ -33,7 +39,23 @@ const IssuesList: React.FC<IssuesListProps> = ({ className }) => {
 
   return (
     <div className={clsx(styles.container, className)}>
-      {data.map((issue) => (
+      {!!data.length && (
+        <div className={styles.resolvedContainer}>
+          <div>Show resolved</div>
+          <Checkbox
+            checked={showResolved}
+            onChange={(e) => setShowResolved(e.target.checked)}
+          />
+        </div>
+      )}
+
+      {!dataForCurrentResolutionStatus?.length && (
+        <div className={styles.innerEmptyContainer}>
+          <Empty description="No issues" />
+        </div>
+      )}
+
+      {dataForCurrentResolutionStatus?.map((issue) => (
         <IssueTile
           key={issue._id}
           issue={issue}
