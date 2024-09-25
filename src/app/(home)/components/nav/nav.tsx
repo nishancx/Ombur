@@ -17,7 +17,7 @@ const Nav: React.FC = () => {
     <nav className={styles.nav}>
       <div className={styles.container}>
         <div className={styles.left}>
-          <Image src="/icon.webp" alt="Ombur" width={32} height={32} />
+          <Image src="/images/icon.webp" alt="Ombur" width={32} height={32} />
           <div className={styles.title}>Ombur</div>
         </div>
 
@@ -32,13 +32,22 @@ const Nav: React.FC = () => {
             }
             hasBackground={false}
           >
-            <Image src="/google.svg" alt="Google" width={20} height={20} />
-            <div>Sign in with Google</div>
+            <Image src="/images/google.svg" alt="Google" width={20} height={20} />
+            <div>
+              Sign in
+              <span className={styles.hideOnSmallScreen}>with Google</span>
+            </div>
           </Button>
         ) : (
           <Link href="/client" className={styles.dashboardButtonLink}>
             <Button className={styles.dashboardButton}>
-              <div>Go to dashboard</div>
+              <div>
+                <span className={styles.hideOnSmallScreen}>
+                  Go to dashboard
+                </span>
+                <span className={styles.showOnSmallScreen}>Dashboard</span>
+              </div>
+
               <ArrowRight size={24} />
             </Button>
           </Link>

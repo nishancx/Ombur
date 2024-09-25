@@ -1,7 +1,5 @@
-import styles from "./page.module.css";
+import { HomePageContent } from "./components";
 
 export default async function Home() {
-  return (
-    <div className={styles.title}>Home</div>
-  );
+  return <HomePageContent />;
 }

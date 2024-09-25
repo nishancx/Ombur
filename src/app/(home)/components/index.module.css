@@ -1,0 +1,229 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.innerContainer {
+  max-width: 1500px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.hero {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.heroTitle {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.heroDescription {
+  text-align: center;
+  padding: 0 30px;
+  max-width: 800px;
+}
+
+@media (min-width: 600px) {
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+
+  .heroDescription {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .heroTitle {
+    font-size: 3rem;
+  }
+}
+
+.signInButton {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid #747775 !important;
+}
+
+.signInButtonText {
+  padding: 0 10px;
+}
+
+.dashboardButtonLink {
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.dashboardButton {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.gettingStarted,
+.onboarding {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  padding: 20px 10px;
+  background-color: aliceblue;
+}
+
+.gettingStartedInnerContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 1500px;
+}
+
+.gettingStartedTitle,
+.onboardingTitle {
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.onboardingDescription {
+  padding: 0 30px;
+}
+
+.gettingStartedList {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 20px;
+}
+
+.gettingStartedListItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.gettingStartedListItemTitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  .gettingStartedList {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.onboarding {
+  background-color: transparent;
+}
+
+.onboardingDescription {
+  text-align: center;
+  padding: 0 30px;
+  max-width: 600px;
+}
+
+.dashboard {
+  margin-top: 50px;
+}
+
+.dashboardTitle {
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.dashboardImageContainer {
+  padding: 10px;
+  margin-top: 20px;
+  display: flex;
+}
+
+.dashboardImage {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.stepsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 800px;
+}
+
+.step {
+  background-color: aliceblue;
+  border-radius: 10px;
+  flex: 1;
+  padding: 10px;
+}
+
+.stepTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px;
+}
+
+.stepImage {
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 600px) {
+  .stepsContainer {
+    flex-direction: row;
+  }
+}
+
+.reachOut {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  padding: 10px;
+  background-color: #05608d;
+}
+
+.reachOutInnerContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 1500px;
+  text-align: center;
+}
+
+.reachOutLinkContainer {
+  margin: 50px 0;
+}
+
+.reachOutLinkContainer,
+.reachOutLink {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.githubLinkContainer {
+  text-align: center;
+  padding: 30px;
+}
+
+.githubLink {
+  color: #05608d;
+}

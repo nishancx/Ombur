@@ -18,7 +18,7 @@ const Empty: React.FC<EmptyProps> = ({
   return (
     <div className={clsx(styles.container, containerClassName)}>
       <Image
-        src="/empty.png"
+        src="/images/empty.png"
         alt="Empty"
         width={imageSize}
         height={imageSize}
