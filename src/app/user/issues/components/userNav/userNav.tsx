@@ -7,6 +7,7 @@ import { Dropdown } from "@/components/dropdown/dropdown";
 import { AuthSession } from "@/types/auth";
 
 import Image from "next/image";
+import Link from "next/link";
 import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
 
@@ -18,10 +19,10 @@ const UserNav: React.FC<UserNavProps> = ({ session }) => {
   return (
     <nav className={styles.nav}>
       <div className={styles.container}>
-        <div className={styles.left}>
+        <Link href="/" className={styles.left}>
           <Image src="/images/icon.webp" alt="Ombur" width={32} height={32} />
           <div className={styles.title}>Ombur</div>
-        </div>
+        </Link>
 
         {!!session ? (
           <Dropdown

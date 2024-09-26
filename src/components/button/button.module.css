@@ -18,6 +18,10 @@
   border-radius: 5px;
 }
 
+.button:hover {
+  background-color: aliceblue;
+}
+
 .buttonWithBackground:hover {
   background: linear-gradient(45deg, #03507d 0%, #0984c6 100%);
   color: white;
