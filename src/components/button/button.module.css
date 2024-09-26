@@ -4,13 +4,14 @@
   cursor: pointer;
   padding: 0 10px;
   border: none;
-  background-color: white;
+  background: white;
   position: relative;
   overflow: hidden;
+  transition: background 0.2s;
 }
 
 .buttonWithBackground {
-  background: linear-gradient(45deg, #05608d 0%, #05608d 100%);
+  background: #05608d;
   color: white;
 }
 
@@ -23,12 +24,12 @@
 }
 
 .buttonWithBackground:hover {
-  background: linear-gradient(45deg, #03507d 0%, #0984c6 100%);
+  background: #0774ae;
   color: white;
 }
 
 .buttonWithBackground:active {
-  background: linear-gradient(45deg, #05608d 0%, #05608d 100%);
+  background: #03507d;
 }
 
 .disabled:hover {
@@ -41,7 +42,7 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, #05608d 0%, #05608d 100%);
+  background: #05608d;
 }
 
 .loaderDots {
