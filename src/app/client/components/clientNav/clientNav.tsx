@@ -4,7 +4,6 @@ import styles from "./clientNav.module.css";
 
 import { Button } from "@/components/button/button";
 import { Dropdown } from "@/components/dropdown/dropdown";
-import { modalStore } from "@/libs/client/stores/modal";
 import { ClientDataSearchParam } from "@/types/searchParams";
 import { FILE_PATHS } from "@/constants/filePaths";
 import { AuthSession } from "@/types/auth";
@@ -13,13 +12,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { Link as LinkIcon, LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
+import { toast } from "react-toastify";
 
 type NavProps = {
   session: AuthSession | null;
 };
 
 const ClientNav: React.FC<NavProps> = ({ session }) => {
-  const handleGetIssueLink = async () => {
+  const handleCopyIssueLink = async () => {
     if (!session?.user?.id) {
       return;
     }
@@ -31,9 +31,8 @@ const ClientNav: React.FC<NavProps> = ({ session }) => {
     );
     const issueLink = `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/user/issues?clientData=${encodedClientData}`;
 
-    modalStore.issueLinkModal.open({
-      issueLink,
-    });
+    window.navigator.clipboard.writeText(issueLink);
+    toast.success("Copied to clipboard.");
   };
 
   return (
@@ -65,11 +64,11 @@ const ClientNav: React.FC<NavProps> = ({ session }) => {
                 <Button
                   hasBackground={false}
                   hasBorderRadius={false}
-                  onClick={handleGetIssueLink}
+                  onClick={handleCopyIssueLink}
                 >
                   <div className={styles.contentButton}>
                     <LinkIcon size={16} />
-                    <div className={styles.buttonText}>Get issue link</div>
+                    <div className={styles.buttonText}>Copy issue link</div>
                   </div>
                 </Button>
 

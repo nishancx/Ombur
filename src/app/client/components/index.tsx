@@ -4,6 +4,7 @@ import styles from "./index.module.css";
 import { useEffect, useState } from "react";
 import { ClientLeftPane } from "./leftPane/leftPane";
 import { ClientRightPane } from "./rightPane/rightPane";
+import { useClientIssues } from "../queries";
 
 import { issueStore } from "@/libs/client/stores/issue";
 import { Message } from "@/types/models/message";
@@ -11,6 +12,7 @@ import { QUERY } from "@/constants/query";
 import { FullSpanLoader } from "@/components/fullSpanLoader/fullSpanLoader";
 import { MESSAGE } from "@/constants/message";
 import { AuthUser } from "@/types/auth";
+import { Button } from "@/components/button/button";
 
 import clsx from "clsx";
 import { useSnapshot } from "valtio";
@@ -34,6 +36,12 @@ const ClientPageContent: React.FC<ClientPageContentProps> = ({
   );
   const queryClient = useQueryClient();
   const router = useRouter();
+  const encodedClientData = btoa(
+    encodeURIComponent(JSON.stringify({ id: user.id }))
+  );
+  const issueLink = `${process.env.NEXT_PUBLIC_WEB_DOMAIN_URL}/user/issues?clientData=${encodedClientData}`;
+  const { data: clientIssues, isLoading: isLoadingClientIssues } =
+    useClientIssues();
 
   useEffect(() => {
     let events: EventSource;
@@ -105,8 +113,50 @@ const ClientPageContent: React.FC<ClientPageContentProps> = ({
   if (user?.type === MESSAGE.SENDER_TYPE_INDEX.USER) {
     router.push("/");
 
-    return <FullSpanLoader />;
+    return (
+      <div className={styles.container}>
+        <FullSpanLoader />
+      </div>
+    );
   }
+
+  if (isLoadingClientIssues) {
+    return (
+      <div className={styles.container}>
+        <FullSpanLoader />
+      </div>
+    );
+  }
+
+  if (!isLoadingClientIssues && !clientIssues?.length)
+    return (
+      <div className={styles.container}>
+        <div className={styles.innerContainer}>
+          <div className={styles.issueLinkContainer}>
+            <div className={styles.issueLinkTitle}>
+              Please share this link to your users:
+            </div>
+
+            <div className={styles.issueLinkDisplayContainer}>
+              <div className={styles.issueLinkDisplay}>{issueLink}</div>
+              <Button
+                text="Copy"
+                onClick={() => {
+                  window.navigator.clipboard.writeText(issueLink);
+                  toast.success("Copied to clipboard.");
+                }}
+                className={styles.copyButton}
+              />
+            </div>
+
+            <div className={styles.issueLinkSubtitle}>
+              <div>Users can create issues with this link.</div>
+              <div>Issues will be shown here once a user creates one.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
 
   return (
     <div className={styles.container}>

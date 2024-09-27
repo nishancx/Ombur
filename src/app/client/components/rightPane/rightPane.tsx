@@ -19,7 +19,7 @@ const ClientRightPane: React.FC<RightPaneProps> = ({
   if (currentIssue === undefined) return null;
 
   if (!currentIssue)
-    return <Empty description="Please select an issue or create one." />;
+    return <Empty description="Please select an issue to start chatting." />;
 
   return (
     <div className={styles.container}>

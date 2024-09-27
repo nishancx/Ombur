@@ -45,3 +45,49 @@
     display: block;
   }
 }
+
+.issueLinkContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex: 1;
+}
+
+.issueLinkDisplayContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  padding: 10px;
+}
+
+.issueLinkDisplay {
+  background-color: #e5e5e5;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  word-break: break-all;
+  max-width: 510px;
+}
+
+.copyButton {
+  flex-shrink: 0;
+  width: 200px;
+}
+
+.issueLinkTitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.issueLinkSubtitle {
+  font-size: 14px;
+  margin-top: 20px;
+  color: #666;
+  text-align: center;
+}
