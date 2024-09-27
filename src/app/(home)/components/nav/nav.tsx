@@ -35,7 +35,7 @@ const Nav: React.FC = () => {
             <Image src="/images/google.svg" alt="Google" width={20} height={20} />
             <div>
               Sign in
-              <span className={styles.hideOnSmallScreen}>with Google</span>
+              <span className={styles.hideOnSmallScreen}> with Google</span>
             </div>
           </Button>
         ) : (
